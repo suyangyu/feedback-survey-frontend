@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.feedbacksurveyfrontend.controllers
+package views.helpers
 
-import uk.gov.hmrc.play.frontend.controller.FrontendController
-import play.api.mvc._
-import scala.concurrent.Future
-import play.api.Play.current
-import play.api.i18n.Messages.Implicits._
+import play.twirl.api.Html
 
-
-object HelloWorld extends HelloWorld
-
-trait HelloWorld extends FrontendController {
-  val helloWorld = Action.async { implicit request =>
-		Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.helloworld.hello_world()))
-  }
+sealed trait QuestionAnswerParametersTrait {
+  def question: String
+  def questionId: String
+  def answer: Option[Html]
+  def wrapperClass: Option[String]
 }
+
+case class QuestionAnswerParameters(question: String,
+                                    questionId: String,
+                                    answer: Option[Html] = None,
+                                    wrapperClass: Option[String] = None
+                                   ) extends QuestionAnswerParametersTrait

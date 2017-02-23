@@ -16,7 +16,7 @@ object FrontendBuild extends Build with MicroService {
     "uk.gov.hmrc" %% "frontend-bootstrap" % "7.12.0",
     "uk.gov.hmrc" %% "play-partials" % "5.3.0",
     "uk.gov.hmrc" %% "play-authorised-frontend" % "6.3.0",
-    "uk.gov.hmrc" %% "play-config" % "4.1.0",
+    "uk.gov.hmrc" %% "play-config" % "3.0.0",
     "uk.gov.hmrc" %% "logback-json-logger" % "3.1.0",
     "uk.gov.hmrc" %% "govuk-template" % "5.1.0",
     "uk.gov.hmrc" %% "play-health" % "2.1.0",
