@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<service id="awrs-lookup-frontend">
+    <title>Check for approved alcohol wholesalers or producers</title>
+    <page id="1">
+        <question id="1">
+            <type>RADIO</type>
+            <title>Where you able to do what you needed to do today?</title>
+            <hinttext></hinttext>
+            <label>Yes</label>
+            <value>yes</value>
+            <label>No</label>
+            <value>no</value>
+        </question>
+    </page>
+    <page id="2">
+        <question id="1">
+            <type>CHECKBOX</type>
+            <title>What did you try before using this service?</title>
+            <hinttext></hinttext>
+            <label>Telephoned HMRC</label>
+            <value>1</value>
+            <label>Wrote to HMRC</label>
+            <value>2</value>
+            <label>Completed an online form</label>
+            <value>3</value>
+            <label>Read guidance on GOV.UK</label>
+            <value>4</value>
+            <label>Spoke to your employer, agent or accountant</label>
+            <value>5</value>
+            <label>Spoke to a friend or family member</label>
+            <value>6</value>
+            <label>None of these</label>
+            <value>7</value>
+        </question>
+    </page>
+</service>

@@ -1,3 +1,11 @@
 # microservice specific routes
 
-GET        /hello-world             uk.gov.hmrc.feedbacksurveyfrontend.controllers.HelloWorld.helloWorld
+GET        /             controllers.AwrsLookupController.page1
+
+GET        /page1             controllers.AwrsLookupController.page1
+POST       /page1             controllers.AwrsLookupController.page1Continue
+GET        /page2             controllers.AwrsLookupController.page2
+POST       /page2             controllers.AwrsLookupController.page2Continue
+GET        /page3             controllers.AwrsLookupController.page3
+POST       /page3             controllers.AwrsLookupController.page3Continue
+GET        /page4             controllers.AwrsLookupController.page4

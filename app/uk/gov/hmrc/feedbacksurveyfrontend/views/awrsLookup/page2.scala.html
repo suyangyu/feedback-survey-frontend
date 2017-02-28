@@ -1,0 +1,25 @@
+@(page2: Form[models.awrsModels.Page2])(implicit request: Request[_], messages: Messages)
+
+@import play.twirl.api.Html
+@import views.helpers._
+@import views.html.helpers._
+@import models.awrsModels._
+
+@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("feedback.page_title"), bodyClasses = None) {
+    @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.AwrsLookupController.page2Continue){
+        <div class="form-group">
+            @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsInputTypeGroupCheckbox(
+                InputTypeGroupCheckboxParams(
+                    page2(""),
+                    formFields.page2Question1Options,
+                    legend = Messages("awrslookup.page2.question2"),
+                    fieldSetAttributes = "id=mainCustomers_field",
+                    fieldSetClass = "test",
+                    legendClass = "heading-large",
+                    formHint = Messages("awrslookup.page2.question2.formhint")
+                )
+            )
+        </div>
+        @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsSubmitButton(Messages("generic.continue"))(id = "save-and-continue", classAttr = "button")
+    }
+}
