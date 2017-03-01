@@ -34,3 +34,7 @@ object FrontendAuthConnector extends AuthConnector with ServicesConfig {
   val serviceUrl = baseUrl("auth")
   lazy val http = WSHttp
 }
+
+//object AwrsFrontendAuditConnector extends AuditConnector with AppName with RunMode {
+//  override lazy val auditingConfig = LoadAuditingConfig(s"auditing")
+//}

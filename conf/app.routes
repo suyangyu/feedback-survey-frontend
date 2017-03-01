@@ -1,8 +1,11 @@
 # microservice specific routes
 GET        /assets/*file      controllers.Assets.at(path="/public", file)
+GET        /                  controllers.HomeController.start
+GET        /unauthorised      controllers.FeedbackSurveyController.unauthorised
+GET        /signed-out        controllers.FeedbackSurveyController.timedOut
+GET        /keep-alive        controllers.FeedbackSurveyController.keepAlive
 
-GET        /                  controllers.AwrsLookupController.page1
-
+# AWRS Lookup specific routes
 GET        /page1             controllers.AwrsLookupController.page1
 POST       /page1             controllers.AwrsLookupController.page1Continue
 GET        /page2             controllers.AwrsLookupController.page2
@@ -10,3 +13,5 @@ POST       /page2             controllers.AwrsLookupController.page2Continue
 GET        /page3             controllers.AwrsLookupController.page3
 POST       /page3             controllers.AwrsLookupController.page3Continue
 GET        /page4             controllers.AwrsLookupController.page4
+POST       /page4             controllers.AwrsLookupController.page4Continue
+GET        /page5             controllers.AwrsLookupController.page5

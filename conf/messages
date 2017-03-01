@@ -1,24 +1,31 @@
-awrslookup.giveFeedBack=Give feedback
-awrslookup.page1.title=Give feedback
-awrslookup.page1.para1=All questions in the survey are optional.
-invalidCharacters=Remove invalid characters
-
 generic.yes=Yes
 generic.no=No
 generic.continue=Continue
+generic.back=Back
 
+# Generic Error Messages
+generic.error.title=Sorry, we’re experiencing technical difficulties
+generic.error.status=There has been a problem with your application
+generic.unauthorised.heading=Sorry, we’re experiencing technical difficulties
+generic.unauthorised.reason_start=This could be because,
+generic.unauthorised.reason_1=you are a sole trader and before you can register for AWRS you must register for Self Assessment Online.
+generic.unauthorised.reason_2=you are an agent. Agents cannot use the AWRS service to apply on behalf of their clients.
+
+awrslookup.giveFeedBack=Give feedback - {0}
+
+awrslookup.page1.title=Give feedback
+awrslookup.page1.para1=All questions in the survey are optional.
 awrslookup.page1.question1=Were you able to do what you needed to do today?
 
-
-awrslookup.page2.question2=What did you try before using this service?
-awrslookup.page2.question2.formhint=Select all that apply.
-awrslookup.page2.question2.option1=Telephoned HMRC
-awrslookup.page2.question2.option2=Wrote to HMRC
-awrslookup.page2.question2.option3=Completed an online form
-awrslookup.page2.question2.option4=Read guidance on GOV.UK
-awrslookup.page2.question2.option5=Spoke to your employer, agent or accountant
-awrslookup.page2.question2.option6=Spoke to a friend or family member
-awrslookup.page2.question2.option7=None of these
+awrslookup.page2.question1=What did you try before using this service?
+awrslookup.page2.question1.formhint=Select all that apply.
+awrslookup.page2.question1.option1=Telephoned HMRC
+awrslookup.page2.question1.option2=Wrote to HMRC
+awrslookup.page2.question1.option3=Completed an online form
+awrslookup.page2.question1.option4=Read guidance on GOV.UK
+awrslookup.page2.question1.option5=Spoke to your employer, agent or accountant
+awrslookup.page2.question1.option6=Spoke to a friend or family member
+awrslookup.page2.question1.option7=None of these
 
 
 awrslookup.page3.question1=Overall, how did you feel about the service you received today?
@@ -43,6 +50,6 @@ awrslookup.page4.question1.option11=0 Very unlikely
 awrslookup.page4.question2=Why did you give this rating?
 awrslookup.page4.question2.labelhint=Do not include any personal or financial information like your National Insurance number or back details.
 
-
+awrslookup.page5.title=Thank you for your feedback
 
 

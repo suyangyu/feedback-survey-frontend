@@ -53,10 +53,6 @@ object Page4 {
   implicit val format = Json.format[Page4]
 }
 
-case class AdditionalBusinessPremises(addAnother: Option[String])
-
-case class AdditionalBusinessPremisesList(premises: List[AdditionalBusinessPremises])
-
 
 object formMappings {
 
@@ -87,13 +83,13 @@ object formMappings {
 object formFields {
 
   val page2Question1Options = Seq(
-    "01" -> Messages("awrslookup.page2.question2.option1"),
-    "02" -> Messages("awrslookup.page2.question2.option2"),
-    "03" -> Messages("awrslookup.page2.question2.option3"),
-    "04" -> Messages("awrslookup.page2.question2.option4"),
-    "05" -> Messages("awrslookup.page2.question2.option5"),
-    "06" -> Messages("awrslookup.page2.question2.option6"),
-    "07" -> Messages("awrslookup.page2.question2.option7")
+    "01" -> Messages("awrslookup.page2.question1.option1"),
+    "02" -> Messages("awrslookup.page2.question1.option2"),
+    "03" -> Messages("awrslookup.page2.question1.option3"),
+    "04" -> Messages("awrslookup.page2.question1.option4"),
+    "05" -> Messages("awrslookup.page2.question1.option5"),
+    "06" -> Messages("awrslookup.page2.question1.option6"),
+    "07" -> Messages("awrslookup.page2.question1.option7")
   )
 
   val page3Question1Options = Seq(

@@ -5,18 +5,19 @@
 @import views.html.helpers._
 @import models.awrsModels._
 
-@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("feedback.page_title"), bodyClasses = None) {
+@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("awrslookup.giveFeedBack", Messages("awrslookup.page2.question1")), bodyClasses = None) {
+    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink(controllers.routes.AwrsLookupController.page1.url, true)(messages)
     @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.AwrsLookupController.page2Continue){
         <div class="form-group">
             @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsInputTypeGroupCheckbox(
                 InputTypeGroupCheckboxParams(
                     page2(""),
                     formFields.page2Question1Options,
-                    legend = Messages("awrslookup.page2.question2"),
+                    legend = Messages("awrslookup.page2.question1"),
                     fieldSetAttributes = "id=mainCustomers_field",
                     fieldSetClass = "test",
                     legendClass = "heading-large",
-                    formHint = Messages("awrslookup.page2.question2.formhint")
+                    formHint = Messages("awrslookup.page2.question1.formhint")
                 )
             )
         </div>

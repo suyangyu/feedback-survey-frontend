@@ -71,4 +71,12 @@ trait AwrsLookupController extends FrontendController {
     Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.awrsLookup.page4(formMappings.page4Form)))
   }
 
+  val page4Continue = Action(parse.form(formMappings.page4Form)) { implicit request =>
+    Redirect(routes.AwrsLookupController.page5())
+  }
+
+  val page5 = Action.async { implicit request =>
+    Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.awrsLookup.page5()))
+  }
+
 }

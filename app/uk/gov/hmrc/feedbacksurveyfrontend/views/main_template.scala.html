@@ -1,8 +1,10 @@
 @(title: String,
+  pageScripts: Option[Html] = None,
   sidebarLinks: Option[Html] = None,
   contentHeader: Option[Html] = None,
   bodyClasses: Option[String] = None,
   mainClass: Option[String] = None,
+  userLoggedIn: Boolean = false,
   scriptElem: Option[Html] = None)(mainContent: Html)(implicit request : Request[_], messages: Messages)
 
 @import uk.gov.hmrc.play.views.html.layouts
@@ -19,6 +21,23 @@
     <link rel="stylesheet" href='@routes.Assets.at("stylesheets/custom.css")'/>
 }
 
+@scriptElement = {
+    @scriptElem
+    @pageScripts
+    <script type="text/javascript" src='@routes.Assets.at("javascripts/timeout-dialog.js")'></script>
+    <script type="text/javascript" charset="utf-8">
+        @if(userLoggedIn) {
+            $.timeoutDialog({timeout: @uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.defaultTimeoutSeconds,
+            countdown: @uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.timeoutCountdown,
+            keep_alive_url: '@controllers.routes.FeedbackSurveyController.keepAlive',
+            logout_url: '@controllers.routes.FeedbackSurveyController.timedOut',
+            logout_redirect_url: '@controllers.routes.FeedbackSurveyController.timedOut',
+            restart_on_yes: true,
+            background_no_scroll: true});
+        }
+    </script>
+}
+
 @govuk_wrapper(appConfig = uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig,
                title = title,
                mainClass = mainClass,
@@ -27,6 +46,6 @@
                contentHeader = contentHeader,
                mainContent = layouts.article(mainContent),
                serviceInfoContent = serviceInfoContent,
-               scriptElem = scriptElem,
+               scriptElem = Some(scriptElement),
                linkElement = Some(linkElement)
 )

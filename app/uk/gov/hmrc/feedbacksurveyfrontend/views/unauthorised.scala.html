@@ -1,0 +1,12 @@
+@()(implicit request: Request[AnyRef], messages: Messages)
+@import play.twirl.api.Html
+@import uk.gov.hmrc.play.views.html.helpers._
+
+@main_template(title = Messages("generic.unauthorised.heading"), userLoggedIn = false){
+    <h1 class="heading-xlarge">@Html(Messages("generic.unauthorised.heading"))</h1>
+    <p>@Messages("generic.unauthorised.reason_start")</p>
+    <p>@Messages("generic.unauthorised.reason_1")</p>
+    <p>@Messages("generic.unauthorised.reason_2")</p>
+}
+
+
