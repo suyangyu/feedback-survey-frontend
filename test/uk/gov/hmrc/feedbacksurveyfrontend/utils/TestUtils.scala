@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-package controllers.auth
+package utils
 
-import uk.gov.hmrc.play.frontend.auth.connectors.domain.Accounts
-import uk.gov.hmrc.play.frontend.auth.{AuthenticationProvider, TaxRegime}
+import play.api.data.Form
+import play.api.mvc.AnyContentAsFormUrlEncoded
+import play.api.test.FakeRequest
 
-object AwrsRegistrationRegime extends TaxRegime {
+object TestUtils {
 
-override def isAuthorised(accounts: Accounts): Boolean = accounts.ct.isDefined || accounts.org.isDefined || accounts.sa.isDefined || accounts.awrs.isDefined
+  def populateFakeRequestWithPost[T](fakeRequest: FakeRequest[_], form: Form[T], data: T): FakeRequest[AnyContentAsFormUrlEncoded] =
+    fakeRequest.withFormUrlEncodedBody(form.fill(data).data.toSeq: _*)
 
-override def authenticationType: AuthenticationProvider = AwrsRegistrationGovernmentGateway
-
-override def unauthorisedLandingPage: Option[String] = Some(controllers.routes.FeedbackSurveyController.unauthorised().url)
 
 }

@@ -26,14 +26,15 @@ trait AppConfig {
   val reportAProblemNonJSUrl: String
   val defaultTimeoutSeconds: Int
   val timeoutCountdown: Int
+  val callbackServiceUrl: String
 }
 
 object FrontendAppConfig extends AppConfig with ServicesConfig {
 
-  private def loadConfig(key: String) = configuration.getString(key).getOrElse(throw new Exception(s"Missing configuration key: $key"))
+  def loadConfig(key: String) = configuration.getString(key).getOrElse(throw new Exception(s"Missing configuration key: $key"))
 
   private val contactHost = configuration.getString(s"contact-frontend.host").getOrElse("")
-  private val contactFormServiceIdentifier = "MyService"
+  private val contactFormServiceIdentifier = "FEEDBACK-SURVEY"
 
   override lazy val analyticsToken = loadConfig(s"google-analytics.token")
   override lazy val analyticsHost = loadConfig(s"google-analytics.host")
@@ -41,5 +42,7 @@ object FrontendAppConfig extends AppConfig with ServicesConfig {
   override lazy val reportAProblemNonJSUrl = s"$contactHost/contact/problem_reports_nonjs?service=$contactFormServiceIdentifier"
   override lazy val defaultTimeoutSeconds: Int = getString(s"defaultTimeoutSeconds").toInt
   override lazy val timeoutCountdown: Int = getString(s"timeoutCountdown").toInt
+
+  override lazy val callbackServiceUrl = loadConfig(s"microservice.services.awrs-lookup.callback-page")
 
 }

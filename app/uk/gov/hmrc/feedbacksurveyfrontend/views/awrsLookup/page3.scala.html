@@ -11,10 +11,11 @@
         <div class="form-group">
             @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsInputTypeRadioGroup(
                 InputTypeRadioGroupParams(
-                    page3("page3.question1"),
+                    page3("serviceReceived"),
                     formFields.page3Question1Options,
                     legend = Messages("awrslookup.page3.question1"),
                     legendClass = "heading-medium",
+                    legendId = "title",
                     fieldSetAttributes = "id=additionalPremises_field"
                 )
             )

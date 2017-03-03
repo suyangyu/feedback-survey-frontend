@@ -17,7 +17,7 @@
 package controllers
 
 import java.io.{PrintWriter, StringWriter}
-import controllers.auth.{ExternalUrls, AwrsRegistrationGovernmentGateway, AwrsRegistrationRegime}
+import controllers.auth.ExternalUrls
 import controllers.routes
 import models.awrsModels._
 import uk.gov.hmrc.play.config.RunMode
@@ -34,75 +34,73 @@ import scala.util.{Failure, Success, Try}
 
 object FeedbackSurveyController extends Results with LoggingUtils {
 
-  def showErrorPageRaw(implicit request: Request[AnyContent]): Result =
-    InternalServerError(uk.gov.hmrc.feedbacksurveyfrontend.views.html.application_error()(request))
-
-  def showErrorPage(implicit request: Request[AnyContent]): Future[Result] =
-    Future.successful(showErrorPageRaw)
-
-  def timedOut() = UnauthorisedAction {
-    implicit request =>
-      Redirect(ExternalUrls.signOut)
-  }
-
-  def keepAlive = UnauthorisedAction {
-    implicit request =>
-      Ok("OK")
-  }
-   def unauthorised = Action { implicit request =>
-    Unauthorized(uk.gov.hmrc.feedbacksurveyfrontend.views.html.unauthorised())
-  }
-
+//  def showErrorPageRaw(implicit request: Request[AnyContent]): Result =
+//    InternalServerError(uk.gov.hmrc.feedbacksurveyfrontend.views.html.application_error()(request))
+//
+//  def showErrorPage(implicit request: Request[AnyContent]): Future[Result] =
+//    Future.successful(showErrorPageRaw)
+//
+//  def timedOut() = UnauthorisedAction {
+//    implicit request =>
+//      Redirect(ExternalUrls.signOut)
+//  }
+//
+//  def keepAlive = UnauthorisedAction {
+//    implicit request =>
+//      Ok("OK")
+//  }
+//   def unauthorised = Action { implicit request =>
+//    Unauthorized(uk.gov.hmrc.feedbacksurveyfrontend.views.html.unauthorised())
+//  }
 
 }
 
-
 trait FeedbackSurveyController extends FrontendController with Actions with LoggingUtils with RunMode {
 
-  type AsyncUserRequest = (AuthContext) => (Request[AnyContent]) => Future[Result]
+//  type AsyncUserRequest = (AuthContext) => (Request[AnyContent]) => Future[Result]
 
-  implicit class StackTraceUtil(e: Throwable) {
-    def getStacktraceString: String = {
-      val stringWriter: StringWriter = new StringWriter()
-      val printWriter: PrintWriter = new PrintWriter(stringWriter)
-      e.printStackTrace(printWriter)
-      stringWriter.toString
-    }
-  }
+//  implicit class StackTraceUtil(e: Throwable) {
+//    def getStacktraceString: String = {
+//      val stringWriter: StringWriter = new StringWriter()
+//      val printWriter: PrintWriter = new PrintWriter(stringWriter)
+//      e.printStackTrace(printWriter)
+//      stringWriter.toString
+//    }
+//  }
 
-  @inline def async(body: AsyncUserRequest): Action[AnyContent] =
-    AuthorisedFor(AwrsRegistrationRegime, pageVisibility = GGConfidence).async {
-      implicit user => implicit request =>
-        Try(executeBody(body)) match {
-          case Success(future) => future
-          case Failure(ex) =>
-            val logInfo = s"Error occured for:\nServiceTransactionName: ${getServiceTransactionName.fold("unknown")(x => x)}\n" + "Stacktrace: " + ex.getStacktraceString + "\n"
-            warn(logInfo)
-            showErrorPage
-        }
-    }
+//  @inline def async(body: AsyncUserRequest): Action[AnyContent] =
+//    AuthorisedFor(AwrsRegistrationRegime, pageVisibility = GGConfidence).async {
+//      implicit user => implicit request =>
+//        Try(executeBody(body)) match {
+//          case Success(future) => future
+//          case Failure(ex) =>
+//            val logInfo = s"Error occured for:\nServiceTransactionName: ${getServiceOrigin.fold("unknown")(x => x)}\n" + "Stacktrace: " + ex.getStacktraceString + "\n"
+//            warn(logInfo)
+//            showErrorPage
+//        }
+//    }
 
-  private def executeBody(body: AsyncUserRequest)(implicit user: AuthContext, request: Request[AnyContent]): Future[Result] =
-    body(user)(request).recover {
-      case error =>
-        warn(error.getStacktraceString)
-        showErrorPageRaw
+//  private def executeBody(body: AsyncUserRequest)(implicit user: AuthContext, request: Request[AnyContent]): Future[Result] =
+//    body(user)(request).recover {
+//      case error =>
+//        warn(error.getStacktraceString)
+//        showErrorPageRaw
+//
+//    }
 
-    }
-
-
-  def showErrorPageRaw(implicit request: Request[AnyContent]): Result =
-    FeedbackSurveyController.showErrorPageRaw
-
-  def showErrorPage(implicit request: Request[AnyContent]): Future[Result] =
-    FeedbackSurveyController.showErrorPage
-
-  implicit val sessionUtil = SessionUtil.sessionUtilForRequest
-  implicit val sessionUtilForResult = SessionUtil.sessionUtilForResult
-
-  def getServiceTransactionName(implicit request: Request[AnyContent]): Option[String] =
-    request getServiceTransactionName
-
+//
+//  def showErrorPageRaw(implicit request: Request[AnyContent]): Result =
+//    FeedbackSurveyController.showErrorPageRaw
+//
+//  def showErrorPage(implicit request: Request[AnyContent]): Future[Result] =
+//    FeedbackSurveyController.showErrorPage
+//
+//  implicit val sessionUtil = SessionUtil.sessionUtilForRequest
+//  implicit val sessionUtilForResult = SessionUtil.sessionUtilForResult
+//
+//  def getServiceOrigin(implicit request: Request[AnyContent]): Option[String] =
+//    request getServiceOrigin
+//
 
 }
 

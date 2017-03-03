@@ -37,7 +37,7 @@
 @legend = {
     @params.legend match {
         case Some(legend) => {
-            <legend id="@(params.field.id)-legend" @legendClass @legendAttributes>@legend</legend>
+            <legend id="@(params.legendId)" @legendClass @legendAttributes>@legend</legend>
         }
         case _ => {}
     }
@@ -56,6 +56,7 @@
         case _ => {}
     }
 }
+
 @inputName = @{
     Html("name=\"" + params.field.name +
         (params.checkboxOptions.length match {
@@ -64,10 +65,12 @@
         })
     )
 }
+
+
 @inputId(append: String) = @{
     params.overrideInputId match {
         case Some(overrideInputId) => overrideInputId
-        case _ => params.field.id + "_" + append
+        case _ => params.fieldPrefixId.get + "_" + append
     }
 }
 <fieldset @fieldSetClass @fieldSetAttributes role="group" aria-required="true" @if(fieldErrors.nonEmpty) {aria-labelledby="@params.field.name-error-0"}>

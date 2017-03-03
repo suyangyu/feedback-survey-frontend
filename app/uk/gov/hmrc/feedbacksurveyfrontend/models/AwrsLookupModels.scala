@@ -57,7 +57,7 @@ object Page4 {
 object formMappings {
 
   val page1Form = Form(mapping(
-    "ableToDoWhatNeeded" -> optional(text.verifying("required field", _.nonEmpty)))(Page1.apply)(Page1.unapply))
+    "ableToDoWhatNeeded" -> optional(text))(Page1.apply)(Page1.unapply))
 
   val page2Form = Form(mapping(
     "telephonedHmrc" -> optional(text.verifying("required field", _.nonEmpty)),

@@ -1,24 +1,27 @@
-@(page1: Form[models.awrsModels.Page1])(implicit request: Request[_], messages: Messages)
+@(page1: Form[models.awrsModels.Page1],
+callbackServiceUrl: String,
+serviceTitle: String
+)(implicit request: Request[_], messages: Messages)
 
 @import play.twirl.api.Html
 @import views.helpers._
 @import views.html.helpers._
 @import models._
 
-@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("awrslookup.giveFeedBack", Messages("awrslookup.page1.question1")), bodyClasses = None) {
-    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink(controllers.routes.AwrsLookupController.page5.url, true)(messages)
-    <h1 class="heading-large">@Messages("awrslookup.page1.title")</h1>
-    <p>@Messages("awrslookup.page1.para1")</p>
+@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("awrslookup.giveFeedBack", Messages("awrslookup.page1.question1")), bodyClasses = None, serviceTitle = serviceTitle) {
+    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink(callbackServiceUrl, true)(messages)
+    <h1 id="title" class="heading-large">@Messages("awrslookup.page1.title")</h1>
+    <p id="intro">@Messages("awrslookup.page1.para1")</p>
     @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.AwrsLookupController.page1Continue){
         <div class="form-group">
             @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsInputTypeRadioGroup(
                 InputTypeRadioGroupParams(
-                    page1("page1.question1"),
+                    page1("ableToDoWhatNeeded"),
                     Seq("Yes" -> Messages("generic.yes"),"No" -> Messages("generic.no")),
                     legend = Messages("awrslookup.page1.question1"),
                     legendClass = "heading-medium",
                     fieldSetClass = "inline",
-                    fieldSetAttributes = "id=additionalPremises_field"
+                    fieldSetAttributes = "id=ableToDoWhatNeeded"
                 )
             )
         </div>

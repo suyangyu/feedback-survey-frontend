@@ -16,29 +16,26 @@
 
 package controllers
 
-import controllers._
 import models.awrsModels._
-import uk.gov.hmrc.play.frontend.auth.AuthContext
 import uk.gov.hmrc.play.frontend.controller.FrontendController
+import uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig._
 import play.api.mvc._
-import uk.gov.hmrc.play.http.HeaderCarrier
 import scala.concurrent.Future
 import play.api.Play.current
 import play.api.i18n.Messages.Implicits._
-import utils._
-import scala.util.{Failure, Success, Try}
 
 object HomeController extends HomeController
 
 trait HomeController extends FrontendController  {
 
-  implicit val sessionUtil = SessionUtil.sessionUtilForRequest
-
-  val start = Action.async { implicit request =>
-    println("***************************** 2 ***************************")
-    println("serviceTransactionName: "+request.session.get("serviceTransactionName"))
-    request.session.get("serviceTransactionName").fold("")(x => x) match {
-      case "awrs-lookup-frontend" => Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.awrsLookup.page1(formMappings.page1Form)))
+  def start() = Action.async { implicit request =>
+    val originService: Option[String] = request.getQueryString("originService")
+    originService.fold("")(x => x) match {
+      case "awrs-lookup" => {
+        val callbackUrl = loadConfig(s"microservice.services.awrs-lookup.callback-url")
+        val serviceTitle = loadConfig(s"microservice.services.awrs-lookup.service-name")
+        Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.awrsLookup.page1(formMappings.page1Form, callbackUrl, serviceTitle)).withSession(request.session + ("originService" -> originService.get)))
+      }
       case _ => Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.awrsLookup.page5()))
     }
   }
