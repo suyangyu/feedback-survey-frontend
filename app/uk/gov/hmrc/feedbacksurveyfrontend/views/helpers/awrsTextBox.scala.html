@@ -26,9 +26,9 @@
             id="@if( elements.args.get('_id) ) {@elements.args.get('_id)} else {@elements.field.name.replaceAll("""[\.\[\]]""", "-")}_field"
                 @if(elements.args.contains('_labelDataAttributes)){@elements.args.get('_labelDataAttributes)}>
 
-            @if(labelHighlight) {<strong>}
+            @if(labelHighlight) {<h2>}
             @if(elements.args.contains('_label)) {@elements.label}
-            @if(labelHighlight) {</strong>}
+            @if(labelHighlight) {</h2>}
         </label>
         @if(elements.args.contains('_labelHint)) {<p>@elements.args.get('_labelHint)</p>}
         <textarea id="@if( elements.args.get('_id) ) {@elements.args.get('_id)} else {@elements.field.name.replaceAll("""[\.\[\]]""", "-")}"
