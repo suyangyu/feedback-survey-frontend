@@ -52,4 +52,8 @@ awrslookup.page4.question2.labelhint=Do not include any personal or financial in
 
 awrslookup.page5.title=Thank you for your feedback
 
+global_errors.message=Sorry, there is a technical problem and you cannot use the service at the moment. Please try again later.
+global_errors.heading=Service unavailable
+global_errors.title=Service unavailable
+
 

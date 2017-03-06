@@ -1,11 +1,13 @@
-@(page2: Form[models.awrsModels.Page2])(implicit request: Request[_], messages: Messages)
+@(page2: Form[models.awrsModels.Page2],
+serviceTitle: String
+)(implicit request: Request[_], messages: Messages)
 
 @import play.twirl.api.Html
 @import views.helpers._
 @import views.html.helpers._
 @import models.awrsModels._
 
-@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("awrslookup.giveFeedBack", Messages("awrslookup.page2.question1")), bodyClasses = None) {
+@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("awrslookup.giveFeedBack", Messages("awrslookup.page2.question1")), bodyClasses = None, serviceTitle = serviceTitle) {
     @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink(controllers.routes.AwrsLookupController.page1.url, true)(messages)
     @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.AwrsLookupController.page2Continue){
         <div class="form-group">

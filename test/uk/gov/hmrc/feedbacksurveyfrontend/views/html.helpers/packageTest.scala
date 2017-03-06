@@ -18,9 +18,9 @@ package views.html.helpers
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import org.jsoup.nodes.Document
-import utils.{AwrsUnitTestTraits, HtmlUtils}
+import utils.{UnitTestTraits, HtmlUtils}
 
-class packageTest extends AwrsUnitTestTraits with HtmlUtils {
+class packageTest extends UnitTestTraits with HtmlUtils {
 
   // this is shadowed so we would use the implicit conversion defined in the package instead
   override def convertToOption[T, U <: T](value: U): Option[T] = ???

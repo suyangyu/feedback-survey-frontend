@@ -17,9 +17,11 @@
 package controllers
 
 import models.awrsModels._
+import play.api.i18n.Messages
 import uk.gov.hmrc.play.frontend.controller.FrontendController
 import uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig._
 import play.api.mvc._
+import uk.gov.hmrc.play.http.InternalServerException
 import scala.concurrent.Future
 import play.api.Play.current
 import play.api.i18n.Messages.Implicits._
@@ -36,8 +38,11 @@ trait HomeController extends FrontendController  {
         val serviceTitle = loadConfig(s"microservice.services.awrs-lookup.service-name")
         Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.awrsLookup.page1(formMappings.page1Form, callbackUrl, serviceTitle)).withSession(request.session + ("originService" -> originService.get)))
       }
-      case _ => Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.awrsLookup.page5()))
+      case _ => {
+        Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.error_template(Messages("global_errors.title"), Messages("global_errors.heading"), Messages("global_errors.message"))))
+      }
     }
   }
+
 
 }

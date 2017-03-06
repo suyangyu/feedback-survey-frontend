@@ -26,10 +26,10 @@ import play.api.test.FakeRequest
 import play.api.test.Helpers._
 
 import scala.concurrent.Future
-import utils.{AwrsUnitTestTraits, HtmlUtils}
+import utils.{UnitTestTraits, HtmlUtils}
 import controllers.AwrsLookupController
 
-class pageTests extends AwrsUnitTestTraits with HtmlUtils {
+class pageTests extends UnitTestTraits with HtmlUtils {
   val lookupFailure = Json.parse( """{"reason": "Generic test reason"}""")
 
   def testRequest(originService: Option[String]): FakeRequest[AnyContentAsEmpty.type] =
