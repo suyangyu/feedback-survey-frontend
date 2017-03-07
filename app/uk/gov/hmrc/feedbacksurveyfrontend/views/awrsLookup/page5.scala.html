@@ -1,4 +1,5 @@
-@(serviceTitle: String
+@(callbackServiceUrl: String,
+serviceTitle: String
 )(implicit request: Request[_], messages: Messages)
 
 @import play.twirl.api.Html
@@ -7,5 +8,6 @@
 @import models._
 
 @uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("awrslookup.giveFeedBack", Messages("awrslookup.page5.title")), bodyClasses = None, serviceTitle = serviceTitle) {
-    <h1 id="title" class="heading-large">@Messages("awrslookup.page5.title")</h1>
+    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("backToSearch", callbackServiceUrl, true, Messages("awrslookup.backToSearch"))(messages)
+    <h1 id="thankYou" class="heading-large">@Messages("awrslookup.page5.title")</h1>
 }

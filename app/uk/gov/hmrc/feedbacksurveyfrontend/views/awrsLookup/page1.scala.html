@@ -9,7 +9,7 @@ serviceTitle: String
 @import models._
 
 @uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("awrslookup.giveFeedBack", Messages("awrslookup.page1.question1")), bodyClasses = None, serviceTitle = serviceTitle) {
-    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink(callbackServiceUrl, true)(messages)
+    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("backToSearch", callbackServiceUrl, true, Messages("awrslookup.backToSearch"))(messages)
     <h1 id="title" class="heading-large">@Messages("awrslookup.page1.title")</h1>
     <p id="intro">@Messages("awrslookup.page1.para1")</p>
     @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.AwrsLookupController.page1Continue){
@@ -20,8 +20,8 @@ serviceTitle: String
                     Seq("Yes" -> Messages("generic.yes"),"No" -> Messages("generic.no")),
                     legend = Messages("awrslookup.page1.question1"),
                     legendClass = "heading-medium",
-                    fieldSetClass = "inline",
-                    fieldSetAttributes = "id=ableToDoWhatNeeded"
+                    legendId = "ableToDoWhatNeeded",
+                    fieldSetClass = "inline"
                 )
             )
         </div>

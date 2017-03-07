@@ -23,7 +23,7 @@
         }
         <label for="@if( elements.args.get('_id) ) {@elements.args.get('_id)} else {@elements.field.name.replaceAll("""[\.\[\]]""", "-")}"
             class="@elements.args.get('_divClass) @if( elements.args.get('_labelClass) ){ @elements.args.get('_labelClass) }"
-            id="@if( elements.args.get('_id) ) {@elements.args.get('_id)} else {@elements.field.name.replaceAll("""[\.\[\]]""", "-")}_field"
+            id="@if(elements.args.get('_id)) {@elements.args.get('_id)Label} else {@elements.field.name.replaceAll("""[\.\[\]]""", "-")Label}"
                 @if(elements.args.contains('_labelDataAttributes)){@elements.args.get('_labelDataAttributes)}>
 
             @if(labelHighlight) {<h2>}

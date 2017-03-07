@@ -1,4 +1,5 @@
 @(page4: Form[models.awrsModels.Page4],
+callbackServiceUrl: String,
 serviceTitle: String
 )(implicit request: Request[_], messages: Messages)
 
@@ -8,7 +9,8 @@ serviceTitle: String
 @import models.awrsModels._
 
 @uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("awrslookup.page4.question1"), bodyClasses = None, serviceTitle = serviceTitle) {
-    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink(controllers.routes.AwrsLookupController.page3.url, true)(messages)
+    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("back", controllers.routes.AwrsLookupController.page3.url, true, Messages("generic.back"))(messages)
+    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("backToSearch", callbackServiceUrl, true, Messages("awrslookup.backToSearch"))(messages)
     @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.AwrsLookupController.page4Continue){
         <div class="form-group">
             @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsInputTypeRadioGroup(
@@ -17,8 +19,7 @@ serviceTitle: String
                     formFields.page4Question1Options,
                     legend = Messages("awrslookup.page4.question1"),
                     legendClass = "heading-large",
-                    legendId = "title",
-                    fieldSetAttributes = "id=recommendRating"
+                    legendId = "recommendRating"
                 )
             )
         </div>

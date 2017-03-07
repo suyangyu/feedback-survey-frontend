@@ -23,7 +23,6 @@ case class InputTypeGroupCheckboxParams(field: Field,
                                         overrideInputId: Option[String] = None, // if none, field name used as id
                                         legend: Option[String] = None,
                                         legendId: Option[String] = None,
-                                        fieldPrefixId: Option[String] = None,
                                         legendClass: Option[String] = None,
                                         legendAttributes: Option[String] = None,
                                         fieldSetClass: Option[String] = None,

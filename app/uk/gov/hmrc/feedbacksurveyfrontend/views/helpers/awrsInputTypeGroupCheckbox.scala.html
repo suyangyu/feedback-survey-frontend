@@ -70,7 +70,7 @@
 @inputId(append: String) = @{
     params.overrideInputId match {
         case Some(overrideInputId) => overrideInputId
-        case _ => params.fieldPrefixId.get + "_" + append
+        case _ => params.legendId.get + "_" + append
     }
 }
 <fieldset @fieldSetClass @fieldSetAttributes role="group" aria-required="true" @if(fieldErrors.nonEmpty) {aria-labelledby="@params.field.name-error-0"}>
