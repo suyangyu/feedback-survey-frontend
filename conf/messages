@@ -43,7 +43,7 @@ awrslookup.page3.question1.option3=Neither satisfied or dissatisfied
 awrslookup.page3.question1.option4=Dissatisfied
 awrslookup.page3.question1.option5=Very dissatisfied
 
-awrslookup.page4.question1=Overall, how did you feel about the service you received today?
+awrslookup.page4.question1=How likely are you to recommend this service to a friend or colleague if they needed to do the same thing?
 awrslookup.page4.question1.option1=10 Very likely
 awrslookup.page4.question1.option2=9
 awrslookup.page4.question1.option3=8

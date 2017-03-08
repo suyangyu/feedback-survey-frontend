@@ -51,26 +51,26 @@ class pageTests extends UnitTestTraits with HtmlUtils {
 
     "render page2 correctly" in {
       val document: Document = TestLookupController.page2.apply(testRequest(originService = "awrs-lookup"))
-      document.getElementById("title").text shouldBe Messages("awrslookup.page2.question1")
+      document.getElementById("beforeUsingThisService").text shouldBe Messages("awrslookup.page2.question1")
       document.getElementById("save-and-continue").text shouldBe Messages("generic.continue")
     }
 
     "render page3 correctly" in {
       val document: Document = TestLookupController.page3.apply(testRequest(originService = "awrs-lookup"))
-      document.getElementById("title").text shouldBe Messages("awrslookup.page3.question1")
+      document.getElementById("serviceReceived").text shouldBe Messages("awrslookup.page3.question1")
       document.getElementById("save-and-continue").text shouldBe Messages("generic.continue")
     }
 
     "render page4 correctly" in {
       val document: Document = TestLookupController.page4.apply(testRequest(originService = "awrs-lookup"))
-      document.getElementById("title").text shouldBe Messages("awrslookup.page4.question1")
-      document.getElementById("reasonForRating_field").text should include(Messages("awrslookup.page4.question2"))
+      document.getElementById("recommendRating").text shouldBe Messages("awrslookup.page4.question1")
+      document.getElementById("reasonForRatingLabel").text should include(Messages("awrslookup.page4.question2"))
       document.getElementById("save-and-continue").text shouldBe Messages("generic.continue")
     }
 
     "render page5 correctly" in {
       val document: Document = TestLookupController.page5.apply(testRequest(originService = "awrs-lookup"))
-      document.getElementById("title").text shouldBe Messages("awrslookup.page5.title")
+      document.getElementById("thankYou").text shouldBe Messages("awrslookup.page5.title")
 
     }
 

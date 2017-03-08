@@ -33,7 +33,7 @@ object FrontendAppConfig extends AppConfig with ServicesConfig {
 
   def loadConfig(key: String) = configuration.getString(key).getOrElse(throw new Exception(s"Missing configuration key: $key"))
 
-  private val contactHost = configuration.getString(s"contact-frontend.host").getOrElse("")
+  private val contactHost = configuration.getString(s"microservice.services.contact-frontend.host").getOrElse("")
   private val contactFormServiceIdentifier = "FEEDBACK-SURVEY"
 
   override lazy val analyticsToken = loadConfig(s"google-analytics.token")
