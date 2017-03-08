@@ -10,7 +10,6 @@ serviceTitle: String
 
 @uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("awrslookup.giveFeedBack", Messages("awrslookup.page4.question1")), bodyClasses = None, serviceTitle = serviceTitle) {
     @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("back", controllers.routes.AwrsLookupController.page3.url, true, Messages("generic.back"))(messages)
-    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("backToSearch", callbackServiceUrl, true, Messages("awrslookup.backToSearch"))(messages)
     @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.AwrsLookupController.page4Continue){
         <div class="form-group">
             @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsInputTypeRadioGroup(
@@ -23,16 +22,15 @@ serviceTitle: String
                 )
             )
         </div>
-        <div class="form-group">
-            @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsTextBox(page4("reasonForRating"),
-                '_label -> Html(Messages("awrslookup.page4.question2")),
-                '_id -> "reasonForRating",
-                '_maxLength -> "2500",
-                '_showConstraints -> false,
-                '_labelHighlight -> true,
-                '_labelHint -> Messages("awrslookup.page4.question2.labelhint")
-            )
-        </div>
+        @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsTextBox(page4("reasonForRating"),
+            '_label -> Html(Messages("awrslookup.page4.question2")),
+            '_id -> "reasonForRating",
+            '_maxLength -> "2500",
+            '_showConstraints -> false,
+            '_labelHighlight -> true,
+            '_labelHint -> Messages("awrslookup.page4.question2.labelhint")
+        )
         @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsSubmitButton(Messages("generic.continue"))(id = "save-and-continue", classAttr = "button")
     }
+    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.returnToService(callbackServiceUrl, Messages("awrslookup.backToSearch"))(messages)
 }

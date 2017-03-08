@@ -1,0 +1,5 @@
+@(callbackServiceUrl:String, linkText:String = "")(implicit messages: Messages)
+@import play.api.i18n.Messages.Implicits._
+@{
+    <a id="return-to-service" href={callbackServiceUrl}>{linkText}</a>
+}

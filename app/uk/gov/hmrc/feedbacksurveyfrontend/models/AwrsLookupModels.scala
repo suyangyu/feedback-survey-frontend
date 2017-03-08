@@ -117,11 +117,6 @@ object formFields {
 }
 
 object fieldValidationPatterns {
-  def companyRegPattern = "(^[a-zA-Z0-9]{1,10})$"
-  def corporationRefPattern = "^([0-9]{10})$"
   def addresssRegx = """^[A-Za-zÀ-ÿ0-9 &'(),-./]{0,}$"""
-  def postCodeRegx = """(GIR 0AA)|((([A-Z-[QVX]][0-9][0-9]?)|(([A-Z-[QVX]][A-Z-[IJZ]][0-9][0-9]?)|(([A-Z-[QVX‌​]][0-9][A-HJKSTUW])|([A-Z-[QVX]][A-Z-[IJZ]][0-9][ABEHMNPRVWXY]))))\s?[0-9][A-Z-[C‌​IKMOV]]{2})"""
   def yesNoRegPattern = "^([1-2]{1})$"
-  def csvOdsRegPattern = "^((ods|csv))$"
-  def csvFileNameRegx = """^file[0-9]{1}$"""
 }

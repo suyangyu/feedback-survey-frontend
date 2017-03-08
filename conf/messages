@@ -11,6 +11,8 @@ generic.unauthorised.heading=Sorry, we’re experiencing technical difficulties
 generic.unauthorised.reason_start=This could be because,
 generic.unauthorised.reason_1=you are a sole trader and before you can register for AWRS you must register for Self Assessment Online.
 generic.unauthorised.reason_2=you are an agent. Agents cannot use the AWRS service to apply on behalf of their clients.
+generic.invalid.characters=Invalid characters
+
 global_errors.message=Sorry, there is a technical problem and you cannot use the service at the moment. Please try again later.
 global_errors.heading=Service unavailable
 global_errors.title=Service unavailable

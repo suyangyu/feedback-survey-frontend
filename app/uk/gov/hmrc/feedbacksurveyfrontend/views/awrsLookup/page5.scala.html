@@ -8,6 +8,6 @@ serviceTitle: String
 @import models._
 
 @uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("awrslookup.giveFeedBack", Messages("awrslookup.page5.title")), bodyClasses = None, serviceTitle = serviceTitle) {
-    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("backToSearch", callbackServiceUrl, true, Messages("awrslookup.backToSearch"))(messages)
     <h1 id="thankYou" class="heading-large">@Messages("awrslookup.page5.title")</h1>
+    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.returnToService(callbackServiceUrl, Messages("awrslookup.backToSearch"))(messages)
 }
