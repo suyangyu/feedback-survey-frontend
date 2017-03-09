@@ -51,7 +51,7 @@
 @formHint = {
     @params.formHint match {
         case Some(formHint) => {
-            <span @formHintId class="form-hint">@formHint</span>
+            <p @formHintId>@formHint</p>
         }
         case _ => {}
     }
