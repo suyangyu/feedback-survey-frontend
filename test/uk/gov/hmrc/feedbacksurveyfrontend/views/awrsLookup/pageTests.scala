@@ -43,7 +43,7 @@ class pageTests extends UnitTestTraits with HtmlUtils {
       val document: Document = TestLookupController.page1.apply(testRequest(originService = "awrs-lookup"))
       document.getElementById("title").text shouldBe Messages("awrslookup.page1.title")
       document.getElementById("intro").text shouldBe Messages("awrslookup.page1.para1")
-      document.getElementById("ableToDoWhatNeeded").text should include(Messages("awrslookup.page1.question1"))
+      document.getElementById("ableToDoWhatNeeded_legend").text should include(Messages("awrslookup.page1.question1"))
       document.getElementById("ableToDoWhatNeeded-yes").text shouldBe ""
       document.getElementById("ableToDoWhatNeeded-no").text shouldBe ""
       document.getElementById("save-and-continue").text shouldBe Messages("generic.continue")
@@ -51,19 +51,19 @@ class pageTests extends UnitTestTraits with HtmlUtils {
 
     "render page2 correctly" in {
       val document: Document = TestLookupController.page2.apply(testRequest(originService = "awrs-lookup"))
-      document.getElementById("beforeUsingThisService").text shouldBe Messages("awrslookup.page2.question1")
+      document.getElementById("beforeUsingThisService").text shouldBe Messages("awrslookup.giveFeedBack") + " " + Messages("awrslookup.page2.question1")
       document.getElementById("save-and-continue").text shouldBe Messages("generic.continue")
     }
 
     "render page3 correctly" in {
       val document: Document = TestLookupController.page3.apply(testRequest(originService = "awrs-lookup"))
-      document.getElementById("serviceReceived").text shouldBe Messages("awrslookup.page3.question1")
+      document.getElementById("serviceReceived").text shouldBe Messages("awrslookup.giveFeedBack") + " " + Messages("awrslookup.page3.question1")
       document.getElementById("save-and-continue").text shouldBe Messages("generic.continue")
     }
 
     "render page4 correctly" in {
       val document: Document = TestLookupController.page4.apply(testRequest(originService = "awrs-lookup"))
-      document.getElementById("recommendRating").text shouldBe Messages("awrslookup.page4.question1")
+      document.getElementById("recommendRating").text shouldBe Messages("awrslookup.giveFeedBack") + " " + Messages("awrslookup.page4.question1")
       document.getElementById("reasonForRatingLabel").text should include(Messages("awrslookup.page4.question2"))
       document.getElementById("save-and-continue").text shouldBe Messages("generic.continue")
     }

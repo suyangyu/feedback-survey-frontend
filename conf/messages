@@ -21,7 +21,8 @@ global_errors.title=Service unavailable
 
 awrslookup.backToSearch=Return to search
 
-awrslookup.giveFeedBack=Give feedback - {0}
+awrslookup.giveFeedBack=Give feedback
+awrslookup.giveFeedBackPageTitle=Give feedback - {0}
 
 awrslookup.page1.title=Give feedback
 awrslookup.page1.para1=All questions in the survey are optional.
