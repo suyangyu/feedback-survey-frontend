@@ -25,7 +25,7 @@ import uk.gov.hmrc.play.http.HeaderCarrier
 // the production logs. All trace and debug calls will only appear locally so should only be used for local debugging
 // and not for anything that you would want to see logged in production.
 trait LoggingUtils extends Auditable {
-  
+
   final val eventTypeSuccess: String = "AwrsSuccess"
   final val eventTypeFailure: String = "AwrsFailure"
   final val eventTypeBadRequest: String = "BadRequest"
