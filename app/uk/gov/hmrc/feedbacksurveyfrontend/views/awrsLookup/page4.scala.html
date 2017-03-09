@@ -8,8 +8,12 @@ serviceTitle: String
 @import views.html.helpers._
 @import models.awrsModels._
 
-@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("awrslookup.giveFeedBack", Messages("awrslookup.page4.question1")), bodyClasses = None, serviceTitle = serviceTitle) {
+@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("awrslookup.giveFeedBackPageTitle", Messages("awrslookup.page4.question1")), bodyClasses = None, serviceTitle = serviceTitle) {
     @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("back", controllers.routes.AwrsLookupController.page3.url, true, Messages("generic.back"))(messages)
+    <h1 id="recommendRating" class="heading-large">
+        <span class="heading-secondary">@Messages("awrslookup.giveFeedBack")</span>
+        @Messages("awrslookup.page4.question1")
+    </h1>
     @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.AwrsLookupController.page4Continue){
         <div class="form-group">
             @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsInputTypeRadioGroup(
@@ -17,7 +21,7 @@ serviceTitle: String
                     page4("recommendRating"),
                     formFields.page4Question1Options,
                     legend = Messages("awrslookup.page4.question1"),
-                    legendClass = "heading-large",
+                    legendClass = "visuallyhidden",
                     legendId = "recommendRating"
                 )
             )

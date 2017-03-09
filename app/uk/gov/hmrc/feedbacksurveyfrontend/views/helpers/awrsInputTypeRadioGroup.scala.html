@@ -36,7 +36,7 @@
 }
 @legendId = @{
     Html(params.legendId match {
-        case Some(legendId) => "id=\"" + legendId + "\""
+        case Some(legendId) => "id=\"" + legendId + "_legend\""
         case _ => ""
     })
 }

@@ -19,9 +19,10 @@ global_errors.title=Service unavailable
 
 # AWRS Lookup Specific
 
-awrslookup.backToSearch=Back to search
+awrslookup.backToSearch=Return to search
 
-awrslookup.giveFeedBack=Give feedback - {0}
+awrslookup.giveFeedBack=Give feedback
+awrslookup.giveFeedBackPageTitle=Give feedback - {0}
 
 awrslookup.page1.title=Give feedback
 awrslookup.page1.para1=All questions in the survey are optional.
@@ -41,7 +42,7 @@ awrslookup.page2.question1.option7=None of these
 awrslookup.page3.question1=Overall, how did you feel about the service you received today?
 awrslookup.page3.question1.option1=Very satisfied
 awrslookup.page3.question1.option2=Satisfied
-awrslookup.page3.question1.option3=Neither satisfied or dissatisfied
+awrslookup.page3.question1.option3=Neither satisfied nor dissatisfied
 awrslookup.page3.question1.option4=Dissatisfied
 awrslookup.page3.question1.option5=Very dissatisfied
 

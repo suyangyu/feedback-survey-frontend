@@ -37,7 +37,7 @@
 @legend = {
     @params.legend match {
         case Some(legend) => {
-            <legend id="@(params.legendId)" @legendClass @legendAttributes>@legend</legend>
+            <legend id="@(params.legendId)_legend" @legendClass @legendAttributes>@legend</legend>
         }
         case _ => {}
     }
@@ -51,7 +51,7 @@
 @formHint = {
     @params.formHint match {
         case Some(formHint) => {
-            <span @formHintId class="form-hint">@formHint</span>
+            <p @formHintId>@formHint</p>
         }
         case _ => {}
     }
