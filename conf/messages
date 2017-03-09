@@ -19,7 +19,7 @@ global_errors.title=Service unavailable
 
 # AWRS Lookup Specific
 
-awrslookup.backToSearch=Back to search
+awrslookup.backToSearch=Return to search
 
 awrslookup.giveFeedBack=Give feedback - {0}
 

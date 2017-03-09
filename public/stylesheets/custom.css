@@ -37,3 +37,17 @@ textarea {width:100%; border-radius:0;}
     font-size: 16px;
     line-height: 1.25;
 }
+
+.beta-banner {text-align: left;}
+
+.heading-large .heading-secondary {
+    color: #6f777b;
+    display: block;
+    font-family: "nta",Arial,sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.25;
+    padding-bottom: 4px;
+    padding-top: 6px;
+    text-transform: none;
+}

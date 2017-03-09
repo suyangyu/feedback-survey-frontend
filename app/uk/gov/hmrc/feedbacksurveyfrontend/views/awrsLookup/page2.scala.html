@@ -10,6 +10,10 @@ serviceTitle: String
 
 @uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("awrslookup.giveFeedBack", Messages("awrslookup.page2.question1")), bodyClasses = None, serviceTitle = serviceTitle) {
     @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("back", controllers.routes.AwrsLookupController.page1.url, true, Messages("generic.back"))(messages)
+    <h1 id="beforeUsingThisService" class="heading-large">
+        <span class="heading-secondary">Give feedback</span>
+        @Messages("awrslookup.page2.question1")
+    </h1>
     @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.AwrsLookupController.page2Continue){
         <div class="form-group">
             @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsInputTypeGroupCheckbox(
@@ -17,7 +21,7 @@ serviceTitle: String
                     page2(""),
                     formFields.page2Question1Options,
                     legend = Messages("awrslookup.page2.question1"),
-                    legendClass = "heading-large",
+                    legendClass = "visuallyhidden",
                     legendId = "beforeUsingThisService",
                     formHint = Messages("awrslookup.page2.question1.formhint")
                 )
