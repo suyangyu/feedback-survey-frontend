@@ -122,7 +122,7 @@
         <div>
             @params.radioOptions.map { case (value, label) =>
                 @defining(s"${params.field.name}-${value.toLowerCase.replace(" ", "_")}") { inputId =>
-                    <label for="@inputId" class="block-label @labelClass @params.field.value.filter(_ == value).map { _ => selected }">
+                    <label for="@inputId" id="@(inputId)_label" class="block-label @labelClass @params.field.value.filter(_ == value).map { _ => selected }">
                         @if(!labelAfter)@{addLabelIfSpecified(label, params)}
                         <input type="radio" id="@inputId" name="@params.field.name" value="@value" @inputClass @dataAttributes @params.field.value.filter(_ == value).map { _ => checked="checked"}>
                         @if(labelAfter)@{addLabelIfSpecified(label, params)}
