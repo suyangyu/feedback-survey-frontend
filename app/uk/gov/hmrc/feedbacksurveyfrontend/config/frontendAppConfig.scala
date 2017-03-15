@@ -33,13 +33,13 @@ trait AppConfig {
 object FrontendAppConfig extends AppConfig with ServicesConfig {
 
   def loadConfig(key: String) = configuration.getString(key).getOrElse(throw new Exception(s"Missing configuration key: $key"))
-
+  private val contactFrontendService = baseUrl("contact-frontend")
   private val contactHost = configuration.getString(s"microservice.services.contact-frontend.host").getOrElse("")
   private val contactFormServiceIdentifier = "FEEDBACK-SURVEY"
 
   override lazy val analyticsToken = loadConfig(s"google-analytics.token")
   override lazy val analyticsHost = loadConfig(s"google-analytics.host")
-  override lazy val reportAProblemPartialUrl = s"$contactHost/contact/problem_reports_ajax?service=$contactFormServiceIdentifier"
+  override lazy val reportAProblemPartialUrl = s"$contactFrontendService/contact/problem_reports?secure=true"
   override lazy val reportAProblemNonJSUrl = s"$contactHost/contact/problem_reports_nonjs?service=$contactFormServiceIdentifier"
   override lazy val betaFeedbackUnauthenticatedUrl = s"$contactHost/contact/beta-feedback-unauthenticated"
   override lazy val defaultTimeoutSeconds: Int = getString(s"defaultTimeoutSeconds").toInt
