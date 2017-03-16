@@ -22,7 +22,7 @@ import uk.gov.hmrc.play.frontend.controller.FrontendController
 import play.api.mvc._
 
 import scala.concurrent.Future
-import play.api.Play.current
+import play.api.Play.{configuration, current}
 import play.api.i18n.Messages
 import play.api.i18n.Messages.Implicits._
 import utils.LoggingUtils
@@ -32,9 +32,8 @@ object AwrsLookupController extends AwrsLookupController
 
 trait AwrsLookupController extends FrontendController with LoggingUtils {
 
-  val callbackUrl = loadConfig(s"microservice.services.awrs-lookup.callback-url")
-  val serviceTitle = loadConfig(s"microservice.services.awrs-lookup.service-name")
-
+  val callbackUrl = loadConfig(s"awrs-lookup.callback-url")
+  val serviceTitle = configuration.getString(s"awrs-lookup.service-name").getOrElse("")
 
   val page1 = (originService:String) => Action.async { implicit request =>
     Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.awrsLookup.page1(formMappings.page1Form, callbackUrl, serviceTitle, originService)))
