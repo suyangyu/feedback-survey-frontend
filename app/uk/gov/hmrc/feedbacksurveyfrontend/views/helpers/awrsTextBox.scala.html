@@ -31,7 +31,7 @@
         </label>
         @if(elements.args.contains('_labelHint)) {<p id="@elements.args.get('_labelHintId)">@elements.args.get('_labelHint)</p>}
         <textarea id="@if( elements.args.get('_id) ) {@elements.args.get('_id)} else {@elements.field.name.replaceAll("""[\.\[\]]""", "-")}"
-            class="comment-box @if( elements.args.get('_inputClass) ){ @elements.args.get('_inputClass) }"
+            style="resize: none;" class="comment-box @if( elements.args.get('_inputClass) ){ @elements.args.get('_inputClass) }"
             @if(elements.args.contains('_maxLength)){maxlength="@elements.args.get('_maxLength)"}else{}
             name="@elements.field.name"
             rows="6">@value</textarea>

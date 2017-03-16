@@ -30,13 +30,12 @@ object HomeController extends HomeController
 
 trait HomeController extends FrontendController  {
 
-  def start() = Action.async { implicit request =>
-    val originService: Option[String] = request.getQueryString("originService")
-    originService.fold("")(x => x) match {
-      case "awrs-lookup" => {
+  def start(originService :String) = Action.async { implicit request =>
+    originService match {
+      case originService => {
         val callbackUrl = loadConfig(s"microservice.services.awrs-lookup.callback-url")
         val serviceTitle = loadConfig(s"microservice.services.awrs-lookup.service-name")
-        Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.awrsLookup.page1(formMappings.page1Form, callbackUrl, serviceTitle)).withSession(request.session + ("originService" -> originService.get)))
+        Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.awrsLookup.page1(formMappings.page1Form, callbackUrl, serviceTitle,originService)).withSession(request.session + ("originService" -> originService)))
       }
       case _ => {
         Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.error_template(Messages("global_errors.title"), Messages("global_errors.heading"), Messages("global_errors.message"))))
