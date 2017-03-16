@@ -59,7 +59,7 @@ awrslookup.page4.question1.option9=2
 awrslookup.page4.question1.option10=1
 awrslookup.page4.question1.option11=0 Very unlikely
 awrslookup.page4.question2=Why did you give this rating?
-awrslookup.page4.question2.labelhint=Do not include any personal or financial information like your National Insurance number or back details.
+awrslookup.page4.question2.labelhint=Do not include any personal or financial information like your National Insurance number or bank details.
 
 awrslookup.page5.title=Thank you for your feedback
 
