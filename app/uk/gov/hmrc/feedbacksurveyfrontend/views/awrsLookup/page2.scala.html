@@ -13,7 +13,7 @@ originService: String
 <script type="text/javascript" src='@routes.Assets.at("javascripts/feedback.js")'></script>
 }
 
-@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("awrslookup.giveFeedBackPageTitle", Messages("awrslookup.page2.question1")), bodyClasses = None, serviceTitle = serviceTitle, pageScripts = Some(pageScripts)) {
+@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("awrslookup.giveFeedBackPageTitle", Messages("awrslookup.page2.question1")), bodyClasses = None, pageScripts = Some(pageScripts)) {
     @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("back", controllers.routes.AwrsLookupController.page1(originService).url, true, Messages("generic.back"))(messages)
     <h1 id="beforeUsingThisService" class="heading-large">
         <span class="heading-secondary" id="giveFeedback">@Messages("awrslookup.giveFeedBack")</span>
