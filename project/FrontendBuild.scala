@@ -1,7 +1,4 @@
 import sbt._
-import uk.gov.hmrc.SbtAutoBuildPlugin
-import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin
-import uk.gov.hmrc.versioning.SbtGitVersioning
 
 object FrontendBuild extends Build with MicroService {
   val appName = "feedback-survey-frontend"
@@ -9,23 +6,22 @@ object FrontendBuild extends Build with MicroService {
 }
 
 private object AppDependencies {
-    import play.sbt.PlayImport._
     import play.core.PlayVersion
+    import play.sbt.PlayImport._
 
-    private val playHealthVersion = "2.0.0"
-    private val logbackJsonLoggerVersion = "3.1.0"
-    private val frontendBootstrapVersion = "7.10.0"
-    private val govukTemplateVersion = "5.0.0"
-    private val playUiVersion = "7.0.0"
-    private val playPartialsVersion = "5.2.0"
-    private val playAuthorisedFrontendVersion = "6.2.0"
-    private val playConfigVersion = "3.0.0"
-    private val hmrcTestVersion = "2.3.0"
-    private val scalaTestVersion = "2.2.6"
-    private val scalaTestPlusPlayVersion = "1.5.1"
-    private val pegdownVersion = "1.6.0"
-    private val mockitoVersion = "1.10.19"
-
+      private val playHealthVersion = "2.1.0"
+      private val logbackJsonLoggerVersion = "3.1.0"
+      private val frontendBootstrapVersion = "7.14.0"
+      private val govukTemplateVersion = "5.1.0"
+      private val playUiVersion = "7.0.0"
+      private val playPartialsVersion = "5.3.0"
+      private val playAuthorisedFrontendVersion = "6.3.0"
+      private val playConfigVersion = "4.2.0"
+      private val hmrcTestVersion = "2.3.0"
+      private val scalaTestVersion = "2.2.6"
+      private val scalaTestPlusPlayVersion = "1.5.1"
+      private val pegdownVersion = "1.6.0"
+      private val mockitoVersion = "1.10.19"
 
     val compile = Seq(
       ws,
