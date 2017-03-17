@@ -20,7 +20,6 @@ import play.api.Play.{configuration, current}
 import play.api.i18n.Messages
 import play.api.i18n.Messages.Implicits._
 import play.api.mvc._
-import uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig._
 import uk.gov.hmrc.play.frontend.controller.FrontendController
 
 import scala.concurrent.Future
@@ -29,13 +28,14 @@ object HomeController extends HomeController
 
 trait HomeController extends FrontendController  {
 
-  def start(originService : String ) = Action.async { implicit request =>
 
+  def start(originService : String ) = Action.async { implicit request =>
+    val callbackURL: Option[String] = request.getQueryString("callbackURL")
     originService match {
       case originService => {
-        val callbackUrl = loadConfig(s"awrs-lookup.callback-url")
+        //val callbackUrl = loadConfig(s"awrs-lookup.callback-url")
         val serviceTitle = configuration.getString(s"awrs-lookup.service-name").getOrElse("")
-        Future.successful(Redirect(routes.AwrsLookupController.page1(originService)))
+        Future.successful(Redirect(routes.FeedbackSurveyController.page1(originService)).withSession(request.session + ("callbackUrl" -> callbackURL.get)))
       }
       case _ => {
         Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.error_template(Messages("global_errors.title"), Messages("global_errors.heading"), Messages("global_errors.message"))))

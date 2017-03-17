@@ -27,7 +27,7 @@ import play.api.test.Helpers._
 
 import scala.concurrent.Future
 import utils.{UnitTestTraits, HtmlUtils}
-import controllers.AwrsLookupController
+import controllers.FeedbackSurveyController
 
 class pageTests extends UnitTestTraits with HtmlUtils {
   val lookupFailure = Json.parse( """{"reason": "Generic test reason"}""")
@@ -35,7 +35,7 @@ class pageTests extends UnitTestTraits with HtmlUtils {
   def testRequest(originService: Option[String]): FakeRequest[AnyContentAsEmpty.type] =
     FakeRequest(GET, "/feedback-survey-frontend" + originService.fold("")(q => s"?originService=$q"))
 
-  object TestLookupController extends AwrsLookupController
+  object TestLookupController extends FeedbackSurveyController
 
   "AWRS Lookup Controller" should {
 

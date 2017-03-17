@@ -12,7 +12,7 @@ originService:String
 @uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("awrslookup.giveFeedBackPageTitle", Messages("awrslookup.page1.question1")), bodyClasses = None) {
     <h1 id="title" class="heading-large">@Messages("awrslookup.page1.title")</h1>
     <p id="intro">@Messages("awrslookup.page1.para1")</p>
-    @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.AwrsLookupController.page1Continue(originService)){
+    @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.FeedbackSurveyController.page1Continue(originService)){
         <div class="form-group">
             @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsInputTypeRadioGroup(
                 InputTypeRadioGroupParams(
