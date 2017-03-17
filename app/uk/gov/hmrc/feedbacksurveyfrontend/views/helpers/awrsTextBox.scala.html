@@ -10,9 +10,8 @@
 @parentElements = @{parentField.map(pf => new FieldElements(pf.id, pf, null, Map(), messages) )}
 @value = @{ field.value match { case Some(x) => x case None => "" case x => x }}
 @labelAfter = @{ elements.args.get('_labelAfter).getOrElse(false).asInstanceOf[Boolean] }
-@labelHighlight = @{ elements.args.get('_labelHighlight).getOrElse(false).asInstanceOf[Boolean] }
+@labelHighlight = @{elements.args.get('_labelHighlight).getOrElse(false).asInstanceOf[Boolean]}
 @labelHint = @{ elements.args.get('_labelHint).getOrElse(false).asInstanceOf[Boolean] }
-
 
 <div class="form-field @if(fieldErrors.nonEmpty || (parentElements.isDefined && parentElements.get.hasErrors)) {form-field--error} else {@if(elements.args.get('_wrapperClass)) { @elements.args.get('_wrapperClass) }}">
 
@@ -30,9 +29,9 @@
             @if(elements.args.contains('_label)) {@elements.label}
             @if(labelHighlight) {</h2>}
         </label>
-        @if(elements.args.contains('_labelHint)) {<p>@elements.args.get('_labelHint)</p>}
+        @if(elements.args.contains('_labelHint)) {<p id="@elements.args.get('_labelHintId)">@elements.args.get('_labelHint)</p>}
         <textarea id="@if( elements.args.get('_id) ) {@elements.args.get('_id)} else {@elements.field.name.replaceAll("""[\.\[\]]""", "-")}"
-            class="comment-box @if( elements.args.get('_inputClass) ){ @elements.args.get('_inputClass) }"
+            style="resize: none;" class="comment-box @if( elements.args.get('_inputClass) ){ @elements.args.get('_inputClass) }"
             @if(elements.args.contains('_maxLength)){maxlength="@elements.args.get('_maxLength)"}else{}
             name="@elements.field.name"
             rows="6">@value</textarea>

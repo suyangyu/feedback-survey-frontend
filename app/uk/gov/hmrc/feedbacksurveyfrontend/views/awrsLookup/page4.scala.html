@@ -1,6 +1,7 @@
 @(page4: Form[models.awrsModels.Page4],
 callbackServiceUrl: String,
-serviceTitle: String
+serviceTitle: String,
+originService : String = ""
 )(implicit request: Request[_], messages: Messages)
 
 @import play.twirl.api.Html
@@ -8,13 +9,13 @@ serviceTitle: String
 @import views.html.helpers._
 @import models.awrsModels._
 
-@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("awrslookup.giveFeedBackPageTitle", Messages("awrslookup.page4.question1")), bodyClasses = None, serviceTitle = serviceTitle) {
-    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("back", controllers.routes.AwrsLookupController.page3.url, true, Messages("generic.back"))(messages)
+@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("awrslookup.giveFeedBackPageTitle", Messages("awrslookup.page4.question1")), bodyClasses = None) {
+    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("back", controllers.routes.AwrsLookupController.page3(originService).url, true, Messages("generic.back"))(messages)
     <h1 id="recommendRating" class="heading-large">
-        <span class="heading-secondary">@Messages("awrslookup.giveFeedBack")</span>
+        <span class="heading-secondary" id="giveFeedback">@Messages("awrslookup.giveFeedBack")</span>
         @Messages("awrslookup.page4.question1")
     </h1>
-    @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.AwrsLookupController.page4Continue){
+    @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.AwrsLookupController.page4Continue(originService)){
         <div class="form-group">
             @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsInputTypeRadioGroup(
                 InputTypeRadioGroupParams(
@@ -29,11 +30,12 @@ serviceTitle: String
         @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsTextBox(page4("reasonForRating"),
             '_label -> Html(Messages("awrslookup.page4.question2")),
             '_id -> "reasonForRating",
-            '_maxLength -> "2500",
+            '_maxLength -> "1000",
             '_showConstraints -> false,
             '_labelHighlight -> true,
-            '_labelHint -> Messages("awrslookup.page4.question2.labelhint")
-        )
+            '_labelHint -> Messages("awrslookup.page4.question2.labelhint"),
+            '_labelHintId -> "labelHint"
+)
         @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsSubmitButton(Messages("generic.continue"))(id = "save-and-continue", classAttr = "button")
     }
     @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.returnToService(callbackServiceUrl, Messages("awrslookup.backToSearch"))(messages)

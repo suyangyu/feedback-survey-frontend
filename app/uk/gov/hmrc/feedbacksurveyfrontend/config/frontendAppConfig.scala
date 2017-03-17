@@ -25,26 +25,22 @@ trait AppConfig {
   val betaFeedbackUnauthenticatedUrl: String
   val reportAProblemPartialUrl: String
   val reportAProblemNonJSUrl: String
-  val defaultTimeoutSeconds: Int
-  val timeoutCountdown: Int
   val callbackServiceUrl: String
 }
 
 object FrontendAppConfig extends AppConfig with ServicesConfig {
 
-  def loadConfig(key: String) = configuration.getString(key).getOrElse(throw new Exception(s"Missing configuration key: $key"))
-
-  private val contactHost = configuration.getString(s"microservice.services.contact-frontend.host").getOrElse("")
+  def loadConfig(key: String) = getConfString(key,throw new Exception(s"Missing configuration key: $key"))
+  private val contactFrontendService = baseUrl("contact-frontend")
+  private val contactHost = loadConfig(s"contact-frontend.host")
   private val contactFormServiceIdentifier = "FEEDBACK-SURVEY"
 
-  override lazy val analyticsToken = loadConfig(s"google-analytics.token")
-  override lazy val analyticsHost = loadConfig(s"google-analytics.host")
-  override lazy val reportAProblemPartialUrl = s"$contactHost/contact/problem_reports_ajax?service=$contactFormServiceIdentifier"
+  override lazy val analyticsToken = getString(s"google-analytics.token")
+  override lazy val analyticsHost = getString(s"google-analytics.host")
+  override lazy val reportAProblemPartialUrl = s"$contactFrontendService/contact/problem_reports?secure=true"
   override lazy val reportAProblemNonJSUrl = s"$contactHost/contact/problem_reports_nonjs?service=$contactFormServiceIdentifier"
   override lazy val betaFeedbackUnauthenticatedUrl = s"$contactHost/contact/beta-feedback-unauthenticated"
-  override lazy val defaultTimeoutSeconds: Int = getString(s"defaultTimeoutSeconds").toInt
-  override lazy val timeoutCountdown: Int = getString(s"timeoutCountdown").toInt
 
-  override lazy val callbackServiceUrl = loadConfig(s"microservice.services.awrs-lookup.callback-page")
+  override lazy val callbackServiceUrl = loadConfig(s"awrs-lookup.callback-page")
 
 }

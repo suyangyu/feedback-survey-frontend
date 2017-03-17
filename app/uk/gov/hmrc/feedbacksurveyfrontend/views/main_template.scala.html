@@ -1,5 +1,5 @@
 @(title: String,
-  serviceTitle: String = "",
+  serviceTitle: String = "Give Feedback",
   pageScripts: Option[Html] = None,
   sidebarLinks: Option[Html] = None,
   contentHeader: Option[Html] = None,
@@ -25,6 +25,8 @@
 @scriptElement = {
     @scriptElem
     @pageScripts
+    <script type="text/javascript" src='@routes.Assets.at("javascripts/jquery.min.js")'></script>
+    <script type="text/javascript" src='@routes.Assets.at("javascripts/jquery-ui.min.js")'></script>
 }
 
 @govuk_wrapper(appConfig = uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig,

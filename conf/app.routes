@@ -1,17 +1,14 @@
 # microservice specific routes
-GET        /assets/*file      controllers.Assets.at(path="/public", file)
-GET        /                  controllers.HomeController.start
-##GET        /unauthorised      controllers.FeedbackSurveyController.unauthorised
-##GET        /signed-out        controllers.FeedbackSurveyController.timedOut
-##GET        /keep-alive        controllers.FeedbackSurveyController.keepAlive
+GET         /assets/*file      controllers.Assets.at(path="/public", file)
+GET         /:originService                  controllers.HomeController.start(originService: String)
 
 # AWRS Lookup specific routes
-GET        /page1             controllers.AwrsLookupController.page1
-POST       /page1             controllers.AwrsLookupController.page1Continue
-GET        /page2             controllers.AwrsLookupController.page2
-POST       /page2             controllers.AwrsLookupController.page2Continue
-GET        /page3             controllers.AwrsLookupController.page3
-POST       /page3             controllers.AwrsLookupController.page3Continue
-GET        /page4             controllers.AwrsLookupController.page4
-POST       /page4             controllers.AwrsLookupController.page4Continue
-GET        /page5             controllers.AwrsLookupController.page5
+GET        /:originService/page-1             controllers.AwrsLookupController.page1(originService : String )
+POST       /:originService/page-1             controllers.AwrsLookupController.page1Continue(originService : String)
+GET        /:originService/page-2             controllers.AwrsLookupController.page2(originService : String )
+POST       /:originService/page-2             controllers.AwrsLookupController.page2Continue(originService : String )
+GET        /:originService/page-3             controllers.AwrsLookupController.page3(originService : String )
+POST       /:originService/page-3             controllers.AwrsLookupController.page3Continue(originService : String )
+GET        /:originService/page-4             controllers.AwrsLookupController.page4(originService : String )
+POST       /:originService/page-4             controllers.AwrsLookupController.page4Continue(originService : String )
+GET        /:originService/page-5             controllers.AwrsLookupController.page5(originService : String )
