@@ -27,6 +27,7 @@ originService : String = ""
                 )
             )
         </div>
+
         @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsTextBox(page4("reasonForRating"),
             '_label -> Html(Messages("awrslookup.page4.question2")),
             '_id -> "reasonForRating",
@@ -34,7 +35,9 @@ originService : String = ""
             '_showConstraints -> false,
             '_labelHighlight -> true,
             '_labelHint -> Messages("awrslookup.page4.question2.labelhint"),
-            '_labelHintId -> "labelHint"
+            '_labelHintId -> "labelHint",
+            '_legend -> "reasonForRating",
+            '_legendHidden -> true
 )
         @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsSubmitButton(Messages("generic.continue"))(id = "save-and-continue", classAttr = "button")
     }
