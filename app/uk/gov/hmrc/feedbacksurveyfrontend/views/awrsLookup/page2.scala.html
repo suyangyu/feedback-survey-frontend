@@ -15,10 +15,8 @@ originService: String
 
 @uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("awrslookup.giveFeedBackPageTitle", Messages("awrslookup.page2.question1")), bodyClasses = None, pageScripts = Some(pageScripts)) {
     @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("back", controllers.routes.AwrsLookupController.page1(originService).url, true, Messages("generic.back"))(messages)
-    <h1 id="beforeUsingThisService" class="heading-large">
-        <span class="heading-secondary" id="giveFeedback">@Messages("awrslookup.giveFeedBack")</span>
-        @Messages("awrslookup.page2.question1")
-    </h1>
+<span id="giveFeedback" class="pre-heading">@Messages("awrslookup.giveFeedBack")</span>
+<h1 id="beforeUsingThisService" class="heading-large">@Messages("awrslookup.page2.question1")</h1>
     @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.AwrsLookupController.page2Continue(originService)){
         <div class="form-group">
             @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsInputTypeGroupCheckbox(

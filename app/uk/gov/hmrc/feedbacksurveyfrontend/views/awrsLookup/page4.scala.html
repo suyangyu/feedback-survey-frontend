@@ -11,10 +11,8 @@ originService : String = ""
 
 @uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("awrslookup.giveFeedBackPageTitle", Messages("awrslookup.page4.question1")), bodyClasses = None) {
     @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("back", controllers.routes.AwrsLookupController.page3(originService).url, true, Messages("generic.back"))(messages)
-    <h1 id="recommendRating" class="heading-large">
-        <span class="heading-secondary" id="giveFeedback">@Messages("awrslookup.giveFeedBack")</span>
-        @Messages("awrslookup.page4.question1")
-    </h1>
+<span id="giveFeedback" class="pre-heading">@Messages("awrslookup.giveFeedBack")</span>
+    <h1 id="recommendRating" class="heading-large">@Messages("awrslookup.page4.question1")</h1>
     @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.AwrsLookupController.page4Continue(originService)){
         <div class="form-group">
             @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsInputTypeRadioGroup(
@@ -34,7 +32,9 @@ originService : String = ""
             '_showConstraints -> false,
             '_labelHighlight -> true,
             '_labelHint -> Messages("awrslookup.page4.question2.labelhint"),
-            '_labelHintId -> "labelHint"
+            '_labelHintId -> "labelHint",
+            '_legend -> "reasonForRating",
+            '_legendHidden -> true
 )
         @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsSubmitButton(Messages("generic.continue"))(id = "save-and-continue", classAttr = "button")
     }
