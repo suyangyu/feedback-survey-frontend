@@ -1,0 +1,37 @@
+@(page4: Form[models.awrsModels.RecommendService])(implicit request: Request[_], messages: Messages)
+
+@import play.twirl.api.Html
+@import views.helpers._
+@import views.html.helpers._
+@import models.awrsModels._
+
+@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("feedbackSurvey.giveFeedBackPageTitle", Messages("feedbackSurvey.page4.question1")), bodyClasses = None) {
+    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("back", controllers.routes.FeedbackSurveyController.aboutService.url, true, Messages("generic.back"))(messages)
+    <h1 id="recommendRating" class="heading-large">
+        <span class="heading-secondary" id="giveFeedback">@Messages("feedbackSurvey.giveFeedBack")</span>
+        @Messages("feedbackSurvey.page4.question1")
+    </h1>
+    @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.FeedbackSurveyController.recommendServiceContinue){
+        <div class="form-group">
+            @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsInputTypeRadioGroup(
+                InputTypeRadioGroupParams(
+                    page4("recommendRating"),
+                    formFields.page4Question1Options,
+                    legend = Messages("feedbackSurvey.page4.question1"),
+                    legendClass = "visuallyhidden",
+                    legendId = "recommendRating"
+                )
+            )
+        </div>
+        @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsTextBox(page4("reasonForRating"),
+            '_label -> Html(Messages("feedbackSurvey.page4.question2")),
+            '_id -> "reasonForRating",
+            '_maxLength -> "1000",
+            '_showConstraints -> false,
+            '_labelHighlight -> true,
+            '_labelHint -> Messages("feedbackSurvey.page4.question2.labelhint"),
+            '_labelHintId -> "labelHint"
+)
+        @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsSubmitButton(Messages("generic.continue"))(id = "save-and-continue", classAttr = "button")
+    }
+}

@@ -15,7 +15,7 @@
 
             @params.answer match {
                 case Some(answer) => {
-                    @awrsAnswerHint(params.questionId, answer)
+                   @awrsAnswerHint(params.questionId, answer)
                 }
                 case _ => {
                     @awrsAnswerStatusDecision(messages)

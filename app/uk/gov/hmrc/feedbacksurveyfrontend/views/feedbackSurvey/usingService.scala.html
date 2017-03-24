@@ -1,0 +1,34 @@
+@(page2: Form[models.awrsModels.UsingService])(implicit request: Request[_], messages: Messages)
+
+@import play.twirl.api.Html
+@import views.helpers._
+@import views.html.helpers._
+@import models.awrsModels._
+
+@pageScripts = {
+<script type="text/javascript" src='@routes.Assets.at("javascripts/feedback.js")'></script>
+}
+
+@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("feedbackSurvey.giveFeedBackPageTitle", Messages("feedbackSurvey.page2.question1")), bodyClasses = None, pageScripts = Some(pageScripts)) {
+    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("back", controllers.routes.FeedbackSurveyController.ableToDo.url, true, Messages("generic.back"))(messages)
+    <h1 id="beforeUsingThisService" class="heading-large">
+        <span class="heading-secondary" id="giveFeedback">@Messages("feedbackSurvey.giveFeedBack")</span>
+        @Messages("feedbackSurvey.page2.question1")
+    </h1>
+    @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.FeedbackSurveyController.usingServiceContinue){
+        <div class="form-group">
+            @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsInputTypeGroupCheckbox(
+                InputTypeGroupCheckboxParams(
+                    page2(""),
+                    formFields.page2Question1Options,
+                    legend = Messages("feedbackSurvey.page2.question1"),
+                    legendClass = "visuallyhidden",
+                    legendId = "beforeUsingThisService",
+                    formHint = Messages("feedbackSurvey.page2.question1.formhint"),
+                    formHintId = "formHint"
+                )
+            )
+        </div>
+        @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsSubmitButton(Messages("generic.continue"))(id = "save-and-continue", classAttr = "button")
+    }
+}

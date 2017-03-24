@@ -16,16 +16,14 @@
 
 package controllers
 
-import org.jsoup.Jsoup
-import org.mockito.Matchers._
-import org.mockito.Mockito._
+import controllers.bindable.Origin
+
 import org.scalatest.Suite
 import org.scalatest.mock.MockitoSugar
-import play.api.http.Status
 import play.api.test.{FakeApplication, FakeRequest}
 import play.api.test.Helpers._
 import uk.gov.hmrc.play.http.HeaderCarrier
-import uk.gov.hmrc.play.test.{WithFakeApplication, UnitSpec}
+import uk.gov.hmrc.play.test.{UnitSpec, WithFakeApplication}
 
 import scala.concurrent.Future
 
@@ -37,15 +35,21 @@ trait FakeApplication extends WithFakeApplication {
 
 class HomeControllerTest extends UnitSpec with FakeApplication with MockitoSugar {
 
-  "Page1 GET" should {
+  "ableToDo page GET" should {
 
     def buildFakeHomeController = new HomeController{}
 
-    "give a status of OK, return error page if origin service not found" in {
+    "give a status of OK, return error page if origin token not found" in {
       val controllerUnderTest = buildFakeHomeController
-      val result = controllerUnderTest.start("").apply(FakeRequest("GET", ""))
+      val result = controllerUnderTest.start(Origin("AWRS")).apply(FakeRequest("GET", ""))
+      status(result) shouldBe OK
+      contentAsString(result) should include("Service unavailable")
+    }
+
+    "give a status of OK, if origin token found" in {
+      val controllerUnderTest = buildFakeHomeController
+      val result = controllerUnderTest.start(Origin("AWRS_LOOKUP")).apply(FakeRequest("GET", ""))
       status(result) shouldBe SEE_OTHER
-      //contentAsString(result) should include("Service unavailable")
     }
 
   }

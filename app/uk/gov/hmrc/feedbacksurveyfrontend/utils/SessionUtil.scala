@@ -21,16 +21,16 @@ import play.api.mvc.{AnyContent, Request, Result}
 object SessionUtil {
 
   implicit class SessionUtilForRequest(request: Request[AnyContent]) {
-    @inline def getServiceOrigin: Option[String] = request.session.get(AwrsSessionKeys.sessionOriginService)
+    @inline def getServiceOrigin: Option[String] = request.session.get(FeedbackSurveySessionKeys.sessionOriginService)
   }
 
   implicit class SessionUtilForResult(result: Result) {
     @inline def addServiceOriginToSession(originService: String)(implicit request: Request[AnyContent]): Result =
-          result.addingToSession(AwrsSessionKeys.sessionOriginService -> originService)
+          result.addingToSession(FeedbackSurveySessionKeys.sessionOriginService -> originService)
   }
 
 }
 
-object AwrsSessionKeys {
+object FeedbackSurveySessionKeys {
   val sessionOriginService = "originService"
 }

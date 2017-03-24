@@ -1,0 +1,26 @@
+@(page1: Form[models.awrsModels.AbleToDo])(implicit request: Request[_], messages: Messages)
+
+@import play.twirl.api.Html
+@import views.helpers._
+@import views.html.helpers._
+@import models._
+
+@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("feedbackSurvey.giveFeedBackPageTitle", Messages("feedbackSurvey.page1.question1")), bodyClasses = None) {
+    <h1 id="title" class="heading-large">@Messages("feedbackSurvey.page1.title")</h1>
+    <p id="intro">@Messages("feedbackSurvey.page1.para1")</p>
+    @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.FeedbackSurveyController.ableToDoContinue){
+        <div class="form-group">
+            @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsInputTypeRadioGroup(
+                InputTypeRadioGroupParams(
+                    page1("ableToDoWhatNeeded"),
+                    Seq("Yes" -> Messages("generic.yes"),"No" -> Messages("generic.no")),
+                    legend = Messages("feedbackSurvey.page1.question1"),
+                    legendClass = "heading-medium",
+                    legendId = "ableToDoWhatNeeded",
+                    fieldSetClass = "inline"
+                )
+            )
+        </div>
+        @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsSubmitButton(Messages("generic.continue"))(id = "save-and-continue", classAttr = "button")
+    }
+}

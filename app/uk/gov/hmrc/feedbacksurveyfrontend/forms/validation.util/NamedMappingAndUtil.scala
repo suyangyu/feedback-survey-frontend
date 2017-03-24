@@ -16,7 +16,7 @@
 
 package forms.validation.util
 
-import forms.AWRSEnums.BooleanRadioEnum
+import forms.FeedbackSurveyEnums.BooleanRadioEnum
 import forms.validation.util.ConstraintUtil.FieldFormatConstraintParameter._
 import forms.validation.util.ConstraintUtil._
 import forms.validation.util.ErrorMessagesUtilAPI._

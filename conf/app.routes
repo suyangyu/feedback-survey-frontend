@@ -1,14 +1,14 @@
 # microservice specific routes
 GET         /assets/*file      controllers.Assets.at(path="/public", file)
-GET         /:originService                  controllers.HomeController.start(originService: String)
+GET         /                  controllers.HomeController.start(origin: Origin)
 
 # AWRS Lookup specific routes
-GET        /:originService/page-1             controllers.FeedbackSurveyController.page1(originService : String )
-POST       /:originService/page-1             controllers.FeedbackSurveyController.page1Continue(originService : String)
-GET        /:originService/page-2             controllers.FeedbackSurveyController.page2(originService : String )
-POST       /:originService/page-2             controllers.FeedbackSurveyController.page2Continue(originService : String )
-GET        /:originService/page-3             controllers.FeedbackSurveyController.page3(originService : String )
-POST       /:originService/page-3             controllers.FeedbackSurveyController.page3Continue(originService : String )
-GET        /:originService/page-4             controllers.FeedbackSurveyController.page4(originService : String )
-POST       /:originService/page-4             controllers.FeedbackSurveyController.page4Continue(originService : String )
-GET        /:originService/page-5             controllers.FeedbackSurveyController.page5(originService : String )
+GET        /ableToDo                          controllers.FeedbackSurveyController.ableToDo
+POST       /ableToDo                          controllers.FeedbackSurveyController.ableToDoContinue
+GET        /usingService                      controllers.FeedbackSurveyController.usingService
+POST       /usingService                      controllers.FeedbackSurveyController.usingServiceContinue
+GET        /aboutService                      controllers.FeedbackSurveyController.aboutService
+POST       /aboutService                      controllers.FeedbackSurveyController.aboutServiceContinue
+GET        /recommendService                  controllers.FeedbackSurveyController.recommendService
+POST       /recommendService                  controllers.FeedbackSurveyController.recommendServiceContinue
+GET        /thankYou                          controllers.FeedbackSurveyController.thankYou
