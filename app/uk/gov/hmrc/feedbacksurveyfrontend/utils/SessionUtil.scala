@@ -28,7 +28,10 @@ object SessionUtil {
     @inline def addServiceOriginToSession(originService: String)(implicit request: Request[AnyContent]): Result =
           result.addingToSession(FeedbackSurveySessionKeys.sessionOriginService -> originService)
   }
-
+  // cached implicit that can be used elsewhere
+  // e.g. implicit val sessionUtil = SessionUtil.sessionUtil
+  implicit val sessionUtilForRequest = (request: Request[AnyContent]) => new SessionUtil.SessionUtilForRequest(request)
+  implicit val sessionUtilForResult = (result: Result) => new SessionUtil.SessionUtilForResult(result)
 }
 
 object FeedbackSurveySessionKeys {

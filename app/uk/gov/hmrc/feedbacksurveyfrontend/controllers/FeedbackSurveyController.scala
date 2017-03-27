@@ -17,15 +17,15 @@
 package controllers
 
 import models.feedbackSurveyModels._
-import uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig._
 import uk.gov.hmrc.play.frontend.controller.FrontendController
 import play.api.mvc._
 
 import scala.concurrent.Future
-import play.api.Play.{configuration, current}
-import play.api.i18n.Messages
+import play.api.Play.{current}
 import play.api.i18n.Messages.Implicits._
 import utils.LoggingUtils
+import utils.FeedbackSurveySessionKeys._
+
 
 
 object FeedbackSurveyController extends FeedbackSurveyController
@@ -38,7 +38,8 @@ trait FeedbackSurveyController extends FrontendController with LoggingUtils {
 
   val ableToDoContinue =  Action.async(parse.form(formMappings.ableToDoForm)) { implicit request =>
         val ableToDoWhatNeeded = request.body.ableToDoWhatNeeded
-    audit("feedback-survey", Map("ableToDoWhatNeeded" -> ableToDoWhatNeeded.getOrElse("")), eventTypeSuccess)
+    audit("feedback-survey", Map("OriginToken" -> request.session.get(sessionOriginService).get,
+      "ableToDoWhatNeeded" -> ableToDoWhatNeeded.getOrElse("")), eventTypeSuccess)
     Future.successful(Redirect(routes.FeedbackSurveyController.usingService))
   }
 
@@ -53,7 +54,9 @@ trait FeedbackSurveyController extends FrontendController with LoggingUtils {
     val spokeToEmployerAgentOrAccountant = request.body.spokeToEmployerAgentOrAccountant
     val telephonedHmrc = request.body.telephonedHmrc
     val wroteToHmrc = request.body.wroteToHmrc
-    audit("feedback-survey", Map("completedAnOnlineForm" -> completedAnOnlineForm.getOrElse(""),
+    audit("feedback-survey", Map(
+      "OriginToken" -> request.session.get(sessionOriginService).get,
+      "completedAnOnlineForm" -> completedAnOnlineForm.getOrElse(""),
       "readGuidanceOnGovUk" -> readGuidanceOnGovUk.getOrElse(""),
       "spokeToAFriendOrFamilyMember" -> spokeToAFriendOrFamilyMember.getOrElse(""),
       "spokeToEmployerAgentOrAccountant" -> spokeToEmployerAgentOrAccountant.getOrElse(""),
@@ -68,7 +71,8 @@ trait FeedbackSurveyController extends FrontendController with LoggingUtils {
 
   val aboutServiceContinue =  Action(parse.form(formMappings.aboutServiceForm)) { implicit request =>
     val serviceReceived = request.body.serviceReceived
-    audit("feedback-survey", Map("serviceReceived" -> serviceReceived.getOrElse("")), eventTypeSuccess)
+    audit("feedback-survey", Map("OriginToken" -> request.session.get(sessionOriginService).get,
+      "serviceReceived" -> serviceReceived.getOrElse("")), eventTypeSuccess)
     Redirect(routes.FeedbackSurveyController.recommendService)
   }
 
@@ -79,7 +83,9 @@ trait FeedbackSurveyController extends FrontendController with LoggingUtils {
   val recommendServiceContinue =  Action(parse.form(formMappings.recommendServiceForm)) { implicit request =>
     val reasonForRating = request.body.reasonForRating
     val recommendRating = request.body.recommendRating
-    audit("feedback-survey", Map("reasonForRating" -> reasonForRating.getOrElse(""),
+    audit("feedback-survey", Map(
+      "OriginToken" -> request.session.get(sessionOriginService).get,
+      "reasonForRating" -> reasonForRating.getOrElse(""),
       "recommendRating" -> recommendRating.getOrElse("")), eventTypeSuccess)
     Redirect(routes.FeedbackSurveyController.thankYou)
   }

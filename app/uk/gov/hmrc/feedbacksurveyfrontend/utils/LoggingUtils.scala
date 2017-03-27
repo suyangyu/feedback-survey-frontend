@@ -26,8 +26,8 @@ import uk.gov.hmrc.play.http.HeaderCarrier
 // and not for anything that you would want to see logged in production.
 trait LoggingUtils extends Auditable {
 
-  final val eventTypeSuccess: String = "FeedbackSurveySuccess"
-  final val eventTypeFailure: String = "FeedbackSurveyFailure"
+  final val eventTypeSuccess: String = "FeedbackSuccess"
+  final val eventTypeFailure: String = "FeedbackFailure"
   final val eventTypeBadRequest: String = "BadRequest"
   final val eventTypeNotFound: String = "NotFound"
   final val eventTypeInternalServerError: String = "InternalServerError"
