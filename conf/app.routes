@@ -2,7 +2,7 @@
 GET         /assets/*file      controllers.Assets.at(path="/public", file)
 GET         /                  controllers.HomeController.start(origin: Origin)
 
-# AWRS Lookup specific routes
+# Feedback Survey specific routes
 GET        /ableToDo                          controllers.FeedbackSurveyController.ableToDo
 POST       /ableToDo                          controllers.FeedbackSurveyController.ableToDoContinue
 GET        /usingService                      controllers.FeedbackSurveyController.usingService

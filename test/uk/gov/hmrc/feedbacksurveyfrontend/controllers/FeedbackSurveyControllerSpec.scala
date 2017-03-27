@@ -59,7 +59,7 @@ class FeedbackSurveyControllerSpec extends UnitTestTraits {
     }
 
     "Go to the recommendService page " in {
-      val result = TestFeedbackSurveyController.recommendService.apply((FakeRequest("GET", "/usingService")))
+      val result = TestFeedbackSurveyController.recommendService.apply((FakeRequest("GET", "/aboutService")))
       status(result) shouldBe OK
     }
 
@@ -70,7 +70,7 @@ class FeedbackSurveyControllerSpec extends UnitTestTraits {
     }
 
     "Go to the Thank you page " in {
-      val result = TestFeedbackSurveyController.recommendService.apply((FakeRequest("GET", "/usingService")))
+      val result = TestFeedbackSurveyController.recommendService.apply((FakeRequest("GET", "/thankYou")))
       status(result) shouldBe OK
     }
   }

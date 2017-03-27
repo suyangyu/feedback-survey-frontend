@@ -32,15 +32,15 @@ import controllers.FeedbackSurveyController
 class pageTests extends UnitTestTraits with HtmlUtils {
   val lookupFailure = Json.parse( """{"reason": "Generic test reason"}""")
 
-  def testRequest(originService: Option[String]): FakeRequest[AnyContentAsEmpty.type] =
-    FakeRequest(GET, "/feedback-survey" + originService.fold("")(q => s"?originService=$q"))
+  def testRequest(page: String): FakeRequest[AnyContentAsEmpty.type] =
+    FakeRequest(GET, "/feedback-survey/" + s"$page")
 
   object TestLookupController extends FeedbackSurveyController
 
   "FeedbackSurvey Controller" should {
 
     "render ableToDo page correctly" in {
-      val document: Document = TestLookupController.ableToDo.apply(testRequest(originService = "awrs-lookup"))
+      val document: Document = TestLookupController.ableToDo.apply(testRequest(page = "ableToDo"))
       document.getElementById("title").text shouldBe Messages("feedbackSurvey.page1.title")
       document.getElementById("intro").text shouldBe Messages("feedbackSurvey.page1.para1")
       document.getElementById("ableToDoWhatNeeded_legend").text should include(Messages("feedbackSurvey.page1.question1"))
@@ -50,26 +50,26 @@ class pageTests extends UnitTestTraits with HtmlUtils {
     }
 
     "render usingService page correctly" in {
-      val document: Document = TestLookupController.usingService.apply(testRequest(originService = "awrs-lookup"))
+      val document: Document = TestLookupController.usingService.apply(testRequest(page = "usingService"))
       document.getElementById("beforeUsingThisService").text shouldBe Messages("feedbackSurvey.giveFeedBack") + " " + Messages("feedbackSurvey.page2.question1")
       document.getElementById("save-and-continue").text shouldBe Messages("generic.continue")
     }
 
     "render aboutService page correctly" in {
-      val document: Document = TestLookupController.aboutService.apply(testRequest(originService = "awrs-lookup"))
+      val document: Document = TestLookupController.aboutService.apply(testRequest(page = "aboutService"))
       document.getElementById("serviceReceived").text shouldBe Messages("feedbackSurvey.giveFeedBack") + " " + Messages("feedbackSurvey.page3.question1")
       document.getElementById("save-and-continue").text shouldBe Messages("generic.continue")
     }
 
     "render recommendService page correctly" in {
-      val document: Document = TestLookupController.recommendService.apply(testRequest(originService = "awrs-lookup"))
+      val document: Document = TestLookupController.recommendService.apply(testRequest(page = "recommendService"))
       document.getElementById("recommendRating").text shouldBe Messages("feedbackSurvey.giveFeedBack") + " " + Messages("feedbackSurvey.page4.question1")
       document.getElementById("reasonForRatingLabel").text should include(Messages("feedbackSurvey.page4.question2"))
       document.getElementById("save-and-continue").text shouldBe Messages("generic.continue")
     }
 
     "render thankYou page correctly" in {
-      val document: Document = TestLookupController.thankYou.apply(testRequest(originService = "awrs-lookup"))
+      val document: Document = TestLookupController.thankYou.apply(testRequest(page = "thankYou"))
       document.getElementById("thankYou").text shouldBe Messages("feedbackSurvey.page5.title")
 
     }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package models.awrsModels
+package models.feedbackSurveyModels
 
 import play.api.data.Form
 import play.api.data.Forms._

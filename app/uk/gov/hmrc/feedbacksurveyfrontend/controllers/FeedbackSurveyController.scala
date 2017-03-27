@@ -16,7 +16,7 @@
 
 package controllers
 
-import models.awrsModels._
+import models.feedbackSurveyModels._
 import uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig._
 import uk.gov.hmrc.play.frontend.controller.FrontendController
 import play.api.mvc._

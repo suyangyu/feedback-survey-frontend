@@ -1,9 +1,9 @@
-@(page2: Form[models.awrsModels.UsingService])(implicit request: Request[_], messages: Messages)
+@(page2: Form[models.feedbackSurveyModels.UsingService])(implicit request: Request[_], messages: Messages)
 
 @import play.twirl.api.Html
 @import views.helpers._
 @import views.html.helpers._
-@import models.awrsModels._
+@import models.feedbackSurveyModels._
 
 @pageScripts = {
 <script type="text/javascript" src='@routes.Assets.at("javascripts/feedback.js")'></script>
@@ -17,7 +17,7 @@
     </h1>
     @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.FeedbackSurveyController.usingServiceContinue){
         <div class="form-group">
-            @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsInputTypeGroupCheckbox(
+            @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.inputTypeGroupCheckbox(
                 InputTypeGroupCheckboxParams(
                     page2(""),
                     formFields.page2Question1Options,
@@ -29,6 +29,6 @@
                 )
             )
         </div>
-        @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.awrsSubmitButton(Messages("generic.continue"))(id = "save-and-continue", classAttr = "button")
+        @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.submitButton(Messages("generic.continue"))(id = "save-and-continue", classAttr = "button")
     }
 }

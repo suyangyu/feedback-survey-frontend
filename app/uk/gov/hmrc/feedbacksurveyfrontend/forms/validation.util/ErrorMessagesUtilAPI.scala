@@ -39,7 +39,7 @@ object ErrorMessagesUtilAPI {
     FieldIsEmptyConstraintParameter(simpleErrorMessage(fieldId, msgId))
 
 
-  def genericInvalidFormatConstraintParameter(validationFunction: (String) => Boolean, fieldId: String, fieldNameInErrorMessage: String, errorMsg: String = "awrs.generic.error.character_invalid"): Seq[FieldFormatConstraintParameter] =
+  def genericInvalidFormatConstraintParameter(validationFunction: (String) => Boolean, fieldId: String, fieldNameInErrorMessage: String, errorMsg: String = "feedbackSurvey.generic.error.character_invalid"): Seq[FieldFormatConstraintParameter] =
     Seq[FieldFormatConstraintParameter](
       FieldFormatConstraintParameter(
         (name: String) => validationFunction(name) match {
@@ -57,7 +57,7 @@ object ErrorMessagesUtilAPI {
   def genericFieldMaxLengthConstraintParameter(maxLen: Int, fieldId: String, fieldNameInErrorMessage: String): FieldMaxLengthConstraintParameter =
     FieldMaxLengthConstraintParameter(maxLen,
       createErrorMessage(TargetFieldIds(fieldId),
-        FieldErrorConfig("awrs.generic.error.maximum_length",
+        FieldErrorConfig("feedbackSurvey.generic.error.maximum_length",
           MessageArguments(fieldNameInErrorMessage, maxLen)),
         SummaryErrorConfig(MessageArguments(fieldNameInErrorMessage))))
 }
