@@ -25,7 +25,6 @@ trait AppConfig {
   val betaFeedbackUnauthenticatedUrl: String
   val reportAProblemPartialUrl: String
   val reportAProblemNonJSUrl: String
-  val callbackServiceUrl: String
 }
 
 object FrontendAppConfig extends AppConfig with ServicesConfig {
@@ -40,7 +39,4 @@ object FrontendAppConfig extends AppConfig with ServicesConfig {
   override lazy val reportAProblemPartialUrl = s"$contactFrontendService/contact/problem_reports?secure=true"
   override lazy val reportAProblemNonJSUrl = s"$contactHost/contact/problem_reports_nonjs?service=$contactFormServiceIdentifier"
   override lazy val betaFeedbackUnauthenticatedUrl = s"$contactHost/contact/beta-feedback-unauthenticated"
-
-  override lazy val callbackServiceUrl = loadConfig(s"awrs-lookup.callback-page")
-
 }

@@ -9,59 +9,56 @@ generic.error.title=Sorry, we’re experiencing technical difficulties
 generic.error.status=There has been a problem with your application
 generic.unauthorised.heading=Sorry, we’re experiencing technical difficulties
 generic.unauthorised.reason_start=This could be because,
-generic.unauthorised.reason_1=you are a sole trader and before you can register for AWRS you must register for Self Assessment Online.
-generic.unauthorised.reason_2=you are an agent. Agents cannot use the AWRS service to apply on behalf of their clients.
 generic.invalid.characters=Invalid characters
 
 global_errors.message=Sorry, there is a technical problem and you cannot use the service at the moment. Please try again later.
 global_errors.heading=Service unavailable
 global_errors.title=Service unavailable
 
-# AWRS Lookup Specific
-
-awrslookup.backToSearch=Return to search
-
-awrslookup.giveFeedBack=Give feedback
-awrslookup.giveFeedBackPageTitle=Give feedback - {0}
-
-awrslookup.page1.title=Give feedback
-awrslookup.page1.para1=All questions in the survey are optional.
-awrslookup.page1.question1=Were you able to do what you needed to do today?
-
-awrslookup.page2.question1=What did you try before using this service?
-awrslookup.page2.question1.formhint=Select all that apply.
-awrslookup.page2.question1.option1=Telephoned HMRC
-awrslookup.page2.question1.option2=Wrote to HMRC
-awrslookup.page2.question1.option3=Completed an online form
-awrslookup.page2.question1.option4=Read guidance on GOV.UK
-awrslookup.page2.question1.option5=Spoke to your employer, agent or accountant
-awrslookup.page2.question1.option6=Spoke to a friend or family member
-awrslookup.page2.question1.option7=None of these
+# Feedback survey Specific
 
 
-awrslookup.page3.question1=Overall, how did you feel about the service you received today?
-awrslookup.page3.question1.option1=Very satisfied
-awrslookup.page3.question1.option2=Satisfied
-awrslookup.page3.question1.option3=Neither satisfied nor dissatisfied
-awrslookup.page3.question1.option4=Dissatisfied
-awrslookup.page3.question1.option5=Very dissatisfied
+feedbackSurvey.giveFeedBack=Give feedback
+feedbackSurvey.giveFeedBackPageTitle=Give feedback - {0}
 
-awrslookup.page4.question1=How likely are you to recommend this service to a friend or colleague if they needed to do the same thing?
-awrslookup.page4.question1.option1=10 Very likely
-awrslookup.page4.question1.option2=9
-awrslookup.page4.question1.option3=8
-awrslookup.page4.question1.option4=7
-awrslookup.page4.question1.option5=6
-awrslookup.page4.question1.option6=5
-awrslookup.page4.question1.option7=4
-awrslookup.page4.question1.option8=3
-awrslookup.page4.question1.option9=2
-awrslookup.page4.question1.option10=1
-awrslookup.page4.question1.option11=0 Very unlikely
-awrslookup.page4.question2=Why did you give this rating?
-awrslookup.page4.question2.labelhint=Do not include any personal or financial information like your National Insurance number or bank details.
+feedbackSurvey.page1.title=Give feedback
+feedbackSurvey.page1.para1=All questions in the survey are optional.
+feedbackSurvey.page1.question1=Were you able to do what you needed to do today?
 
-awrslookup.page5.title=Thank you for your feedback
+feedbackSurvey.page2.question1=What did you try before using this service?
+feedbackSurvey.page2.question1.formhint=Select all that apply.
+feedbackSurvey.page2.question1.option1=Telephoned HMRC
+feedbackSurvey.page2.question1.option2=Wrote to HMRC
+feedbackSurvey.page2.question1.option3=Completed an online form
+feedbackSurvey.page2.question1.option4=Read guidance on GOV.UK
+feedbackSurvey.page2.question1.option5=Spoke to your employer, agent or accountant
+feedbackSurvey.page2.question1.option6=Spoke to a friend or family member
+feedbackSurvey.page2.question1.option7=None of these
+
+
+feedbackSurvey.page3.question1=Overall, how did you feel about the service you received today?
+feedbackSurvey.page3.question1.option1=Very satisfied
+feedbackSurvey.page3.question1.option2=Satisfied
+feedbackSurvey.page3.question1.option3=Neither satisfied nor dissatisfied
+feedbackSurvey.page3.question1.option4=Dissatisfied
+feedbackSurvey.page3.question1.option5=Very dissatisfied
+
+feedbackSurvey.page4.question1=How likely are you to recommend this service to a friend or colleague if they needed to do the same thing?
+feedbackSurvey.page4.question1.option1=10 Very likely
+feedbackSurvey.page4.question1.option2=9
+feedbackSurvey.page4.question1.option3=8
+feedbackSurvey.page4.question1.option4=7
+feedbackSurvey.page4.question1.option5=6
+feedbackSurvey.page4.question1.option6=5
+feedbackSurvey.page4.question1.option7=4
+feedbackSurvey.page4.question1.option8=3
+feedbackSurvey.page4.question1.option9=2
+feedbackSurvey.page4.question1.option10=1
+feedbackSurvey.page4.question1.option11=0 Very unlikely
+feedbackSurvey.page4.question2=Why did you give this rating?
+feedbackSurvey.page4.question2.labelhint=Do not include any personal or financial information like your National Insurance number or bank details.
+
+feedbackSurvey.page5.title=Thank you for your feedback
 
 
 

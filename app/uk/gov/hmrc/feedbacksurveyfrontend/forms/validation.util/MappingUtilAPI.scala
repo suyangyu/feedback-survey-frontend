@@ -16,7 +16,7 @@
 
 package forms.validation.util
 
-import forms.AWRSEnums.{AWRSEnumeration, BooleanEnumeration}
+import forms.FeedbackSurveyEnums.{FeedbackSurveyEnumeration, BooleanEnumeration}
 import play.api.data.Forms._
 import play.api.data.format._
 import play.api.data.validation.{Invalid, Valid, ValidationResult}
@@ -212,7 +212,7 @@ object MappingUtilAPI {
       isEnum match {
         case false => error
         case true =>
-          val enumValue: AWRSEnumeration#Value = config.enumType.withName(value)
+          val enumValue: FeedbackSurveyEnumeration#Value = config.enumType.withName(value)
           val invalidChoices = config.invalidChoices
           invalidChoices.nonEmpty && invalidChoices.contains(enumValue) match {
             case true => error

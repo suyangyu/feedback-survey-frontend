@@ -16,14 +16,14 @@
 
 package forms
 
-object AWRSEnums {
+object FeedbackSurveyEnums {
 
-  trait AWRSEnumeration extends Enumeration {
+  trait FeedbackSurveyEnumeration extends Enumeration {
     private lazy val stringValues = values.map(a => a.toString)
     final def isEnumValue(value: String): Boolean = stringValues.contains(value)
   }
 
-  trait BooleanEnumeration extends AWRSEnumeration {
+  trait BooleanEnumeration extends FeedbackSurveyEnumeration {
     def toBoolean(value: BooleanEnumeration#Value): Option[Boolean]
 
     final def toBoolean(value: String): Option[Boolean] = {
