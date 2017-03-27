@@ -22,6 +22,8 @@ import play.api.i18n.Messages.Implicits._
 import play.api.mvc._
 import controllers.bindable.Origin
 import uk.gov.hmrc.play.frontend.controller.FrontendController
+import utils.FeedbackSurveySessionKeys._
+import utils.SessionUtil
 
 import scala.concurrent.Future
 
@@ -33,7 +35,8 @@ trait HomeController extends FrontendController  {
     implicit request =>
     Origin(originService.value).isValid match {
     case true =>  {
-      val result = Redirect(routes.FeedbackSurveyController.ableToDo).withSession(request.session + ("OriginService",originService.value))
+      val result = Redirect(routes.FeedbackSurveyController.ableToDo).withSession(request.session + (sessionOriginService,originService.value))
+      SessionUtil.sessionUtilForResult(result).addServiceOriginToSession(originService.value)
       Future.successful(result)
     }
     case false => Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.error_template(Messages("global_errors.title"), Messages("global_errors.heading"), Messages("global_errors.message"))))
