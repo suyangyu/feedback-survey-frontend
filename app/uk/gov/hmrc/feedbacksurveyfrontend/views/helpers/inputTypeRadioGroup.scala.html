@@ -75,16 +75,6 @@
                 the radioSetQuestion class adds spacing between the radio buttons and the hint,
                 this should not be set if the radios are inline
             *@
-            <div @if(!params.fieldSetClass.fold("")(x => x).toLowerCase.contains("inline")){ class = "radioSetQuestion" }>
-                @awrsAnswerQuestionHelper(
-                    QuestionAnswerParameters(
-                        question = fieldSetQuestion,
-                        questionId = params.fieldSetQuestionId.fold("")(x=>x),
-                        answer = params.fieldSetQuestionAnswer.get,
-                        wrapperClass = params.fieldSetQuestionWrapperClass
-                    )
-                )
-            <div>
         }
         case _ => {}
     }

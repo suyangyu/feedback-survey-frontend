@@ -1,0 +1,10 @@
+@()(implicit request: Request[_], messages: Messages)
+
+@import play.twirl.api.Html
+@import views.helpers._
+@import views.html.helpers._
+@import models._
+
+@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("feedbackSurvey.giveFeedBack", Messages("feedbackSurvey.page5.title")), bodyClasses = None) {
+<h1 id="thankYou" class="heading-large">@Messages("feedbackSurvey.page5.title")</h1>
+}

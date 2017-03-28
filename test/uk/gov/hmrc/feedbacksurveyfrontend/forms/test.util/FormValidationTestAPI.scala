@@ -133,7 +133,7 @@ case class ExpectedFieldExceedsMaxLength(fieldError: FieldError, summaryError: S
 object ExpectedFieldExceedsMaxLength {
   // quick constructor for the default expected max length error messages
   def apply(fieldId: String, embeddedFieldNameInErrorMessages: String, maxLen: Int)(implicit messages: Messages): ExpectedFieldExceedsMaxLength = {
-    val defaultKey = "awrs.generic.error.maximum_length"
+    val defaultKey = "feedbackSurvey.generic.error.maximum_length"
     val defaultError = FieldError(defaultKey, MessageArguments(embeddedFieldNameInErrorMessages, maxLen))
     new ExpectedFieldExceedsMaxLength(defaultError, SummaryError(defaultError, MessageArguments(embeddedFieldNameInErrorMessages), fieldId), maxLen)
   }
@@ -164,7 +164,7 @@ case class ExpectedInvalidFieldFormat(invalidCase: String, fieldError: FieldErro
 
 object ExpectedInvalidFieldFormat {
   def apply(invalidCase: String, fieldId: String, embeddedFieldNameInErrorMessages: String)(implicit messages: Messages): ExpectedInvalidFieldFormat = {
-    val defaultKey = "awrs.generic.error.character_invalid"
+    val defaultKey = "feedbackSurvey.generic.error.character_invalid"
     val defaultFieldError = FieldError(defaultKey)
     val defaultSummaryError = SummaryError(defaultFieldError, MessageArguments(embeddedFieldNameInErrorMessages), fieldId)
     new ExpectedInvalidFieldFormat(invalidCase, defaultFieldError, defaultSummaryError)

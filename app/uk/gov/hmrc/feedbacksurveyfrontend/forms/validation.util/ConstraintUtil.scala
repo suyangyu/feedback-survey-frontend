@@ -16,7 +16,7 @@
 
 package forms.validation.util
 
-import forms.AWRSEnums.{AWRSEnumeration, BooleanEnumeration}
+import forms.FeedbackSurveyEnums.{FeedbackSurveyEnumeration, BooleanEnumeration}
 import play.api.data.Mapping
 import play.api.data.validation.{Constraint, Invalid, Valid, ValidationResult}
 
@@ -186,8 +186,8 @@ object ConstraintUtil {
                                                invalidChoices: Set[BooleanEnumeration#Value] = Set()) extends ValidationMappingTrait[Boolean]
 
   case class CompulsoryEnumMappingParameter(empty: FieldIsEmptyConstraintParameter,
-                                            enumType: AWRSEnumeration,
-                                            invalidChoices: Set[AWRSEnumeration#Value] = Set()) extends ValidationMappingTrait[String]
+                                            enumType: FeedbackSurveyEnumeration,
+                                            invalidChoices: Set[FeedbackSurveyEnumeration#Value] = Set()) extends ValidationMappingTrait[String]
 
   case class CompulsoryListMappingParameter[T](mapping: Mapping[T],
                                                emptyErrorMsg: Invalid) extends ValidationMappingTrait[Mapping[T]]

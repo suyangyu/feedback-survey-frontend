@@ -14,19 +14,13 @@
  * limitations under the License.
  */
 
-package views.helpers
+package controllers.bindable
 
-import play.twirl.api.Html
+import uk.gov.hmrc.play.config.ServicesConfig
 
-sealed trait QuestionAnswerParametersTrait {
-  def question: String
-  def questionId: String
-  def answer: Option[Html]
-  def wrapperClass: Option[String]
+case class Origin(value: String) extends ServicesConfig{
+  lazy val validOrigins = getString("validOrigins").split(",").toList
+  override def toString : String = value
+
+  def isValid: Boolean = validOrigins.contains(value)
 }
-
-case class QuestionAnswerParameters(question: String,
-                                    questionId: String,
-                                    answer: Option[Html] = None,
-                                    wrapperClass: Option[String] = None
-                                   ) extends QuestionAnswerParametersTrait
