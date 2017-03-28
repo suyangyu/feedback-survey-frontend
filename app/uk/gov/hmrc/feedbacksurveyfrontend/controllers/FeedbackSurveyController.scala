@@ -32,66 +32,56 @@ object FeedbackSurveyController extends FeedbackSurveyController
 
 trait FeedbackSurveyController extends FrontendController with LoggingUtils {
 
-  val ableToDo  = Action.async { implicit request =>
-    Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.ableToDo(formMappings.ableToDoForm)))
+  val ableToDo  = Action { implicit request =>
+    Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.ableToDo(formMappings.ableToDoForm))
   }
 
-  val ableToDoContinue =  Action.async(parse.form(formMappings.ableToDoForm)) { implicit request =>
+  val ableToDoContinue =  Action (parse.form(formMappings.ableToDoForm)) { implicit request =>
         val ableToDoWhatNeeded = request.body.ableToDoWhatNeeded
-    audit("feedback-survey", Map("OriginToken" -> request.session.get(sessionOriginService).get,
+    audit("feedback-survey", Map("origin" -> request.session.get(sessionOriginService).get,
       "ableToDoWhatNeeded" -> ableToDoWhatNeeded.getOrElse("")), eventTypeSuccess)
-    Future.successful(Redirect(routes.FeedbackSurveyController.usingService))
+    Redirect(routes.FeedbackSurveyController.usingService)
   }
 
-  val usingService =  Action.async { implicit request =>
-    Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.usingService(formMappings.usingServiceForm)))
+  val usingService =  Action { implicit request =>
+    Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.usingService(formMappings.usingServiceForm))
   }
 
-  val usingServiceContinue = Action(parse.form(formMappings.usingServiceForm)) { implicit request =>
-    val completedAnOnlineForm = request.body.completedAnOnlineForm
-    val readGuidanceOnGovUk = request.body.readGuidanceOnGovUk
-    val spokeToAFriendOrFamilyMember = request.body.spokeToAFriendOrFamilyMember
-    val spokeToEmployerAgentOrAccountant = request.body.spokeToEmployerAgentOrAccountant
-    val telephonedHmrc = request.body.telephonedHmrc
-    val wroteToHmrc = request.body.wroteToHmrc
+  val usingServiceContinue = Action (parse.form(formMappings.usingServiceForm)) { implicit request =>
+    val beforeUsingThisService = request.body.beforeUsingThisService
     audit("feedback-survey", Map(
-      "OriginToken" -> request.session.get(sessionOriginService).get,
-      "completedAnOnlineForm" -> completedAnOnlineForm.getOrElse(""),
-      "readGuidanceOnGovUk" -> readGuidanceOnGovUk.getOrElse(""),
-      "spokeToAFriendOrFamilyMember" -> spokeToAFriendOrFamilyMember.getOrElse(""),
-      "spokeToEmployerAgentOrAccountant" -> spokeToEmployerAgentOrAccountant.getOrElse(""),
-      "telephonedHmrc" -> telephonedHmrc.getOrElse(""),
-      "wroteToHmrc" -> wroteToHmrc.getOrElse("")), eventTypeSuccess)
+      "origin" -> request.session.get(sessionOriginService).get,
+      "exitSurveyWhatDidYouTryBeforeUsingThisService" -> beforeUsingThisService.mkString(" ")), eventTypeSuccess)
     Redirect(routes.FeedbackSurveyController.aboutService)
   }
 
-  val aboutService = Action.async { implicit request =>
-    Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.aboutService(formMappings.aboutServiceForm)))
+  val aboutService = Action { implicit request =>
+    Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.aboutService(formMappings.aboutServiceForm))
   }
 
-  val aboutServiceContinue =  Action(parse.form(formMappings.aboutServiceForm)) { implicit request =>
+  val aboutServiceContinue =  Action (parse.form(formMappings.aboutServiceForm)) { implicit request =>
     val serviceReceived = request.body.serviceReceived
-    audit("feedback-survey", Map("OriginToken" -> request.session.get(sessionOriginService).get,
+    audit("feedback-survey", Map("origin" -> request.session.get(sessionOriginService).get,
       "serviceReceived" -> serviceReceived.getOrElse("")), eventTypeSuccess)
     Redirect(routes.FeedbackSurveyController.recommendService)
   }
 
-  val recommendService = Action.async { implicit request =>
-    Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.recommendService(formMappings.recommendServiceForm)))
+  val recommendService = Action { implicit request =>
+    Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.recommendService(formMappings.recommendServiceForm))
   }
 
-  val recommendServiceContinue =  Action(parse.form(formMappings.recommendServiceForm)) { implicit request =>
+  val recommendServiceContinue =  Action (parse.form(formMappings.recommendServiceForm)) { implicit request =>
     val reasonForRating = request.body.reasonForRating
     val recommendRating = request.body.recommendRating
     audit("feedback-survey", Map(
-      "OriginToken" -> request.session.get(sessionOriginService).get,
+      "origin" -> request.session.get(sessionOriginService).get,
       "reasonForRating" -> reasonForRating.getOrElse(""),
       "recommendRating" -> recommendRating.getOrElse("")), eventTypeSuccess)
     Redirect(routes.FeedbackSurveyController.thankYou)
   }
 
-  val thankYou = Action.async { implicit request =>
-    Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.thankYou()))
+  val thankYou = Action { implicit request =>
+    Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.thankYou())
   }
 
 }

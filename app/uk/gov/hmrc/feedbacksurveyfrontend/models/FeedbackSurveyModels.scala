@@ -29,12 +29,7 @@ object AbleToDo {
   implicit val format = Json.format[AbleToDo]
 }
 
-case class UsingService(telephonedHmrc: Option[String],
-                        wroteToHmrc: Option[String],
-                        completedAnOnlineForm: Option[String],
-                        readGuidanceOnGovUk: Option[String],
-                        spokeToEmployerAgentOrAccountant: Option[String],
-                        spokeToAFriendOrFamilyMember: Option[String])
+case class UsingService(beforeUsingThisService: List[String])
 
 object UsingService {
   implicit val format = Json.format[UsingService]
@@ -60,12 +55,8 @@ object formMappings {
     "ableToDoWhatNeeded" -> optional(text))(AbleToDo.apply)(AbleToDo.unapply))
 
   val usingServiceForm = Form(mapping(
-    "telephonedHmrc" -> optional(text.verifying("required field", _.nonEmpty)),
-    "wroteToHmrc" -> optional(text.verifying("required field", _.nonEmpty)),
-    "completedAnOnlineForm" -> optional(text.verifying("required field", _.nonEmpty)),
-    "spokeToEmployerAgentOrAccountant" -> optional(text.verifying("required field", _.nonEmpty)),
-    "spokeToEmployerAgentOrAccountant" -> optional(text.verifying("required field", _.nonEmpty)),
-    "spokeToAFriendOrFamilyMember" -> optional(text.verifying("required field", _.nonEmpty)))(UsingService.apply)(UsingService.unapply))
+    "beforeUsingThisService" -> list(text.verifying("required field", _.nonEmpty))
+  )(UsingService.apply)(UsingService.unapply))
 
   val aboutServiceForm = Form(mapping(
     "serviceReceived" -> optional(text.verifying("required field", _.nonEmpty)))(AboutService.apply)(AboutService.unapply))
@@ -83,35 +74,35 @@ object formMappings {
 object formFields {
 
   val page2Question1Options = Seq(
-    "01" -> Messages("feedbackSurvey.page2.question1.option1"),
-    "02" -> Messages("feedbackSurvey.page2.question1.option2"),
-    "03" -> Messages("feedbackSurvey.page2.question1.option3"),
-    "04" -> Messages("feedbackSurvey.page2.question1.option4"),
-    "05" -> Messages("feedbackSurvey.page2.question1.option5"),
-    "06" -> Messages("feedbackSurvey.page2.question1.option6"),
-    "07" -> Messages("feedbackSurvey.page2.question1.option7")
+    "telephonedHMRC" -> Messages("feedbackSurvey.page2.question1.option1"),
+    "wroteToHMRC" -> Messages("feedbackSurvey.page2.question1.option2"),
+    "completedAnOnlineForm" -> Messages("feedbackSurvey.page2.question1.option3"),
+    "readGuidanceOnGovUK" -> Messages("feedbackSurvey.page2.question1.option4"),
+    "spokeToYourEmployerAgentOrAccountant" -> Messages("feedbackSurvey.page2.question1.option5"),
+    "spokeToAFriendOrFamilyMember" -> Messages("feedbackSurvey.page2.question1.option6"),
+    "noneOfThese" -> Messages("feedbackSurvey.page2.question1.option7")
   )
 
   val page3Question1Options = Seq(
-    "01" -> Messages("feedbackSurvey.page3.question1.option1"),
-    "02" -> Messages("feedbackSurvey.page3.question1.option2"),
-    "03" -> Messages("feedbackSurvey.page3.question1.option3"),
-    "04" -> Messages("feedbackSurvey.page3.question1.option4"),
-    "05" -> Messages("feedbackSurvey.page3.question1.option5")
+    "5" -> Messages("feedbackSurvey.page3.question1.option1"),
+    "4" -> Messages("feedbackSurvey.page3.question1.option2"),
+    "3" -> Messages("feedbackSurvey.page3.question1.option3"),
+    "2" -> Messages("feedbackSurvey.page3.question1.option4"),
+    "1" -> Messages("feedbackSurvey.page3.question1.option5")
   )
 
   val page4Question1Options = Seq(
     "10" -> Messages("feedbackSurvey.page4.question1.option1"),
-    "09" -> Messages("feedbackSurvey.page4.question1.option2"),
-    "08" -> Messages("feedbackSurvey.page4.question1.option3"),
-    "07" -> Messages("feedbackSurvey.page4.question1.option4"),
-    "06" -> Messages("feedbackSurvey.page4.question1.option5"),
-    "05" -> Messages("feedbackSurvey.page4.question1.option6"),
-    "04" -> Messages("feedbackSurvey.page4.question1.option7"),
-    "03" -> Messages("feedbackSurvey.page4.question1.option8"),
-    "02" -> Messages("feedbackSurvey.page4.question1.option9"),
-    "01" -> Messages("feedbackSurvey.page4.question1.option10"),
-    "00" -> Messages("feedbackSurvey.page4.question1.option11")
+    "9" -> Messages("feedbackSurvey.page4.question1.option2"),
+    "8" -> Messages("feedbackSurvey.page4.question1.option3"),
+    "7" -> Messages("feedbackSurvey.page4.question1.option4"),
+    "6" -> Messages("feedbackSurvey.page4.question1.option5"),
+    "5" -> Messages("feedbackSurvey.page4.question1.option6"),
+    "4" -> Messages("feedbackSurvey.page4.question1.option7"),
+    "3" -> Messages("feedbackSurvey.page4.question1.option8"),
+    "2" -> Messages("feedbackSurvey.page4.question1.option9"),
+    "1" -> Messages("feedbackSurvey.page4.question1.option10"),
+    "0" -> Messages("feedbackSurvey.page4.question1.option11")
   )
 
 }

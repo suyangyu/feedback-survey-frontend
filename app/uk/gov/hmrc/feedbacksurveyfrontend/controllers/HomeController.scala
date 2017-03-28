@@ -31,13 +31,14 @@ object HomeController extends HomeController
 
 trait HomeController extends FrontendController  {
 
-  def start(originService : Origin ): Action[AnyContent] = Action.async {
+  def start(originService : Origin ): Action[AnyContent] = Action {
     implicit request =>
     Origin(originService.value).isValid match {
       case true =>  {
-        Future(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.ableToDo(formMappings.ableToDoForm)).withSession(request.session + (sessionOriginService -> originService.value)))
+        Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.ableToDo(formMappings.ableToDoForm)).withSession(request.session + (sessionOriginService -> originService.value))
+        //Redirect(routes.FeedbackSurveyController.ableToDo).withSession(request.session + (sessionOriginService -> originService.value))
       }
-      case false => Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.error_template(Messages("global_errors.title"), Messages("global_errors.heading"), Messages("global_errors.message"))))
+      case false => Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.error_template(Messages("global_errors.title"), Messages("global_errors.heading"), Messages("global_errors.message")))
     }
   }
 }
