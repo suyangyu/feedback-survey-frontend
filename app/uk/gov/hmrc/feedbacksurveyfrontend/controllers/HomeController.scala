@@ -16,12 +16,14 @@
 
 package controllers
 
+import models.feedbackSurveyModels.formMappings
 import play.api.Play.current
 import play.api.i18n.Messages
 import play.api.i18n.Messages.Implicits._
 import play.api.mvc._
 import controllers.bindable.Origin
 import uk.gov.hmrc.play.frontend.controller.FrontendController
+import utils.FeedbackSurveySessionKeys._
 
 import scala.concurrent.Future
 
@@ -32,11 +34,10 @@ trait HomeController extends FrontendController  {
   def start(originService : Origin ): Action[AnyContent] = Action.async {
     implicit request =>
     Origin(originService.value).isValid match {
-    case true =>  {
-      val result = Redirect(routes.FeedbackSurveyController.ableToDo).withSession(request.session + ("OriginService",originService.value))
-      Future.successful(result)
-    }
-    case false => Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.error_template(Messages("global_errors.title"), Messages("global_errors.heading"), Messages("global_errors.message"))))
+      case true =>  {
+        Future(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.ableToDo(formMappings.ableToDoForm)).withSession(request.session + (sessionOriginService -> originService.value)))
+      }
+      case false => Future.successful(Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.error_template(Messages("global_errors.title"), Messages("global_errors.heading"), Messages("global_errors.message"))))
     }
   }
 }

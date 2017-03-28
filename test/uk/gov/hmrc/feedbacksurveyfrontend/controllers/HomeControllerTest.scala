@@ -49,7 +49,7 @@ class HomeControllerTest extends UnitSpec with FakeApplication with MockitoSugar
     "give a status of OK, if origin token found" in {
       val controllerUnderTest = buildFakeHomeController
       val result = controllerUnderTest.start(Origin("AWRS_LOOKUP")).apply(FakeRequest("GET", ""))
-      status(result) shouldBe SEE_OTHER
+      status(result) shouldBe OK
     }
 
   }
