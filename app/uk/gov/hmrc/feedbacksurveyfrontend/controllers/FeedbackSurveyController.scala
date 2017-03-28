@@ -23,7 +23,7 @@ import play.api.mvc._
 import scala.concurrent.Future
 import play.api.Play.{current}
 import play.api.i18n.Messages.Implicits._
-import utils.LoggingUtils
+import utils.{SessionUtil, LoggingUtils}
 import utils.FeedbackSurveySessionKeys._
 
 

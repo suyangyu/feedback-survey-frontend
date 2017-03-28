@@ -42,12 +42,11 @@ class FeedbackSurveyControllerSpec extends UnitTestTraits {
 
     "Go to the ableToDo page " in {
       val result = TestFeedbackSurveyController.ableToDo.apply(testRequest("AWRS_LOOKUP"))
-      //SessionUtil.sessionUtilForResult(result).addServiceOriginToSession("AWRS_LOOKUP")
       status(await(result)) shouldBe OK
     }
 
     "redirect to the usingService page " in {
-      val result = TestFeedbackSurveyController.ableToDoContinue.apply(FakeRequest()).run()
+      val result = TestFeedbackSurveyController.ableToDoContinue.apply(testRequest("AWRS_LOOKUP")).run()
       status(result) shouldBe SEE_OTHER
       redirectLocation(result).get should include("/feedback-survey/usingService")
     }
@@ -58,7 +57,7 @@ class FeedbackSurveyControllerSpec extends UnitTestTraits {
     }
 
     "redirect to the aboutService page " in {
-      val result = TestFeedbackSurveyController.usingServiceContinue.apply(FakeRequest()).run()
+      val result = TestFeedbackSurveyController.usingServiceContinue.apply(testRequest("AWRS_LOOKUP")).run()
       status(result) shouldBe SEE_OTHER
       redirectLocation(result).get should include("/feedback-survey/aboutService")
     }
@@ -69,7 +68,7 @@ class FeedbackSurveyControllerSpec extends UnitTestTraits {
     }
 
     "redirect to the Thank you page " in {
-      val result = TestFeedbackSurveyController.recommendServiceContinue.apply(FakeRequest()).run()
+      val result = TestFeedbackSurveyController.recommendServiceContinue.apply(testRequest("AWRS_LOOKUP")).run()
       status(result) shouldBe SEE_OTHER
       redirectLocation(result).get should include("/feedback-survey/thankYou")
     }
