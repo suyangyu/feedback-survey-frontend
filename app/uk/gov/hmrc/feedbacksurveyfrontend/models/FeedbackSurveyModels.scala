@@ -63,12 +63,6 @@ object formMappings {
 
   val usingServiceForm = Form(mapping(
     "beforeUsingThisService" -> list(text.verifying("required field", _.nonEmpty))
-//    "telephonedHmrc" -> optional(text.verifying("required field", _.nonEmpty)),
-//    "wroteToHmrc" -> optional(text.verifying("required field", _.nonEmpty)),
-//    "completedAnOnlineForm" -> optional(text.verifying("required field", _.nonEmpty)),
-//    "spokeToEmployerAgentOrAccountant" -> optional(text.verifying("required field", _.nonEmpty)),
-//    "spokeToEmployerAgentOrAccountant" -> optional(text.verifying("required field", _.nonEmpty)),
-//    "spokeToAFriendOrFamilyMember" -> optional(text.verifying("required field", _.nonEmpty))
   )(UsingService.apply)(UsingService.unapply))
 
   val aboutServiceForm = Form(mapping(
