@@ -29,14 +29,7 @@ object AbleToDo {
   implicit val format = Json.format[AbleToDo]
 }
 
-case class UsingService(beforeUsingThisService: List[String]
-//                         telephonedHmrc: Option[String],
-//                        wroteToHmrc: Option[String],
-//                        completedAnOnlineForm: Option[String],
-//                        readGuidanceOnGovUk: Option[String],
-//                        spokeToEmployerAgentOrAccountant: Option[String],
-//                        spokeToAFriendOrFamilyMember: Option[String]
-                         )
+case class UsingService(beforeUsingThisService: List[String])
 
 object UsingService {
   implicit val format = Json.format[UsingService]
