@@ -49,9 +49,18 @@ trait FeedbackSurveyController extends FrontendController with LoggingUtils {
 
   val usingServiceContinue = Action (parse.form(formMappings.usingServiceForm)) { implicit request =>
     val beforeUsingThisService = request.body.beforeUsingThisService
+    var option0, option1, option2, option3, option4, option5, option6: (String,String) = ("","")
+    if (beforeUsingThisService.lift(0).isDefined) {option0 = beforeUsingThisService.lift(0).get -> "Checked"}
+    if (beforeUsingThisService.lift(1).isDefined) {option1 = beforeUsingThisService.lift(1).get -> "Checked"}
+    if (beforeUsingThisService.lift(2).isDefined) {option2 = beforeUsingThisService.lift(2).get -> "Checked"}
+    if (beforeUsingThisService.lift(3).isDefined) {option3 = beforeUsingThisService.lift(3).get -> "Checked"}
+    if (beforeUsingThisService.lift(4).isDefined) {option4 = beforeUsingThisService.lift(4).get -> "Checked"}
+    if (beforeUsingThisService.lift(5).isDefined) {option5 = beforeUsingThisService.lift(5).get -> "Checked"}
+    if (beforeUsingThisService.lift(6).isDefined) {option6 = beforeUsingThisService.lift(6).get -> "Checked"}
     audit("feedback-survey", Map(
       "origin" -> request.session.get(sessionOriginService).get,
-      "exitSurveyWhatDidYouTryBeforeUsingThisService" -> beforeUsingThisService.mkString(" ")), eventTypeSuccess)
+      option0, option1, option2, option3, option4, option5, option6
+    ).filter((t) => t._1 != ""), eventTypeSuccess)
     Redirect(routes.FeedbackSurveyController.aboutService)
   }
 
