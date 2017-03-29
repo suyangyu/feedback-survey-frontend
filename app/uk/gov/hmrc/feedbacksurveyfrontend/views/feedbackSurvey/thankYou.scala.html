@@ -5,6 +5,7 @@
 @import views.html.helpers._
 @import models._
 
-@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("feedbackSurvey.giveFeedBack", Messages("feedbackSurvey.page5.title")), bodyClasses = None) {
+@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("feedbackSurvey.giveFeedBackPageTitle", Messages("feedbackSurvey.page5.title")), bodyClasses = None) {
+<span id="giveFeedback" class="pre-heading">@Messages("feedbackSurvey.giveFeedBack")</span>
 <h1 id="thankYou" class="heading-large">@Messages("feedbackSurvey.page5.title")</h1>
 }
