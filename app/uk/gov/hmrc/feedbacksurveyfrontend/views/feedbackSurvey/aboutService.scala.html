@@ -7,10 +7,8 @@
 
 @uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("feedbackSurvey.giveFeedBackPageTitle", Messages("feedbackSurvey.page3.question1")), bodyClasses = None) {
     @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("back",controllers.routes.FeedbackSurveyController.usingService.url, true, Messages("generic.back"))(messages)
-    <h1 id="serviceReceived" class="heading-large">
-        <span class="heading-secondary" id="giveFeedback">@Messages("feedbackSurvey.giveFeedBack")</span>
-        @Messages("feedbackSurvey.page3.question1")
-    </h1>
+    <span id="giveFeedback" class="pre-heading">@Messages("feedbackSurvey.giveFeedBack")</span>
+    <h1 id="serviceReceived" class="heading-large">@Messages("feedbackSurvey.page3.question1")</h1>
     @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.FeedbackSurveyController.aboutServiceContinue){
         <div class="form-group">
             @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.inputTypeRadioGroup(
