@@ -20,6 +20,7 @@ import com.typesafe.config.Config
 import net.ceedubs.ficus.Ficus._
 import play.api.mvc.Request
 import play.api.{Application, Configuration, Play}
+import play.filters.csrf.CSRFFilter
 import play.twirl.api.Html
 import uk.gov.hmrc.crypto.ApplicationCrypto
 import uk.gov.hmrc.play.audit.filters.FrontendAuditFilter
