@@ -5,9 +5,7 @@
 @import views.html.helpers._
 @import models.feedbackSurveyModels._
 
-@pageScripts = {
-<script type="text/javascript" src='@routes.Assets.at("javascripts/feedback.js")'></script>
-}
+@pageScripts = {}
 
 @uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("feedbackSurvey.giveFeedBackPageTitle", Messages("feedbackSurvey.page2.question1")), bodyClasses = None, pageScripts = Some(pageScripts)) {
     @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("back", controllers.routes.FeedbackSurveyController.ableToDo.url, true, Messages("generic.back"))(messages)

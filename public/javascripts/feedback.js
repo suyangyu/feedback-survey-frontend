@@ -11,5 +11,9 @@ $(document).ready(function() {
           else {
             $('input[text="None of these"]').attr('checked', false)
           }
+          ga('send', 'event', this.id, 'click');
+     });
+     $('input[type="radio"]').click(function(){
+         ga('send', 'event', this.id, 'click');
      });
 });
