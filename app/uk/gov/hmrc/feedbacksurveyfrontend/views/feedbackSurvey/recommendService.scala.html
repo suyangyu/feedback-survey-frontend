@@ -7,10 +7,8 @@
 
 @uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("feedbackSurvey.giveFeedBackPageTitle", Messages("feedbackSurvey.page4.question1")), bodyClasses = None) {
     @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("back", controllers.routes.FeedbackSurveyController.aboutService.url, true, Messages("generic.back"))(messages)
-    <h1 id="recommendRating" class="heading-large">
-        <span class="heading-secondary" id="giveFeedback">@Messages("feedbackSurvey.giveFeedBack")</span>
-        @Messages("feedbackSurvey.page4.question1")
-    </h1>
+    <span id="giveFeedback" class="pre-heading">@Messages("feedbackSurvey.giveFeedBack")</span>
+    <h1 id="recommendRating" class="heading-large">@Messages("feedbackSurvey.page4.question1")</h1>
     @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.FeedbackSurveyController.recommendServiceContinue){
         <div class="form-group">
             @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.inputTypeRadioGroup(
@@ -30,7 +28,9 @@
             '_showConstraints -> false,
             '_labelHighlight -> true,
             '_labelHint -> Messages("feedbackSurvey.page4.question2.labelhint"),
-            '_labelHintId -> "labelHint"
+            '_labelHintId -> "labelHint",
+            '_legend -> "reasonForRating",
+            '_legendHidden -> true
 )
         @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.submitButton(Messages("generic.continue"))(id = "save-and-continue", classAttr = "button")
     }
