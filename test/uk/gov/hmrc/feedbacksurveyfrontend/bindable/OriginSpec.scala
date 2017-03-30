@@ -25,7 +25,7 @@ class OriginSpec extends UnitTestTraits {
   "The validation of an origin" should {
 
     "pass with valid AWRS_LOOKUP origin" in {
-      Origin("AWRS_LOOKUP").isValid shouldBe true
+      Origin("check-the-awrs-register").isValid shouldBe true
      }
     "pass with valid PTA origin" in {
       Origin("PERTAX").isValid shouldBe true
