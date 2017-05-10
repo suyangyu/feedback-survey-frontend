@@ -41,7 +41,7 @@ class HomeControllerTest extends UnitSpec with FakeApplication with MockitoSugar
 
     "give a status of OK, return error page if origin token not found" in {
       val controllerUnderTest = buildFakeHomeController
-      val result = controllerUnderTest.start(Origin("AWRS")).apply(FakeRequest("GET", ""))
+      val result = controllerUnderTest.start(Origin("XYZ")).apply(FakeRequest("GET", ""))
       status(result) shouldBe OK
       contentAsString(result) should include("Service unavailable")
     }
