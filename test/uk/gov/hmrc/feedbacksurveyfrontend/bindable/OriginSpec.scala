@@ -45,6 +45,9 @@ class OriginSpec extends UnitTestTraits {
     "pass with valid P800 origin"  in {
       Origin("P800").isValid shouldBe true
     }
+    "pass with valid AWRS origin"  in {
+      Origin("AWRS").isValid shouldBe true
+    }
     "fail with an invalid origin"  in {
       Origin("INVALID").isValid shouldBe false
     }
