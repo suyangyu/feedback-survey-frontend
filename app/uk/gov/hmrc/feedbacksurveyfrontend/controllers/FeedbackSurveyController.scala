@@ -17,11 +17,11 @@
 package controllers
 
 import models.feedbackSurveyModels._
+import play.api.Play
 import uk.gov.hmrc.play.frontend.controller.FrontendController
 import play.api.mvc._
-
-import play.api.Play.{current}
-import play.api.i18n.Messages.Implicits._
+import play.api.Play.current
+import play.api.i18n.{I18nSupport, MessagesApi}
 import utils.LoggingUtils
 import utils.FeedbackSurveySessionKeys._
 
@@ -29,7 +29,9 @@ import utils.FeedbackSurveySessionKeys._
 
 object FeedbackSurveyController extends FeedbackSurveyController
 
-trait FeedbackSurveyController extends FrontendController with LoggingUtils {
+trait FeedbackSurveyController extends FrontendController with LoggingUtils with I18nSupport {
+
+  implicit val messagesApi: MessagesApi = Play.current.injector.instanceOf[MessagesApi]
 
   val ableToDo  = Action { implicit request =>
     Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.ableToDo(formMappings.ableToDoForm))

@@ -1,4 +1,4 @@
-@(params: views.helpers.InputTypeRadioGroupParams)(implicit message : Messages, formInstance: Option[Form[_]] = None)
+@(params: views.helpers.InputTypeRadioGroupParams)(implicit messages: play.api.i18n.Messages, formInstance: Option[Form[_]] = None)
 
 @import views.html.helpers._
 @import views.helpers._
@@ -49,7 +49,7 @@
 @legend = {
     @params.legend match {
         case Some(legend) => {
-            <legend @legendId @legendClass @legendAttributes>@legend</legend>
+            <legend @legendId @legendClass @legendAttributes>@Messages(legend)</legend>
         }
         case _ => {}
     }
@@ -113,9 +113,9 @@
             @params.radioOptions.map { case (value, label) =>
                 @defining(s"${params.field.name}-${value.toLowerCase.replace(" ", "_")}") { inputId =>
                     <label for="@inputId" id="@(inputId)_label" class="block-label @labelClass @params.field.value.filter(_ == value).map { _ => selected }">
-                        @if(!labelAfter)@{addLabelIfSpecified(label, params)}
+                        @if(!labelAfter)@{addLabelIfSpecified(Messages(label), params)}
                         <input type="radio" id="@inputId" name="@params.field.name" value="@value" @inputClass @dataAttributes @params.field.value.filter(_ == value).map { _ => checked="checked"}>
-                        @if(labelAfter)@{addLabelIfSpecified(label, params)}
+                        @if(labelAfter)@{addLabelIfSpecified(Messages(label), params)}
                     </label>
                 }
             }

@@ -1,11 +1,11 @@
-@(page1: Form[models.feedbackSurveyModels.AbleToDo])(implicit request: Request[_], messages: Messages)
+@(page1: Form[models.feedbackSurveyModels.AbleToDo])(implicit request: Request[_], messages: play.api.i18n.Messages)
 
 @import play.twirl.api.Html
 @import views.helpers._
 @import views.html.helpers._
 @import models._
 
-@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("feedbackSurvey.giveFeedBackPageTitle", Messages("feedbackSurvey.page1.question1")), bodyClasses = None) {
+@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = "feedbackSurvey.giveFeedBackPageTitle.page1.question1", bodyClasses = None, langReturnUrl = request.uri) {
     <h1 id="title" class="heading-large">@Messages("feedbackSurvey.page1.title")</h1>
     <p id="intro">@Messages("feedbackSurvey.page1.para1")</p>
     @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.FeedbackSurveyController.ableToDoContinue){
@@ -13,14 +13,14 @@
             @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.inputTypeRadioGroup(
                 InputTypeRadioGroupParams(
                     page1("ableToDoWhatNeeded"),
-                    Seq("Yes" -> Messages("generic.yes"),"No" -> Messages("generic.no")),
-                    legend = Messages("feedbackSurvey.page1.question1"),
+                    Seq("Yes" -> "generic.yes","No" -> "generic.no"),
+                    legend = "feedbackSurvey.page1.question1",
                     legendClass = "heading-medium",
                     legendId = "ableToDoWhatNeeded",
                     fieldSetClass = "inline"
                 )
             )
         </div>
-        @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.submitButton(Messages("generic.continue"))(id = "save-and-continue", classAttr = "button")
+        @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.submitButton("generic.continue")(id = "save-and-continue", classAttr = "button")
     }
 }

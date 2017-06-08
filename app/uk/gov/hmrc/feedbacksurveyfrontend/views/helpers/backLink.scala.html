@@ -1,11 +1,9 @@
-@(id:String = "back", backUrl:String, alwaysShow:Boolean = false, linkText:String = "")(implicit messages: Messages)
-
-@import play.api.i18n.Messages.Implicits._
+@(id:String = "back", backUrl:String, alwaysShow:Boolean = false, linkText:String = "")(implicit messages: play.api.i18n.Messages)
 
 @{
     alwaysShow match {
         case true =>
-            <p><a id={id} class="back-link print-hidden" href={backUrl}>{linkText}</a></p>
+            <p><a id={id} class="back-link print-hidden" href={backUrl}>{Messages(linkText)}</a></p>
         case _ => {}
     }
 }
