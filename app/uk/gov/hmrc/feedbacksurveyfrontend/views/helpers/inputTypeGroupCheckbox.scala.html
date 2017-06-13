@@ -1,4 +1,4 @@
-@(params: views.helpers.InputTypeGroupCheckboxParams)(implicit lang: play.api.i18n.Lang, formInstance: Option[Form[_]] = None)
+@(params: views.helpers.InputTypeGroupCheckboxParams)(implicit messages: play.api.i18n.Messages, formInstance: Option[Form[_]] = None)
 
 @import views.html.helper._
 @import views.helpers._
@@ -51,7 +51,7 @@
 @formHint = {
     @params.formHint match {
         case Some(formHint) => {
-            <p @formHintId>@formHint</p>
+            <p @formHintId>@Messages(formHint)</p>
         }
         case _ => {}
     }
@@ -82,7 +82,7 @@
             @params.checkboxOptions.map { checkboxOptions =>
                 <label for="@(inputId(checkboxOptions._1))" class="block-label" id="@(inputId(checkboxOptions._1))_label">
                     <input type="checkbox" text="@checkboxOptions._2" id="@(inputId(checkboxOptions._1))" @inputName value="@checkboxOptions._1" @if(values.contains(checkboxOptions._1)){checked="checked"}>
-                    @checkboxOptions._2
+                    @Messages(checkboxOptions._2)
                 </label>
             }
         }

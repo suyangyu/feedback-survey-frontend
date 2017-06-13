@@ -1,4 +1,4 @@
-@(text: String)(id: Option[String], classAttr: Option[String])
+@(text: String)(id: Option[String], classAttr: Option[String])(implicit messages: play.api.i18n.Messages)
 @getId = {
     @id match {
         case Some(customId) => {id=@customId}
@@ -12,5 +12,5 @@
     }
 }
 <div class="form-group">
-    <button @getClass type="submit" @getId formnovalidate="formnovalidate">@text</button>
+    <button @getClass type="submit" @getId formnovalidate="formnovalidate">@Messages(text)</button>
 </div>

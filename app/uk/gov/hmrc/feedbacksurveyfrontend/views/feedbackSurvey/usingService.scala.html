@@ -1,4 +1,4 @@
-@(page2: Form[models.feedbackSurveyModels.UsingService])(implicit request: Request[_], messages: Messages)
+@(page2: Form[models.feedbackSurveyModels.UsingService])(implicit request: Request[_], messages: play.api.i18n.Messages)
 
 @import play.twirl.api.Html
 @import views.helpers._
@@ -7,8 +7,8 @@
 
 @pageScripts = {}
 
-@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = Messages("feedbackSurvey.giveFeedBackPageTitle", Messages("feedbackSurvey.page2.question1")), bodyClasses = None, pageScripts = Some(pageScripts)) {
-    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("back", controllers.routes.FeedbackSurveyController.ableToDo.url, true, Messages("generic.back"))(messages)
+@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = "feedbackSurvey.giveFeedBackPageTitle.page2.question1", bodyClasses = None, pageScripts = Some(pageScripts), langReturnUrl = request.uri) {
+    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("back", controllers.routes.FeedbackSurveyController.ableToDo.url, true, "generic.back")(messages)
     <span id="giveFeedback" class="pre-heading">@Messages("feedbackSurvey.giveFeedBack")</span>
     <h1 id="beforeUsingThisService" class="heading-large">@Messages("feedbackSurvey.page2.question1")</h1>
     @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.FeedbackSurveyController.usingServiceContinue){
@@ -17,14 +17,14 @@
                 InputTypeGroupCheckboxParams(
                     page2("beforeUsingThisService"),
                     formFields.page2Question1Options,
-                    legend = Messages("feedbackSurvey.page2.question1"),
+                    legend = "feedbackSurvey.page2.question1",
                     legendClass = "visuallyhidden",
                     legendId = "beforeUsingThisService",
-                    formHint = Messages("feedbackSurvey.page2.question1.formhint"),
+                    formHint = "feedbackSurvey.page2.question1.formhint",
                     formHintId = "formHint"
                 )
             )
         </div>
-        @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.submitButton(Messages("generic.continue"))(id = "save-and-continue", classAttr = "button")
+        @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.submitButton("generic.continue")(id = "save-and-continue", classAttr = "button")
     }
 }

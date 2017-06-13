@@ -33,7 +33,8 @@ private object AppDependencies {
       "uk.gov.hmrc" %% "govuk-template" % govukTemplateVersion,
       "uk.gov.hmrc" %% "play-health" % playHealthVersion,
       "uk.gov.hmrc" %% "play-ui" % playUiVersion,
-      "uk.gov.hmrc" %% "http-caching-client" % "6.0.0"
+      "uk.gov.hmrc" %% "http-caching-client" % "6.0.0",
+      "uk.gov.hmrc" %% "play-language" % "3.3.0"
     )
 
     trait TestDependencies {

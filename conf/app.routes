@@ -12,3 +12,6 @@ POST       /aboutService                      controllers.FeedbackSurveyControll
 GET        /recommendService                  controllers.FeedbackSurveyController.recommendService
 POST       /recommendService                  controllers.FeedbackSurveyController.recommendServiceContinue
 GET        /thankYou                          controllers.FeedbackSurveyController.thankYou
+
+GET        /lang/enGb                         controllers.LanguageController.enGb(redirectUrl: String)
+GET        /lang/cyGb                         controllers.LanguageController.cyGb(redirectUrl: String)

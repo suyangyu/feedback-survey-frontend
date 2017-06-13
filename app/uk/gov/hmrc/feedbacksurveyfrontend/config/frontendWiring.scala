@@ -20,8 +20,9 @@ import uk.gov.hmrc.play.audit.http.config.LoadAuditingConfig
 import uk.gov.hmrc.play.audit.http.connector.{AuditConnector => Auditing}
 import uk.gov.hmrc.play.config.{AppName, RunMode, ServicesConfig}
 import uk.gov.hmrc.play.frontend.auth.connectors.AuthConnector
+import uk.gov.hmrc.play.frontend.filters.SessionCookieCryptoFilter
 import uk.gov.hmrc.play.http.ws.{WSDelete, WSGet, WSPost, WSPut}
-import uk.gov.hmrc.play.partials.CachedStaticHtmlPartialRetriever
+import uk.gov.hmrc.play.partials.FormPartialRetriever
 
 object FrontendAuditConnector extends Auditing with AppName {
   override lazy val auditingConfig = LoadAuditingConfig(s"auditing")
@@ -36,6 +37,7 @@ object FrontendAuthConnector extends AuthConnector with ServicesConfig {
   lazy val http = WSHttp
 }
 
-object CachedStaticHtmlPartialProvider extends CachedStaticHtmlPartialRetriever {
+object LocalPartialRetriever extends FormPartialRetriever {
+  override def crypto = SessionCookieCryptoFilter.encrypt
   override val httpGet = WSHttp
 }

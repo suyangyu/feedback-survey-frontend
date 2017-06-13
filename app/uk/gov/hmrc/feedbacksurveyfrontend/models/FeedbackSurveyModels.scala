@@ -74,35 +74,35 @@ object formMappings {
 object formFields {
 
   val page2Question1Options = Seq(
-    "telephonedHMRC" -> Messages("feedbackSurvey.page2.question1.option1"),
-    "wroteToHMRC" -> Messages("feedbackSurvey.page2.question1.option2"),
-    "completedAnOnlineForm" -> Messages("feedbackSurvey.page2.question1.option3"),
-    "readGuidanceOnGovUK" -> Messages("feedbackSurvey.page2.question1.option4"),
-    "spokeToYourEmployerAgentOrAccountant" -> Messages("feedbackSurvey.page2.question1.option5"),
-    "spokeToAFriendOrFamilyMember" -> Messages("feedbackSurvey.page2.question1.option6"),
-    "noneOfThese" -> Messages("feedbackSurvey.page2.question1.option7")
+    "telephonedHMRC" -> "feedbackSurvey.page2.question1.option1",
+    "wroteToHMRC" -> "feedbackSurvey.page2.question1.option2",
+    "completedAnOnlineForm" -> "feedbackSurvey.page2.question1.option3",
+    "readGuidanceOnGovUK" -> "feedbackSurvey.page2.question1.option4",
+    "spokeToYourEmployerAgentOrAccountant" -> "feedbackSurvey.page2.question1.option5",
+    "spokeToAFriendOrFamilyMember" -> "feedbackSurvey.page2.question1.option6",
+    "noneOfThese" -> "feedbackSurvey.page2.question1.option7"
   )
 
   val page3Question1Options = Seq(
-    "5" -> Messages("feedbackSurvey.page3.question1.option1"),
-    "4" -> Messages("feedbackSurvey.page3.question1.option2"),
-    "3" -> Messages("feedbackSurvey.page3.question1.option3"),
-    "2" -> Messages("feedbackSurvey.page3.question1.option4"),
-    "1" -> Messages("feedbackSurvey.page3.question1.option5")
+    "5" -> "feedbackSurvey.page3.question1.option1",
+    "4" -> "feedbackSurvey.page3.question1.option2",
+    "3" -> "feedbackSurvey.page3.question1.option3",
+    "2" -> "feedbackSurvey.page3.question1.option4",
+    "1" -> "feedbackSurvey.page3.question1.option5"
   )
 
   val page4Question1Options = Seq(
-    "10" -> Messages("feedbackSurvey.page4.question1.option1"),
-    "9" -> Messages("feedbackSurvey.page4.question1.option2"),
-    "8" -> Messages("feedbackSurvey.page4.question1.option3"),
-    "7" -> Messages("feedbackSurvey.page4.question1.option4"),
-    "6" -> Messages("feedbackSurvey.page4.question1.option5"),
-    "5" -> Messages("feedbackSurvey.page4.question1.option6"),
-    "4" -> Messages("feedbackSurvey.page4.question1.option7"),
-    "3" -> Messages("feedbackSurvey.page4.question1.option8"),
-    "2" -> Messages("feedbackSurvey.page4.question1.option9"),
-    "1" -> Messages("feedbackSurvey.page4.question1.option10"),
-    "0" -> Messages("feedbackSurvey.page4.question1.option11")
+    "10" -> "feedbackSurvey.page4.question1.option1",
+    "9" -> "feedbackSurvey.page4.question1.option2",
+    "8" -> "feedbackSurvey.page4.question1.option3",
+    "7" -> "feedbackSurvey.page4.question1.option4",
+    "6" -> "feedbackSurvey.page4.question1.option5",
+    "5" -> "feedbackSurvey.page4.question1.option6",
+    "4" -> "feedbackSurvey.page4.question1.option7",
+    "3" -> "feedbackSurvey.page4.question1.option8",
+    "2" -> "feedbackSurvey.page4.question1.option9",
+    "1" -> "feedbackSurvey.page4.question1.option10",
+    "0" -> "feedbackSurvey.page4.question1.option11"
   )
 
 }

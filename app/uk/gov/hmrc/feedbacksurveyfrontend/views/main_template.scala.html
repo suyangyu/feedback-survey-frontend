@@ -2,43 +2,55 @@
   serviceTitle: String = "Give Feedback",
   pageScripts: Option[Html] = None,
   sidebarLinks: Option[Html] = None,
-  contentHeader: Option[Html] = None,
   bodyClasses: Option[String] = None,
   mainClass: Option[String] = None,
   userLoggedIn: Boolean = false,
-  scriptElem: Option[Html] = None)(mainContent: Html)(implicit request : Request[_], messages: Messages)
+  langReturnUrl: Option[String] = None,
+  scriptElem: Option[Html] = None)(mainContent: Html)(implicit request : Request[_], messages: play.api.i18n.Messages)
 
 @import uk.gov.hmrc.play.views.html.layouts
 
 @serviceInfoContent = {}
 
 @sidebar = {
-    @if(sidebarLinks.isDefined) {
-        @layouts.sidebar(sidebarLinks.get, Some("sidebar"))
-    }
+  @if(sidebarLinks.isDefined) {
+   @layouts.sidebar(sidebarLinks.get, Some("sidebar"))
+  }
 }
 
 @linkElement = {
-    <link rel="stylesheet" href='@routes.Assets.at("stylesheets/custom.css")'/>
+  <link rel="stylesheet" href='@routes.Assets.at("stylesheets/custom.css")'/>
 }
 
 @scriptElement = {
-    @scriptElem
-    @pageScripts
-    <script type="text/javascript" src='@routes.Assets.at("javascripts/feedback.js")'></script>
-    <script type="text/javascript" src='@routes.Assets.at("javascripts/jquery.min.js")'></script>
-    <script type="text/javascript" src='@routes.Assets.at("javascripts/jquery-ui.min.js")'></script>
+  @scriptElem
+  @pageScripts
+  <script type="text/javascript" src='@routes.Assets.at("javascripts/feedback.js")'></script>
+  <script type="text/javascript" src='@routes.Assets.at("javascripts/gaTracking.js")'></script>
+  <script type="text/javascript" src='@routes.Assets.at("javascripts/jquery.min.js")'></script>
+  <script type="text/javascript" src='@routes.Assets.at("javascripts/jquery-ui.min.js")'></script>
 }
 
-@govuk_wrapper(appConfig = uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig,
-               title = title,
-               serviceTitle = serviceTitle,
-               mainClass = mainClass,
-               bodyClasses = bodyClasses,
-               sidebar = sidebar,
-               contentHeader = contentHeader,
-               mainContent = layouts.article(mainContent),
-               serviceInfoContent = serviceInfoContent,
-               scriptElem = Some(scriptElement),
-               linkElement = Some(linkElement)
-)
+@contentHeader = {
+  @langReturnUrl.map { url =>
+    <div class="lang-select">
+      <ul>
+        <li><a class="ga-track-event" data-ga-event-category="link - click" data-ga-event-action="lang-select" data-ga-event-label="English" href="@controllers.routes.LanguageController.enGb(url)">@Messages("label.english")</a></li>
+        <li><a class="ga-track-event" data-ga-event-category="link - click" data-ga-event-action="lang-select" data-ga-event-label="Cymraeg" href="@controllers.routes.LanguageController.cyGb(url)">@Messages("label.welsh")</a></li>
+      </ul>
+    </div>
+  }
+}
+
+@govuk_wrapper(
+  appConfig = uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig,
+  title = Messages(title),
+  serviceTitle = serviceTitle,
+  mainClass = mainClass,
+  bodyClasses = bodyClasses,
+  sidebar = sidebar,
+  contentHeader = Some(contentHeader),
+  mainContent = layouts.article(mainContent),
+  serviceInfoContent = serviceInfoContent,
+  scriptElem = Some(scriptElement),
+  linkElement = Some(linkElement))
