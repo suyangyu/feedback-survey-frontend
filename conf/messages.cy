@@ -5,18 +5,17 @@ generic.yes=Iawn
 generic.no=Na
 generic.continue=Parhau
 generic.back=Yn ôl
-generic.error.title=Sorry, we''re experiencing technical difficulties
-generic.error.status=There has been a problem with your application
-generic.unauthorised.heading=Sorry, we''re experiencing technical difficulties
-generic.unauthorised.reason_start=This could be because,
-generic.invalid.characters=Invalid characters
+generic.error.title=Mae''n ddrwg gennym, rydym yn cael anawsterau technegol
+generic.error.status=Mae problem gyda''ch cais.
+generic.unauthorised.heading=Mae''n ddrwg gennym, rydym yn cael anawsterau technegol
+generic.unauthorised.reason_start=Gallai hyn fod oherwydd:
+generic.invalid.characters=Cymeriadau annilys
 
-global_errors.message=Sorry, there is a technical problem and you cannot use the service at the moment. Please try again later.
-global_errors.heading=Service unavailable
-global_errors.title=Service unavailable
+global_errors.message=Mae''n ddrwg gennym, mae anhawster technegol ac ni allwch ddefnyddio''r gwasanaeth ar hyn o bryd. Rhowch gynnig arall arni yn nes ymlaen.
+global_errors.heading=Nid yw''r gwasanaeth ar gael
+global_errors.title=Nid yw''r gwasanaeth ar gael
 
 # Feedback survey Specific
-
 feedbackSurvey.giveFeedBack=Rhoi adborth
 feedbackSurvey.giveFeedBackPageTitle.page1.question1=Rhoi adborth - A oeddech yn gallu gwneud yr hyn yr oedd angen i chi''i wneud heddiw?
 feedbackSurvey.giveFeedBackPageTitle.page2.question1=Rhoi adborth - Pa ffynonellau o wybodaeth a roesoch gynnig arnynt cyn i chi ddefnyddio''r gwasanaeth hwn?
