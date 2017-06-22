@@ -9,6 +9,7 @@
   scriptElem: Option[Html] = None)(mainContent: Html)(implicit request : Request[_], messages: play.api.i18n.Messages)
 
 @import uk.gov.hmrc.play.views.html.layouts
+@import uk.gov.hmrc.urls.Link
 
 @serviceInfoContent = {}
 
@@ -34,10 +35,31 @@
 @contentHeader = {
   @langReturnUrl.map { url =>
     <div class="lang-select">
-      <ul>
-        <li><a class="ga-track-event" data-ga-event-category="link - click" data-ga-event-action="lang-select" data-ga-event-label="English" href="@controllers.routes.LanguageController.enGb(url)">@Messages("label.english")</a></li>
-        <li><a class="ga-track-event" data-ga-event-category="link - click" data-ga-event-action="lang-select" data-ga-event-label="Cymraeg" href="@controllers.routes.LanguageController.cyGb(url)">@Messages("label.welsh")</a></li>
-      </ul>
+      @if(messages.lang == Lang("cy")) {
+        @Link.toInternalPage(
+          url=controllers.routes.LanguageController.enGb(url).toString(),
+          value=Some(Messages("label.english")),
+          id=Some("switch-to-english"),
+          cssClasses=Some("ga-track-click-event"),
+          dataAttributes=Some(Map(
+            "ga-event-category" -> "link - click",
+            "ga-event-action" -> "lang-select",
+            "ga-event-label" -> "English"))
+          ).toHtml
+        | @Messages("label.welsh")
+      } else {
+        @Messages("label.english") |
+        @Link.toInternalPage(
+          url=controllers.routes.LanguageController.cyGb(url).toString(),
+          value=Some(Messages("label.welsh")),
+          id=Some("switch-to-welsh"),
+          cssClasses=Some("ga-track-click-event"),
+          dataAttributes=Some(Map(
+            "ga-event-category" -> "link - click",
+            "ga-event-action" -> "lang-select",
+            "ga-event-label" -> "Cymraeg"))
+          ).toHtml
+      }
     </div>
   }
 }

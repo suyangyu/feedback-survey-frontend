@@ -11,17 +11,17 @@ private object AppDependencies {
 
       private val playHealthVersion = "2.1.0"
       private val logbackJsonLoggerVersion = "3.1.0"
-      private val frontendBootstrapVersion = "7.17.0"
-      private val govukTemplateVersion = "5.1.0"
+      private val frontendBootstrapVersion = "7.23.0"
+      private val govukTemplateVersion = "5.2.0"
       private val playUiVersion = "7.2.1"
       private val playPartialsVersion = "5.3.0"
       private val playAuthorisedFrontendVersion = "6.3.0"
-      private val playConfigVersion = "4.2.0"
+      private val playConfigVersion = "4.3.0"
       private val hmrcTestVersion = "2.3.0"
-      private val scalaTestVersion = "2.2.6"
-      private val scalaTestPlusPlayVersion = "1.5.1"
+      private val scalaTestVersion = "3.0.0"
+      private val scalaTestPlusPlayVersion = "2.0.0"
       private val pegdownVersion = "1.6.0"
-      private val mockitoVersion = "1.10.19"
+      private val mockitoVersion = "2.0.2-beta"
 
     val compile = Seq(
       ws,
