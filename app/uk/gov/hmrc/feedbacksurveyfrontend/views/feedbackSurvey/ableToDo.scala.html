@@ -6,21 +6,19 @@
 @import models._
 
 @uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = "feedbackSurvey.giveFeedBackPageTitle.page1.question1", bodyClasses = None, langReturnUrl = request.uri) {
-    <h1 id="title" class="heading-large">@Messages("feedbackSurvey.page1.title")</h1>
-    <p id="intro">@Messages("feedbackSurvey.page1.para1")</p>
-    @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.FeedbackSurveyController.ableToDoContinue){
-        <div class="form-group">
-            @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.inputTypeRadioGroup(
-                InputTypeRadioGroupParams(
-                    page1("ableToDoWhatNeeded"),
-                    Seq("Yes" -> "generic.yes","No" -> "generic.no"),
-                    legend = "feedbackSurvey.page1.question1",
-                    legendClass = "heading-medium",
-                    legendId = "ableToDoWhatNeeded",
-                    fieldSetClass = "inline"
-                )
-            )
-        </div>
-        @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.submitButton("generic.continue")(id = "save-and-continue", classAttr = "button")
-    }
+  <p id="intro">@Messages("feedbackSurvey.page1.para1")</p>
+  <h1 class="heading-large">@Messages("feedbackSurvey.page1.question1")</h1>
+  @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.FeedbackSurveyController.ableToDoContinue){
+    <div class="form-group">
+      @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.inputTypeRadioGroup(
+        InputTypeRadioGroupParams(
+          page1("ableToDoWhatNeeded"),
+          Seq("Yes" -> "generic.yes","No" -> "generic.no"),
+          legend = "feedbackSurvey.page1.question1",
+          legendClass = "visuallyhidden",
+          legendId = "ableToDoWhatNeeded",
+          fieldSetClass = "inline"))
+    </div>
+    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.submitButton("generic.continue")(id = "save-and-continue", classAttr = "button")
+  }
 }
