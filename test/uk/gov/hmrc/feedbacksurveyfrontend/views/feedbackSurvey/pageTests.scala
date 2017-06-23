@@ -41,7 +41,6 @@ class pageTests extends UnitTestTraits with HtmlUtils {
 
     "render ableToDo page correctly" in {
       val document: Document = TestLookupController.ableToDo.apply(testRequest(page = "ableToDo"))
-      document.getElementById("title").text shouldBe Messages("feedbackSurvey.page1.title")
       document.getElementById("intro").text shouldBe Messages("feedbackSurvey.page1.para1")
       document.getElementById("ableToDoWhatNeeded_legend").text should include(Messages("feedbackSurvey.page1.question1"))
       document.getElementById("ableToDoWhatNeeded-yes").text shouldBe ""

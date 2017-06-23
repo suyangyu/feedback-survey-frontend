@@ -37,7 +37,7 @@
 @legend = {
     @params.legend match {
         case Some(legend) => {
-            <legend id="@(params.legendId)_legend" @legendClass @legendAttributes>@legend</legend>
+            <legend id="@(params.legendId)_legend" @legendClass @legendAttributes>@Messages(legend)</legend>
         }
         case _ => {}
     }
