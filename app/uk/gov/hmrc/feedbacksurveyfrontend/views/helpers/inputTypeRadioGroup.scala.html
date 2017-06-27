@@ -104,22 +104,18 @@
     }
 }
 
-<fieldset @fieldSetClass @fieldSetAttributes role="radiogroup" aria-required="true" @if(fieldErrors.nonEmpty) {aria-labelledby="@params.field.name-error-0"}>
-    <div>
-        @legend
-        @formHint
-        @commonHelper(params.field, fieldErrors)
-        <div>
-            @params.radioOptions.map { case (value, label) =>
-                @defining(s"${params.field.name}-${value.toLowerCase.replace(" ", "_")}") { inputId =>
-                    <label for="@inputId" id="@(inputId)_label" class="block-label @labelClass @params.field.value.filter(_ == value).map { _ => selected }">
-                        @if(!labelAfter)@{addLabelIfSpecified(Messages(label), params)}
-                        <input type="radio" id="@inputId" name="@params.field.name" value="@value" @inputClass @dataAttributes @params.field.value.filter(_ == value).map { _ => checked="checked"}>
-                        @if(labelAfter)@{addLabelIfSpecified(Messages(label), params)}
-                    </label>
-                }
-            }
-        </div>
-        @fieldSetQuestion
-    </div>
+<fieldset @fieldSetClass @fieldSetAttributes role="radiogroup" @if(fieldErrors.nonEmpty) {aria-labelledby="@params.field.name-error-0"}>
+  @legend
+  @formHint
+  @commonHelper(params.field, fieldErrors)
+    @params.radioOptions.map { case (value, label) =>
+      @defining(s"${params.field.name}-${value.toLowerCase.replace(" ", "_")}") { inputId =>
+        <label for="@inputId" id="@(inputId)_label" class="block-label @labelClass @params.field.value.filter(_ == value).map { _ => selected }">
+          @if(!labelAfter)@{addLabelIfSpecified(Messages(label), params)}
+          <input type="radio" id="@inputId" name="@params.field.name" value="@value" @inputClass @dataAttributes @params.field.value.filter(_ == value).map { _ => checked="checked"}>
+          @if(labelAfter)@{addLabelIfSpecified(Messages(label), params)}
+        </label>
+      }
+    }
+  @fieldSetQuestion
 </fieldset>

@@ -73,18 +73,16 @@
         case _ => params.legendId.get + "_" + append
     }
 }
-<fieldset @fieldSetClass @fieldSetAttributes role="group" aria-required="true" @if(fieldErrors.nonEmpty) {aria-labelledby="@params.field.name-error-0"}>
-    <div>
-        @legend
-        @commonHelper(params.field, fieldErrors)
-        @formHint
-        @defining(params.field.indexes.flatMap( i => params.field("[%s]".format(i)).value ).toSet) { values =>
-            @params.checkboxOptions.map { checkboxOptions =>
-                <label for="@(inputId(checkboxOptions._1))" class="block-label" id="@(inputId(checkboxOptions._1))_label">
-                    <input type="checkbox" text="@checkboxOptions._2" id="@(inputId(checkboxOptions._1))" @inputName value="@checkboxOptions._1" @if(values.contains(checkboxOptions._1)){checked="checked"}>
-                    @Messages(checkboxOptions._2)
-                </label>
-            }
-        }
-    </div>
+<fieldset @fieldSetClass @fieldSetAttributes role="group" @if(fieldErrors.nonEmpty) {aria-labelledby="@params.field.name-error-0"}>
+  @legend
+  @commonHelper(params.field, fieldErrors)
+  @formHint
+  @defining(params.field.indexes.flatMap( i => params.field("[%s]".format(i)).value ).toSet) { values =>
+    @params.checkboxOptions.map { checkboxOptions =>
+      <label for="@(inputId(checkboxOptions._1))" class="block-label" id="@(inputId(checkboxOptions._1))_label">
+        <input type="checkbox" id="@(inputId(checkboxOptions._1))" @inputName value="@checkboxOptions._1" @if(values.contains(checkboxOptions._1)){checked="checked"}>
+        @Messages(checkboxOptions._2)
+      </label>
+    }
+  }
 </fieldset>
