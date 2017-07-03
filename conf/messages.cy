@@ -64,3 +64,5 @@ feedbackSurvey.page5.title=Diolch am eich adborth
 
 label.english=English
 label.welsh=Cymraeg
+label.this_is_a_trial_service=Mae hwn yn wasanaeth sy''n cael ei brofi.
+label.this_is_a_new_service_your_feedback_will_help_us_to_improve_it=Mae hwn yn wasanaeth newydd – bydd eich <a href="{0}">adborth</a> yn ein helpu i''w wella.

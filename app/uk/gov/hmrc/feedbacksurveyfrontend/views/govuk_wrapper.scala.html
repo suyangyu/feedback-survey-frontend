@@ -46,12 +46,10 @@
 @footerLinks = {}
 
 @betaBanner = {
-  @uiLayouts.betaBanner(
-    userLoggedIn = true,
-    betaFeedbackUrl = appConfig.betaFeedbackUnauthenticatedUrl,
-    betaFeedbackUnauthenticatedUrl = appConfig.betaFeedbackUnauthenticatedUrl,
-    showFeedbackLinkInBetaBanner = false
-  )
+  <div class="beta-banner">
+    <strong class="phase-tag">BETA</strong>
+    <span class="feedback">@Html(Messages("label.this_is_a_new_service_your_feedback_will_help_us_to_improve_it", appConfig.betaFeedbackUnauthenticatedUrl))</span>
+  </div>
 }
 
 @serviceInfo = {
