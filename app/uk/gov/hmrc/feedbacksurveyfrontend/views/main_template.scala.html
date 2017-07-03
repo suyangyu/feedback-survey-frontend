@@ -40,7 +40,7 @@
           url=controllers.routes.LanguageController.enGb(url).toString(),
           value=Some(Messages("label.english")),
           id=Some("switch-to-english"),
-          cssClasses=Some("ga-track-click-event"),
+          cssClasses=Some("ga-track-event"),
           dataAttributes=Some(Map(
             "ga-event-category" -> "link - click",
             "ga-event-action" -> "lang-select",
@@ -53,7 +53,7 @@
           url=controllers.routes.LanguageController.cyGb(url).toString(),
           value=Some(Messages("label.welsh")),
           id=Some("switch-to-welsh"),
-          cssClasses=Some("ga-track-click-event"),
+          cssClasses=Some("ga-track-event"),
           dataAttributes=Some(Map(
             "ga-event-category" -> "link - click",
             "ga-event-action" -> "lang-select",
