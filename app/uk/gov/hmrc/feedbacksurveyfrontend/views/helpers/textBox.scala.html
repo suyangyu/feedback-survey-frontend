@@ -14,29 +14,22 @@
 @labelHint = @{ elements.args.get('_labelHint).getOrElse(false).asInstanceOf[Boolean] }
 
 <div class="form-field @if(fieldErrors.nonEmpty || (parentElements.isDefined && parentElements.get.hasErrors)) {form-field--error} else {@if(elements.args.get('_wrapperClass)) { @elements.args.get('_wrapperClass) }}">
-
-    @commonHelper(field, fieldErrors)
-    <fieldset class="form-group">
-        @if( elements.args.get('_legend) ) {
-            <legend @if( elements.args.get('_legendHidden).getOrElse(false).asInstanceOf[Boolean] ) {class="visuallyhidden"}>@elements.args.get('_legend)</legend>
-        }
-        <label for="@if( elements.args.get('_id) ) {@elements.args.get('_id)} else {@elements.field.name.replaceAll("""[\.\[\]]""", "-")}"
-            class="@elements.args.get('_divClass) @if( elements.args.get('_labelClass) ){ @elements.args.get('_labelClass) }"
-            id="@if(elements.args.get('_id)) {@elements.args.get('_id)Label} else {@elements.field.name.replaceAll("""[\.\[\]]""", "-")Label}"
-                @if(elements.args.contains('_labelDataAttributes)){@elements.args.get('_labelDataAttributes)}>
-
-            @if(labelHighlight) {<h2 class="heading-large">}
-            @if(elements.args.contains('_label)) {
-                @Messages(elements.label.toString)
-            }
-            @if(labelHighlight) {</h2>}
-        </label>
-        @if(elements.args.contains('_labelHint)) {<p id="@elements.args.get('_labelHintId)">@elements.args.get('_labelHint)</p>}
-        <textarea id="@if( elements.args.get('_id) ) {@elements.args.get('_id)} else {@elements.field.name.replaceAll("""[\.\[\]]""", "-")}"
-            style="resize: none;" class="comment-box @if( elements.args.get('_inputClass) ){ @elements.args.get('_inputClass) }"
-            @if(elements.args.contains('_maxLength)){maxlength="@elements.args.get('_maxLength)"}else{}
-            name="@elements.field.name"
-            rows="6">@value</textarea>
-    </fieldset>
+  @commonHelper(field, fieldErrors)
+  <fieldset class="form-group">
+    @if( elements.args.get('_legend) ) {
+      <legend @if( elements.args.get('_legendHidden).getOrElse(false).asInstanceOf[Boolean] ) {class="visuallyhidden"}>@elements.args.get('_legend)</legend>
+    }
+    <label for="@if( elements.args.get('_id) ) {@elements.args.get('_id)} else {@elements.field.name.replaceAll("""[\.\[\]]""", "-")}"
+      class="@elements.args.get('_divClass) @if( elements.args.get('_labelClass) ){ @elements.args.get('_labelClass) }"
+      id="@if(elements.args.get('_id)) {@elements.args.get('_id)Label} else {@elements.field.name.replaceAll("""[\.\[\]]""", "-")Label}"
+        @if(elements.args.contains('_labelDataAttributes)){@elements.args.get('_labelDataAttributes)}>
+    </label>
+    @if(elements.args.contains('_labelHint)) {<p id="@elements.args.get('_labelHintId)">@elements.args.get('_labelHint)</p>}
+    <textarea id="@if( elements.args.get('_id) ) {@elements.args.get('_id)} else {@elements.field.name.replaceAll("""[\.\[\]]""", "-")}"
+      style="resize: none;" class="comment-box @if( elements.args.get('_inputClass) ){ @elements.args.get('_inputClass) }"
+      @if(elements.args.contains('_maxLength)){maxlength="@elements.args.get('_maxLength)"}else{}
+      name="@elements.field.name"
+      rows="6">@value</textarea>
+  </fieldset>
 
 </div>

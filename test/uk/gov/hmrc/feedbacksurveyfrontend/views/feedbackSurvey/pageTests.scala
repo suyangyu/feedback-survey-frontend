@@ -62,8 +62,7 @@ class pageTests extends UnitTestTraits with HtmlUtils {
 
     "render recommendService page correctly" in {
       val document: Document = TestLookupController.recommendService.apply(testRequest(page = "recommendService"))
-      document.getElementById("recommendRating").text shouldBe Messages("feedbackSurvey.page4.question1")
-      document.getElementById("reasonForRatingLabel").text should include(Messages("feedbackSurvey.page4.question2"))
+      document.getElementById("reasonForRatingHeader").text shouldBe Messages("feedbackSurvey.page4.question2")
       document.getElementById("save-and-continue").text shouldBe Messages("generic.continue")
     }
 
