@@ -73,7 +73,7 @@
         case _ => params.legendId.get + "_" + append
     }
 }
-<fieldset @fieldSetClass @fieldSetAttributes role="group" @if(fieldErrors.nonEmpty) {aria-labelledby="@params.field.name-error-0"}>
+<fieldset @fieldSetClass @fieldSetAttributes @if(fieldErrors.nonEmpty) {aria-labelledby="@params.field.name-error-0"}>
   @legend
   @commonHelper(params.field, fieldErrors)
   @formHint

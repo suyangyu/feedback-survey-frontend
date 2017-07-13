@@ -17,12 +17,12 @@
           legendClass = "visuallyhidden",
           legendId = "recommendRating"))
     </div>
+
+    <h2 id="reasonForRatingHeader" class="heading-large">@Messages("feedbackSurvey.page4.question2")</h2>
     @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.textBox(page4("reasonForRating"),
-      '_label -> "feedbackSurvey.page4.question2",
       '_id -> "reasonForRating",
       '_maxLength -> "1000",
       '_showConstraints -> false,
-      '_labelHighlight -> true,
       '_labelHint -> Messages("feedbackSurvey.page4.question2.labelhint"),
       '_labelHintId -> "labelHint",
       '_legend -> "reasonForRating",
