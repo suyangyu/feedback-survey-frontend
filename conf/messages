@@ -64,3 +64,5 @@ feedbackSurvey.page5.title=Thank you for your feedback
 
 label.english=English
 label.welsh=Cymraeg
+label.this_is_a_new_service_your_feedback_will_help_us_to_improve_it=This is a new service - your <a href="{0}">feedback</a> will help us to improve it.
+label.this_is_a_trial_service=This is a trial service.

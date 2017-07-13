@@ -1,5 +1,5 @@
 @(title: String,
-  serviceTitle: String = "Give Feedback",
+  serviceTitle: Option[String] = None,
   pageScripts: Option[Html] = None,
   sidebarLinks: Option[Html] = None,
   bodyClasses: Option[String] = None,
@@ -88,7 +88,7 @@
 @govuk_wrapper(
   appConfig = uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig,
   title = Messages(title),
-  serviceTitle = serviceTitle,
+  serviceTitle = Messages("feedbackSurvey.giveFeedBack"),
   mainClass = mainClass,
   bodyClasses = bodyClasses,
   sidebar = sidebar,
