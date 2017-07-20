@@ -16,11 +16,21 @@
 
 package controllers.bindable
 
+import play.api.Play.current
 import uk.gov.hmrc.play.config.ServicesConfig
+import scala.collection.JavaConversions._
 
-case class Origin(value: String) extends ServicesConfig{
-  lazy val validOrigins = getString("validOrigins").split(",").toList
+case class OriginService(token: Option[String], customFeedbackUrl: Option[String])
+
+case class Origin(value: String) extends ServicesConfig {
+
+  val originServices: List[OriginService] = current.configuration.getConfigList("origin-services").map(_.toList).getOrElse(Nil).map { configItem =>
+    OriginService(configItem.getString("token"), configItem.getString("customFeedbackUrl"))
+  }
+
   override def toString : String = value
 
-  def isValid: Boolean = validOrigins.contains(value)
+  def isValid: Boolean = !originServices.filter(o => o.token.equals(Some(value))).isEmpty
+
+  def customFeedbackUrl: Option[String] = originServices.filter(o => o.token.equals(Some(value))).head.customFeedbackUrl
 }

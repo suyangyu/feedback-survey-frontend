@@ -8,4 +8,12 @@
   <p>@Messages(message)</p>
 }
 
-@govuk_wrapper(appConfig = uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig, title = Messages(pageTitle), contentHeader = Some(contentHeader), mainContent = mainContent)
+@linkElement = {
+  <link rel="stylesheet" href='@routes.Assets.at("stylesheets/custom.css")'/>
+}
+
+@govuk_wrapper(appConfig = uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig,
+  title = Messages(pageTitle),
+  contentHeader = Some(contentHeader),
+  mainContent = mainContent,
+  linkElement = Some(linkElement))

@@ -26,8 +26,9 @@ import play.api.test.FakeRequest
 import play.api.test.Helpers._
 
 import scala.concurrent.Future
-import utils.{UnitTestTraits, HtmlUtils}
+import utils.{HtmlUtils, UnitTestTraits}
 import controllers.FeedbackSurveyController
+import controllers.bindable.Origin
 
 class pageTests extends UnitTestTraits with HtmlUtils {
   val lookupFailure = Json.parse( """{"reason": "Generic test reason"}""")
@@ -66,10 +67,14 @@ class pageTests extends UnitTestTraits with HtmlUtils {
       document.getElementById("save-and-continue").text shouldBe Messages("generic.continue")
     }
 
-    "render thankYou page correctly" in {
-      val document: Document = TestLookupController.thankYou.apply(testRequest(page = "thankYou"))
+    "render thankYou page correctly with valid origin" in {
+      val document: Document = TestLookupController.thankYou(Origin("AWRS")).apply(testRequest(page = "thankYou"))
       document.getElementById("thankYou").text shouldBe Messages("feedbackSurvey.page5.title")
+    }
 
+    "render error page correctly with invalid origin" in {
+      val document: Document = TestLookupController.thankYou(Origin("INVALID_ORIGIN")).apply(testRequest(page = "thankYou"))
+      document.body.getElementsByClass("page-header").text should include("Service unavailable")
     }
 
   }

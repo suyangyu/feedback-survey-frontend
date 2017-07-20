@@ -16,12 +16,13 @@
 
 package controllers
 
+import controllers.bindable.Origin
 import models.feedbackSurveyModels._
 import play.api.Play
 import uk.gov.hmrc.play.frontend.controller.FrontendController
 import play.api.mvc._
 import play.api.Play.current
-import play.api.i18n.{I18nSupport, MessagesApi}
+import play.api.i18n.{I18nSupport, Messages, MessagesApi}
 import utils.LoggingUtils
 import utils.FeedbackSurveySessionKeys._
 
@@ -39,7 +40,7 @@ trait FeedbackSurveyController extends FrontendController with LoggingUtils with
 
   val ableToDoContinue =  Action (parse.form(formMappings.ableToDoForm)) { implicit request =>
         val ableToDoWhatNeeded = request.body.ableToDoWhatNeeded
-    audit("feedback-survey", Map("origin" -> request.session.get(sessionOriginService).get,
+    audit("feedback-survey", Map("origin" -> getOriginFromSession.value,
       "ableToDoWhatNeeded" -> ableToDoWhatNeeded.getOrElse("")), eventTypeSuccess)
     Redirect(routes.FeedbackSurveyController.usingService)
   }
@@ -59,7 +60,7 @@ trait FeedbackSurveyController extends FrontendController with LoggingUtils with
     if (beforeUsingThisService.lift(5).isDefined) {option5 = beforeUsingThisService.lift(5).get -> "Checked"}
     if (beforeUsingThisService.lift(6).isDefined) {option6 = beforeUsingThisService.lift(6).get -> "Checked"}
     audit("feedback-survey", Map(
-      "origin" -> request.session.get(sessionOriginService).get,
+      "origin" -> getOriginFromSession.value,
       option0, option1, option2, option3, option4, option5, option6
     ).filter((t) => t._1 != ""), eventTypeSuccess)
     Redirect(routes.FeedbackSurveyController.aboutService)
@@ -71,7 +72,7 @@ trait FeedbackSurveyController extends FrontendController with LoggingUtils with
 
   val aboutServiceContinue =  Action (parse.form(formMappings.aboutServiceForm)) { implicit request =>
     val serviceReceived = request.body.serviceReceived
-    audit("feedback-survey", Map("origin" -> request.session.get(sessionOriginService).get,
+    audit("feedback-survey", Map("origin" -> getOriginFromSession.value,
       "serviceReceived" -> serviceReceived.getOrElse("")), eventTypeSuccess)
     Redirect(routes.FeedbackSurveyController.recommendService)
   }
@@ -84,14 +85,26 @@ trait FeedbackSurveyController extends FrontendController with LoggingUtils with
     val reasonForRating = request.body.reasonForRating
     val recommendRating = request.body.recommendRating
     audit("feedback-survey", Map(
-      "origin" -> request.session.get(sessionOriginService).get,
+      "origin" -> getOriginFromSession.value,
       "reasonForRating" -> reasonForRating.getOrElse(""),
       "recommendRating" -> recommendRating.getOrElse("")), eventTypeSuccess)
-    Redirect(routes.FeedbackSurveyController.thankYou)
+
+    getOriginFromSession(request).customFeedbackUrl match {
+      case Some(x) => Redirect(x)
+      case None => Redirect(routes.FeedbackSurveyController.thankYou(getOriginFromSession))
+    }
   }
 
-  val thankYou = Action { implicit request =>
-    Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.thankYou())
+  def thankYou(originService : Origin) = Action {
+    implicit request =>
+      Origin(originService.value).isValid match {
+        case true => Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.thankYou())
+        case false => Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.error_template(Messages("global_errors.title"), Messages("global_errors.heading"), Messages("global_errors.message")))
+      }
+  }
+
+  def getOriginFromSession(implicit request: Request[_]): Origin = {
+    Origin(request.session.get(sessionOriginService).get)
   }
 
 }
