@@ -16,9 +16,12 @@
 
 package uk.gov.hmrc.feedbacksurveyfrontend.bindable
 
+import com.typesafe.config.ConfigFactory
 import controllers.bindable.Origin
-
+import play.api.inject.guice.GuiceApplicationBuilder
+import play.api.{Application, Configuration}
 import utils.UnitTestTraits
+
 
 class OriginSpec extends UnitTestTraits {
 
@@ -56,7 +59,7 @@ class OriginSpec extends UnitTestTraits {
   "The customFeedbackUrl of an origin" should {
 
     "return a custom feedback url if present" in {
-      Origin("PERTAX").customFeedbackUrl shouldBe Some("/personal-account/custom-feedback")
+      Origin("PERTAX").customFeedbackUrl shouldBe Some("//localhost:9232/personal-account/custom-feedback")
     }
 
     "not return a custom feedback url if not present" in {
