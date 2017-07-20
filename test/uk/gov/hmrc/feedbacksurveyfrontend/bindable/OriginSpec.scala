@@ -16,47 +16,63 @@
 
 package uk.gov.hmrc.feedbacksurveyfrontend.bindable
 
-import com.typesafe.config.ConfigFactory
 import controllers.bindable.Origin
-import play.api.inject.guice.GuiceApplicationBuilder
-import play.api.{Application, Configuration}
+import org.mockito.Matchers.{eq => meq}
 import utils.UnitTestTraits
-
 
 class OriginSpec extends UnitTestTraits {
 
   "The validation of an origin" should {
 
-    "pass with valid AWRS_LOOKUP origin" in {
-      Origin("check-the-awrs-register").isValid shouldBe true
+    val originServicesList: List[String] = List(
+      "check-the-awrs-register",
+      "PERTAX",
+      "TES",
+      "TCS",
+      "TCSHOME",
+      "TCR",
+      "BBSI",
+      "NISP",
+      "PAYE",
+      "REPAYMENTS",
+      "P800",
+      "FANDF",
+      "TYF",
+      "CARBEN",
+      "MEDBEN",
+      "TAMC",
+      "CHARITIES",
+      "EI",
+      "ERS",
+      "GMP",
+      "PLA",
+      "AWRS",
+      "CC",
+      "CDS",
+      "LISA",
+      "AGENTSUB",
+      "HTS"
+    )
+
+    //Write OriginService
+
+    originServicesList.map { originServiceItem =>
+      s"pass with valid '$originServiceItem' origin" in {
+        Origin(originServiceItem).isValid shouldBe true
+        //originService.isValid(Origin(originServiceItem)) shouldbe true
+      }
     }
-    "pass with valid PTA origin" in {
-      Origin("PERTAX").isValid shouldBe true
-    }
-    "pass with valid TCS origin" in {
-      Origin("TCS").isValid shouldBe true
-    }
-    "pass with valid NISP origin" in {
-      Origin("NISP").isValid shouldBe true
-    }
-    "pass with valid PAYE origin" in {
-      Origin("PAYE").isValid shouldBe true
-    }
-    "pass with valid 'REPAYMENTS' origin" in {
-      Origin("REPAYMENTS").isValid shouldBe true
-    }
-    "pass with valid P800 origin" in {
-      Origin("P800").isValid shouldBe true
-    }
-    "pass with valid AWRS origin" in {
-      Origin("AWRS").isValid shouldBe true
-    }
+
     "fail with an invalid origin" in {
       Origin("INVALID").isValid shouldBe false
     }
   }
 
   "The customFeedbackUrl of an origin" should {
+
+    "return a custom feedback url if present" in {
+      Origin("PERTAX").customFeedbackUrl shouldBe Some("//localhost:9232/personal-account/custom-feedback")
+    }
 
     "not return a custom feedback url if not present" in {
       Origin("check-the-awrs-register").customFeedbackUrl shouldBe None
