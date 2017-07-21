@@ -11,14 +11,14 @@
     Html((params.fieldSetClass, fieldErrors.nonEmpty) match {
         case (None, false) => ""
         case (Some(""), false) => ""
-        case (Some(fieldSetClass), false) => "class=\"" + fieldSetClass + "\""
-        case (Some(fieldSetClass), true) => "class=\"" + fieldSetClass + " form-field--error" + "\""
-        case (None, true) => "class=form-field--error"
+        case (Some(fieldSetClass), false) => " class=\"" + fieldSetClass + "\" "
+        case (Some(fieldSetClass), true) => " class=\"" + fieldSetClass + " form-field--error" + "\" "
+        case (None, true) => " class=form-field--error "
     })
 }
 @fieldSetAttributes = @{
     params.fieldSetAttributes match {
-        case Some(fieldSetAttributes) => fieldSetAttributes
+        case Some(fieldSetAttributes) => " " + fieldSetAttributes + " "
         case _ =>
     }
 }
@@ -58,12 +58,7 @@
 }
 
 @inputName = @{
-    Html("name=\"" + params.field.name +
-        (params.checkboxOptions.length match {
-            case 1 => "\""
-            case _ => "[]\""
-        })
-    )
+    Html("name=\"" + params.field.name + "\"")
 }
 
 
@@ -73,10 +68,10 @@
         case _ => params.legendId.get + "_" + append
     }
 }
-<fieldset @fieldSetClass @fieldSetAttributes @if(fieldErrors.nonEmpty) {aria-labelledby="@params.field.name-error-0"}>
+@commonHelper(params.field, fieldErrors)
+@formHint
+<fieldset@fieldSetClass@fieldSetAttributes@if(fieldErrors.nonEmpty){aria-labelledby="@params.field.name-error-0"}>
   @legend
-  @commonHelper(params.field, fieldErrors)
-  @formHint
   @defining(params.field.indexes.flatMap( i => params.field("[%s]".format(i)).value ).toSet) { values =>
     @params.checkboxOptions.map { checkboxOptions =>
       <label for="@(inputId(checkboxOptions._1))" class="block-label" id="@(inputId(checkboxOptions._1))_label">
