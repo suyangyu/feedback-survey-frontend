@@ -30,50 +30,70 @@ import scala.concurrent.ExecutionContext
 
 class FeedbackSurveyControllerSpec extends UnitTestTraits {
 
-  def testRequest(page: String): FakeRequest[AnyContentAsEmpty.type] =
-    FakeRequest(GET, "/feedback-survey/" + s"$page").withSession(sessionOriginService -> "AWRS_LOOKUP")
+  trait SpecSetup {
 
-  val request = FakeRequest()
-  implicit val as = ActorSystem()
-  implicit val mat = ActorMaterializer()
+    implicit val as = ActorSystem()
+    implicit val mat = ActorMaterializer()
+    def origin: String
+
+    def testRequest(page: String): FakeRequest[AnyContentAsEmpty.type] =
+      FakeRequest(GET, "/feedback-survey/" + s"$page").withSession(sessionOriginService -> origin)
+
+    val request = FakeRequest()
+  }
+
   object TestFeedbackSurveyController extends FeedbackSurveyController
 
   "FeedbackSurveyController" should {
 
-    "Go to the ableToDo page " in {
-      val result = TestFeedbackSurveyController.ableToDo.apply(testRequest("AWRS_LOOKUP"))
+    "Go to the ableToDo page" in new SpecSetup {
+      override lazy val origin = "AWRS"
+      val result = TestFeedbackSurveyController.ableToDo.apply(testRequest(""))
       status(await(result)) shouldBe OK
     }
 
-    "redirect to the usingService page " in {
-      val result = TestFeedbackSurveyController.ableToDoContinue.apply(testRequest("AWRS_LOOKUP")).run()
+    "redirect to the usingService page" in new SpecSetup {
+      override lazy val origin = "AWRS"
+      val result = TestFeedbackSurveyController.ableToDoContinue.apply(testRequest("")).run()
       status(result) shouldBe SEE_OTHER
       redirectLocation(result).get should include("/feedback-survey/usingService")
     }
 
-    "Go to the usingService page " in {
+    "Go to the usingService page" in new SpecSetup {
+      override lazy val origin = "AWRS"
       val result = TestFeedbackSurveyController.usingService.apply(testRequest("usingService"))
       status(result) shouldBe OK
     }
 
-    "redirect to the aboutService page " in {
-      val result = TestFeedbackSurveyController.usingServiceContinue.apply(testRequest("AWRS_LOOKUP")).run()
+    "redirect to the aboutService page" in new SpecSetup {
+      override lazy val origin = "AWRS"
+      val result = TestFeedbackSurveyController.usingServiceContinue.apply(testRequest("")).run()
       status(result) shouldBe SEE_OTHER
       redirectLocation(result).get should include("/feedback-survey/aboutService")
     }
 
-    "Go to the recommendService page " in {
+    "Go to the recommendService page" in new SpecSetup {
+      override lazy val origin = "AWRS"
       val result = TestFeedbackSurveyController.recommendService.apply(testRequest("recommendService"))
       status(result) shouldBe OK
     }
 
-    "redirect to the Thank you page " in {
-      val result = TestFeedbackSurveyController.recommendServiceContinue.apply(testRequest("AWRS_LOOKUP")).run()
+    "redirect to the Thank you page when an origin service custom feedback Url when not present" in new SpecSetup {
+      override lazy val origin = "AWRS"
+      val result = TestFeedbackSurveyController.recommendServiceContinue.apply(testRequest("")).run()
       status(result) shouldBe SEE_OTHER
-      redirectLocation(result).get should include("/feedback-survey/thankYou")
+      redirectLocation(result).get should include("/feedback-survey/thankYou?origin=AWRS")
     }
 
-    "Go to the Thank you page " in {
+    "redirect to the origin service custom feedback Url when present" in new SpecSetup {
+      override lazy val origin = "PERTAX"
+      val result = TestFeedbackSurveyController.recommendServiceContinue.apply(testRequest("")).run()
+      status(result) shouldBe SEE_OTHER
+      redirectLocation(result).get should include("/personal-account/custom-feedback")
+    }
+
+    "Go to the Thank you page " in new SpecSetup {
+      override lazy val origin = "AWRS"
       val result = TestFeedbackSurveyController.recommendService.apply(testRequest("thankYou"))
       status(result) shouldBe OK
     }

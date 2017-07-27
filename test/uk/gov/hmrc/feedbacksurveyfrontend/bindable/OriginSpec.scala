@@ -26,7 +26,7 @@ class OriginSpec extends UnitTestTraits {
 
     "pass with valid AWRS_LOOKUP origin" in {
       Origin("check-the-awrs-register").isValid shouldBe true
-     }
+    }
     "pass with valid PTA origin" in {
       Origin("PERTAX").isValid shouldBe true
     }
@@ -42,14 +42,26 @@ class OriginSpec extends UnitTestTraits {
     "pass with valid 'REPAYMENTS' origin" in {
       Origin("REPAYMENTS").isValid shouldBe true
     }
-    "pass with valid P800 origin"  in {
+    "pass with valid P800 origin" in {
       Origin("P800").isValid shouldBe true
     }
-    "pass with valid AWRS origin"  in {
+    "pass with valid AWRS origin" in {
       Origin("AWRS").isValid shouldBe true
     }
-    "fail with an invalid origin"  in {
+    "fail with an invalid origin" in {
       Origin("INVALID").isValid shouldBe false
     }
   }
+
+  "The customFeedbackUrl of an origin" should {
+
+    "return a custom feedback url if present" in {
+      Origin("PERTAX").customFeedbackUrl shouldBe Some("/personal-account/custom-feedback")
+    }
+
+    "not return a custom feedback url if not present" in {
+      Origin("check-the-awrs-register").customFeedbackUrl shouldBe None
+    }
+  }
+
 }
