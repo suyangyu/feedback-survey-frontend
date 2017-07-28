@@ -16,16 +16,17 @@
 
 package uk.gov.hmrc.feedbacksurveyfrontend.controllers
 
-import akka.stream.ActorMaterializer
-import controllers.FeedbackSurveyController
-import play.api.test.{FakeHeaders, FakeRequest}
-import play.api.test.Helpers._
-import utils.{SessionUtil, UnitTestTraits}
 import akka.actor.ActorSystem
+import akka.stream.ActorMaterializer
+import com.typesafe.config.ConfigFactory
+import controllers.FeedbackSurveyController
+import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.mvc.AnyContentAsEmpty
+import play.api.test.FakeRequest
+import play.api.test.Helpers._
+import play.api.{Application, Configuration}
 import utils.FeedbackSurveySessionKeys._
-
-import scala.concurrent.ExecutionContext
+import utils.UnitTestTraits
 
 
 class FeedbackSurveyControllerSpec extends UnitTestTraits {

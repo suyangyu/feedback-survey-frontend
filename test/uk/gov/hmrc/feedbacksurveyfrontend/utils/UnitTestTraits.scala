@@ -16,12 +16,14 @@
 
 package utils
 
+import com.typesafe.config.ConfigFactory
 import org.mockito.Matchers
 import org.scalatest.BeforeAndAfterEach
 import org.scalatest.mock.MockitoSugar
 import org.scalatestplus.play.OneServerPerSuite
 import play.api.i18n.{Lang, Messages, MessagesApi}
-import play.api.{Configuration, Environment}
+import play.api.inject.guice.GuiceApplicationBuilder
+import play.api.{Application, Configuration, Environment}
 import uk.gov.hmrc.play.http.HeaderCarrier
 import uk.gov.hmrc.play.test.UnitSpec
 
@@ -29,6 +31,10 @@ import scala.concurrent.Future
 
 
 trait UnitTestTraits extends UnitSpec with MockitoSugar with BeforeAndAfterEach with OneServerPerSuite {
+
+  override implicit lazy val app: Application = new GuiceApplicationBuilder()
+    .loadConfig(new Configuration(ConfigFactory.load("dev-application.conf")))
+    .build()
 
   implicit lazy val hc = HeaderCarrier()
 
