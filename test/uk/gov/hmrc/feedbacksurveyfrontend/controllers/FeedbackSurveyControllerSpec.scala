@@ -86,13 +86,6 @@ class FeedbackSurveyControllerSpec extends UnitTestTraits {
       redirectLocation(result).get should include("/feedback-survey/thankYou?origin=AWRS")
     }
 
-    "redirect to the origin service custom feedback Url when present" in new SpecSetup {
-      override lazy val origin = "PERTAX"
-      val result = TestFeedbackSurveyController.recommendServiceContinue.apply(testRequest("")).run()
-      status(result) shouldBe SEE_OTHER
-      redirectLocation(result).get should include("/personal-account/custom-feedback")
-    }
-
     "Go to the Thank you page " in new SpecSetup {
       override lazy val origin = "AWRS"
       val result = TestFeedbackSurveyController.recommendService.apply(testRequest("thankYou"))

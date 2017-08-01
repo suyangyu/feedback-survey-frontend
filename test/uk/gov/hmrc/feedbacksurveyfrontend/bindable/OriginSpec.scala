@@ -58,10 +58,6 @@ class OriginSpec extends UnitTestTraits {
 
   "The customFeedbackUrl of an origin" should {
 
-    "return a custom feedback url if present" in {
-      Origin("PERTAX").customFeedbackUrl shouldBe Some("//localhost:9232/personal-account/custom-feedback")
-    }
-
     "not return a custom feedback url if not present" in {
       Origin("check-the-awrs-register").customFeedbackUrl shouldBe None
     }
