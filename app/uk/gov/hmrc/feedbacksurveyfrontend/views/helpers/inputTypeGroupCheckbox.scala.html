@@ -5,79 +5,89 @@
 @import forms.validation.util._
 
 @fieldErrors = @{
-    ErrorMessageInterpreter.getFieldErrors(params.field)
+  ErrorMessageInterpreter.getFieldErrors(params.field)
 }
+
 @fieldSetClass = @{
-    Html((params.fieldSetClass, fieldErrors.nonEmpty) match {
-        case (None, false) => ""
-        case (Some(""), false) => ""
-        case (Some(fieldSetClass), false) => " class=\"" + fieldSetClass + "\" "
-        case (Some(fieldSetClass), true) => " class=\"" + fieldSetClass + " form-field--error" + "\" "
-        case (None, true) => " class=form-field--error "
-    })
+  Html((params.fieldSetClass, fieldErrors.nonEmpty) match {
+    case (None, false) => ""
+    case (Some(""), false) => ""
+    case (Some(fieldSetClass), false) => " class=\"" + fieldSetClass + "\" "
+    case (Some(fieldSetClass), true) => " class=\"" + fieldSetClass + " form-field--error" + "\" "
+    case (None, true) => " class=form-field--error "
+  })
 }
+
 @fieldSetAttributes = @{
-    params.fieldSetAttributes match {
-        case Some(fieldSetAttributes) => " " + fieldSetAttributes + " "
-        case _ =>
-    }
+  params.fieldSetAttributes match {
+    case Some(fieldSetAttributes) => " " + fieldSetAttributes + " "
+    case _ =>
+  }
 }
+
 @legendClass = @{
-    Html(params.legendClass match {
-        case Some(legendClass) => "class=\"" + legendClass + "\""
-        case _ => ""
-    })
+  Html(params.legendClass match {
+    case Some(legendClass) => "class=\"" + legendClass + "\""
+    case _ => ""
+  })
 }
+
 @legendAttributes = @{
-    params.legendAttributes match {
-        case Some(legendAttributes) => legendAttributes
-        case _ => ""
-    }
+  params.legendAttributes match {
+    case Some(legendAttributes) => legendAttributes
+    case _ => ""
+  }
 }
+
 @legend = {
-    @params.legend match {
-        case Some(legend) => {
-            <legend id="@(params.legendId)_legend" @legendClass @legendAttributes>@Messages(legend)</legend>
-        }
-        case _ => {}
+  @params.legend match {
+    case Some(legend) => {
+      <legend id="@(params.legendId)_legend" @legendClass @legendAttributes>@Messages(legend)</legend>
     }
+    case _ => {}
+  }
 }
+
 @formHintId = @{
-    Html(params.formHintId match {
-        case Some(formHintId) => "id=\"" + formHintId + "\""
-        case _ => ""
-    })
+  Html(params.formHintId match {
+    case Some(formHintId) => "id=\"" + formHintId + "\""
+    case _ => ""
+  })
 }
+
 @formHint = {
-    @params.formHint match {
-        case Some(formHint) => {
-            <p @formHintId>@Messages(formHint)</p>
-        }
-        case _ => {}
+  @params.formHint match {
+    case Some(formHint) => {
+        <p @formHintId>@Messages(formHint)</p>
     }
+    case _ => {}
+  }
 }
 
 @inputName = @{
-    Html("name=\"" + params.field.name + "\"")
+  Html("name=\"" + params.field.name + "\"")
 }
 
 
 @inputId(append: String) = @{
-    params.overrideInputId match {
-        case Some(overrideInputId) => overrideInputId
-        case _ => params.legendId.get + "_" + append
-    }
+  params.overrideInputId match {
+    case Some(overrideInputId) => overrideInputId
+    case _ => params.legendId.get + "_" + append
+  }
 }
+
 @commonHelper(params.field, fieldErrors)
 @formHint
-<fieldset@fieldSetClass@fieldSetAttributes@if(fieldErrors.nonEmpty){aria-labelledby="@params.field.name-error-0"}>
+<fieldset @fieldSetClass @fieldSetAttributes @if(fieldErrors.nonEmpty){aria-labelledby="@params.field.name-error-0"}>
   @legend
-  @defining(params.field.indexes.flatMap( i => params.field("[%s]".format(i)).value ).toSet) { values =>
-    @params.checkboxOptions.map { checkboxOptions =>
-      <label for="@(inputId(checkboxOptions._1))" class="block-label" id="@(inputId(checkboxOptions._1))_label">
-        <input type="checkbox" id="@(inputId(checkboxOptions._1))" @inputName value="@checkboxOptions._1" @if(values.contains(checkboxOptions._1)){checked="checked"}>
-        @Messages(checkboxOptions._2)
-      </label>
+  @defining(params.field.indexes.flatMap(i => params.field("[%s]".format(i)).value).toSet) { values =>
+    @params.checkboxOptions.map {
+      case (checkboxValue, checkboxLabel, checkboxClass) => {
+        <label for="@(inputId(checkboxValue))" class="block-label" id="@(inputId(checkboxValue))_label">
+          <input class="@checkboxClass" type="checkbox" id="@(inputId(checkboxValue))" @inputName value="@checkboxValue" @if(values.contains(checkboxValue)){checked="checked"}>
+          @Messages(checkboxLabel)
+        </label>
+      }
     }
   }
 </fieldset>

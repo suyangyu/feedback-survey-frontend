@@ -74,13 +74,13 @@ object formMappings {
 object formFields {
 
   val page2Question1Options = Seq(
-    "telephonedHMRC" -> "feedbackSurvey.page2.question1.option1",
-    "wroteToHMRC" -> "feedbackSurvey.page2.question1.option2",
-    "completedAnOnlineForm" -> "feedbackSurvey.page2.question1.option3",
-    "readGuidanceOnGovUK" -> "feedbackSurvey.page2.question1.option4",
-    "spokeToYourEmployerAgentOrAccountant" -> "feedbackSurvey.page2.question1.option5",
-    "spokeToAFriendOrFamilyMember" -> "feedbackSurvey.page2.question1.option6",
-    "noneOfThese" -> "feedbackSurvey.page2.question1.option7"
+    ("telephonedHMRC", "feedbackSurvey.page2.question1.option1", Some("checkboxgroup-clear-two checkboxgroup-one")),
+    ("wroteToHMRC", "feedbackSurvey.page2.question1.option2", Some("checkboxgroup-clear-two checkboxgroup-one")),
+    ("completedAnOnlineForm", "feedbackSurvey.page2.question1.option3", Some("checkboxgroup-clear-two checkboxgroup-one")),
+    ("readGuidanceOnGovUK","feedbackSurvey.page2.question1.option4", Some("checkboxgroup-clear-two checkboxgroup-one")),
+    ("spokeToYourEmployerAgentOrAccountant", "feedbackSurvey.page2.question1.option5", Some("checkboxgroup-clear-two checkboxgroup-one")),
+    ("spokeToAFriendOrFamilyMember", "feedbackSurvey.page2.question1.option6", Some("checkboxgroup-clear-two checkboxgroup-one")),
+    ("noneOfThese", "feedbackSurvey.page2.question1.option7", Some("checkboxgroup-clear-one checkboxgroup-two"))
   )
 
   val page3Question1Options = Seq(

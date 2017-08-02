@@ -19,18 +19,17 @@ package views.helpers
 import play.api.data.Field
 
 case class InputTypeGroupCheckboxParams(field: Field,
-                                        checkboxOptions: Seq[(String, String)],
-                                        overrideInputId: Option[String] = None, // if none, field name used as id
-                                        legend: Option[String] = None,
-                                        legendId: Option[String] = None,
-                                        legendClass: Option[String] = None,
-                                        legendAttributes: Option[String] = None,
-                                        fieldSetClass: Option[String] = None,
-                                        fieldSetAttributes: Option[String] = None,
-                                        labelClass: Option[String] = None,
-                                        labelAfter: Boolean = false,
-                                        labelStacked: Boolean = false,
-                                        formHint: Option[String] = None,
-                                        formHintId: Option[String] = None,
-                                        dataAttributes: Option[String] = None
-                              )
+  checkboxOptions: Seq[Tuple3[String, String, Option[String]]],
+  overrideInputId: Option[String] = None, // if none, field name used as id
+  legend: Option[String] = None,
+  legendId: Option[String] = None,
+  legendClass: Option[String] = None,
+  legendAttributes: Option[String] = None,
+  fieldSetClass: Option[String] = None,
+  fieldSetAttributes: Option[String] = None,
+  labelClass: Option[String] = None,
+  labelAfter: Boolean = false,
+  labelStacked: Boolean = false,
+  formHint: Option[String] = None,
+  formHintId: Option[String] = None,
+  dataAttributes: Option[String] = None)
