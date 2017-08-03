@@ -1,19 +1,18 @@
 $(document).ready(function() {
-     $('input[type="checkbox"]').click(function () {
-          if ($(this).attr('text') == "None of these")
-          {
-            $('input[type=checkbox]').each(function () {
-                if ($(this).is(":checked") && $(this).attr('text') != "None of these"){
-                   $(this).attr('checked', false)
-                }
-            });
-          }
-          else {
-            $('input[text="None of these"]').attr('checked', false)
-          }
-          ga('send', 'event', this.id, 'click');
-     });
-     $('input[type="radio"]').click(function(){
-         ga('send', 'event', this.id, 'click');
-     });
+
+  $('input[type="checkbox"], input[type="radio"]').click(function() {
+    ga('send', 'event', this.id, 'click');
+  });
+
+  $('[class*="checkboxgroup-clear"]').on('change', function() {
+    if( $(this).is(':checked') ) {
+      var classes = $(this).attr('class').split(' ');
+      for ( i in classes ) {
+        var c = classes[i];
+        if ( c.startsWith('checkboxgroup-clear') )
+          $('.'+c.replace('-clear', '')+':checked').prop('checked', false).trigger('change');
+      }
+    }
+  });
+
 });
