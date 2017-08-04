@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.feedbacksurveyfrontend
 
+import play.api.Mode
 import play.api.Play.{configuration, current}
 import uk.gov.hmrc.play.config.ServicesConfig
 
@@ -28,7 +29,10 @@ trait AppConfig {
 
 object FrontendAppConfig extends AppConfig with ServicesConfig {
 
-  private lazy val contactFrontendBaseUrl = getConfString(s"external-url.contact-frontend", "")
+  private lazy val contactFrontendBaseUrl = {
+    if(current.mode==Mode.Dev) getConfString(s"contact-frontend.external-url", "")
+    else ""
+  }
   private val contactFrontendService = baseUrl("contact-frontend")
   private val contactFormServiceIdentifier = "FEEDBACK-SURVEY"
 

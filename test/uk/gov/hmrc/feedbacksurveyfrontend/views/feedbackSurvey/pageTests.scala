@@ -16,19 +16,16 @@
 
 package views.feedbackSurvey
 
+import controllers.FeedbackSurveyController
+import controllers.bindable.Origin
 import org.jsoup.nodes.Document
-import org.mockito.Matchers
-import org.mockito.Mockito._
 import play.api.i18n.Messages
 import play.api.libs.json.Json
 import play.api.mvc.AnyContentAsEmpty
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
-
-import scala.concurrent.Future
+import uk.gov.hmrc.feedbacksurveyfrontend.services.{OriginConfigItem, OriginService}
 import utils.{HtmlUtils, UnitTestTraits}
-import controllers.FeedbackSurveyController
-import controllers.bindable.Origin
 
 class pageTests extends UnitTestTraits with HtmlUtils {
   val lookupFailure = Json.parse( """{"reason": "Generic test reason"}""")
@@ -36,7 +33,13 @@ class pageTests extends UnitTestTraits with HtmlUtils {
   def testRequest(page: String): FakeRequest[AnyContentAsEmpty.type] =
     FakeRequest(GET, "/feedback-survey/" + s"$page")
 
-  object TestLookupController extends FeedbackSurveyController
+  object TestLookupController extends FeedbackSurveyController {
+    val originService = new OriginService {
+      override lazy val originConfigItems = List(
+        OriginConfigItem(Some("AWRS"), None)
+      )
+    }
+  }
 
   "FeedbackSurvey Controller" should {
 

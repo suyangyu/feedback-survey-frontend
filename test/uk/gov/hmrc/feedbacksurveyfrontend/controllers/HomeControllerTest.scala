@@ -17,38 +17,35 @@
 package controllers
 
 import controllers.bindable.Origin
-
-import org.scalatest.Suite
-import org.scalatest.mock.MockitoSugar
-import play.api.test.{FakeApplication, FakeRequest}
+import play.api.test.FakeRequest
 import play.api.test.Helpers._
-import uk.gov.hmrc.play.http.HeaderCarrier
-import uk.gov.hmrc.play.test.{UnitSpec, WithFakeApplication}
+import uk.gov.hmrc.feedbacksurveyfrontend.services.{OriginConfigItem, OriginService}
+import utils.UnitTestTraits
 
-import scala.concurrent.Future
 
-trait FakeApplication extends WithFakeApplication {
-  this: Suite =>
-  implicit val hc = HeaderCarrier()
-  override lazy val fakeApplication = FakeApplication()
-}
 
-class HomeControllerTest extends UnitSpec with FakeApplication with MockitoSugar {
+class HomeControllerTest extends UnitTestTraits {
 
   "ableToDo page GET" should {
 
-    def buildFakeHomeController = new HomeController{}
+    def buildFakeHomeController = new HomeController{
+      val originService = new OriginService {
+        override lazy val originConfigItems = List(
+          OriginConfigItem(Some("TOKEN1"), None)
+        )
+      }
+    }
 
     "give a status of OK, return error page if origin token not found" in {
       val controllerUnderTest = buildFakeHomeController
-      val result = controllerUnderTest.start(Origin("XYZ")).apply(FakeRequest("GET", ""))
+      val result = controllerUnderTest.start(Origin("TOKEN2")).apply(FakeRequest("GET", ""))
       status(result) shouldBe OK
       contentAsString(result) should include("Service unavailable")
     }
 
     "give a status of OK, if origin token found" in {
       val controllerUnderTest = buildFakeHomeController
-      val result = controllerUnderTest.start(Origin("check-the-awrs-register")).apply(FakeRequest("GET", ""))
+      val result = controllerUnderTest.start(Origin("TOKEN1")).apply(FakeRequest("GET", ""))
       status(result) shouldBe SEE_OTHER
     }
 

@@ -33,7 +33,7 @@ import scala.concurrent.Future
 trait UnitTestTraits extends UnitSpec with MockitoSugar with BeforeAndAfterEach with OneServerPerSuite {
 
   override implicit lazy val app: Application = new GuiceApplicationBuilder()
-    .loadConfig(new Configuration(ConfigFactory.load("dev-application.conf")))
+    .loadConfig(new Configuration(ConfigFactory.load("application.conf")))
     .build()
 
   implicit lazy val hc = HeaderCarrier()
