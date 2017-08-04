@@ -14,24 +14,32 @@
  * limitations under the License.
  */
 
-package controllers
+package controllers.bindable
 
-import play.api.mvc.{QueryStringBindable}
-import controllers.bindable.Origin
+import controllers.bindable.Binders.originService
+import play.api.mvc.QueryStringBindable
+import uk.gov.hmrc.feedbacksurveyfrontend.services.OriginService
 
-package object bindable {
+
+object Binders extends Binders {
+
+  val originService = new OriginService
+}
+
+
+trait Binders {
 
   implicit def originBinder(implicit stringBinder: QueryStringBindable[String]) = new QueryStringBindable[Origin] {
 
     val enc = play.utils.UriEncoding.encodePathSegment(_: String, "UTF-8")
 
-    override def unbind(key: String, origin: Origin): String = enc(key)+"="+enc(origin.toString)
+    override def unbind(key: String, origin: Origin): String = enc(key) + "=" + enc(origin.value)
 
     override def bind(key: String, params: Map[String, Seq[String]]): Option[Either[String, Origin]] = {
       params.get(key) match {
         case None =>
           None
-        case Some(Seq(originString)) if(Origin(originString).isValid) =>
+        case Some(Seq(originString)) if(originService.isValid(Origin(originString))) =>
           Some(Right(Origin(originString)))
         case _ =>
           Some(Left("Invalid origin in queryString"))

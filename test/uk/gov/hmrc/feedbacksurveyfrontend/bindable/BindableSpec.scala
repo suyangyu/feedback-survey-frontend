@@ -16,41 +16,48 @@
 
 package uk.gov.hmrc.feedbacksurveyfrontend.bindable
 
-import controllers.bindable.Origin
+import controllers.bindable.{Binders, Origin}
+import uk.gov.hmrc.feedbacksurveyfrontend.services.{OriginConfigItem, OriginService}
 import utils.UnitTestTraits
 
 class BindableSpec extends UnitTestTraits {
 
-  trait LocalSetup {
-
+    
+  object testBindable extends Binders {
+    val originService = new OriginService {
+      override lazy val originConfigItems = List(
+        OriginConfigItem(Some("PERTAX"), None)
+      )
+      
+    }
   }
 
   "Calling originBinder.unbind" should {
 
     "return origin=PERTAX when key is origin and value is PERTAX" in {
-      controllers.bindable.originBinder.unbind("origin", Origin("PERTAX")) shouldBe "origin=PERTAX"
+      testBindable.originBinder.unbind("origin", Origin("PERTAX")) shouldBe "origin=PERTAX"
     }
     "UrlEncode keys" in {
-      controllers.bindable.originBinder.unbind("£", Origin("PERTAX")) shouldBe "%C2%A3=PERTAX"
+      testBindable.originBinder.unbind("£", Origin("PERTAX")) shouldBe "%C2%A3=PERTAX"
     }
     "UrlEncode values" in {
-      controllers.bindable.originBinder.unbind("origin", Origin("£")) shouldBe "origin=%C2%A3"
+      testBindable.originBinder.unbind("origin", Origin("£")) shouldBe "origin=%C2%A3"
     }
   }
 
   "Calling originBinder.bind" should {
 
-    "return an origin when called with a valid string" in new LocalSetup {
-      controllers.bindable.originBinder.bind("origin", Map("origin" -> Seq("PERTAX"))) shouldBe Some(Right(Origin("PERTAX")))
+    "return an origin when called with a valid string" in {
+      testBindable.originBinder.bind("origin", Map("origin" -> Seq("PERTAX"))) shouldBe Some(Right(Origin("PERTAX")))
     }
-    "return error message when called with an empty string" in new LocalSetup {
-      controllers.bindable.originBinder.bind("origin", Map("origin" -> Seq(""))) shouldBe Some(Left("Invalid origin in queryString"))
+    "return error message when called with an empty string" in {
+      testBindable.originBinder.bind("origin", Map("origin" -> Seq(""))) shouldBe Some(Left("Invalid origin in queryString"))
     }
-    "return error message when called with an invalid string" in new LocalSetup {
-      controllers.bindable.originBinder.bind("origin", Map("origin" -> Seq("INVALID"))) shouldBe Some(Left("Invalid origin in queryString"))
+    "return error message when called with an invalid string" in {
+      testBindable.originBinder.bind("origin", Map("origin" -> Seq("INVALID"))) shouldBe Some(Left("Invalid origin in queryString"))
     }
-    "return None when called with an empty map" in new LocalSetup {
-      controllers.bindable.originBinder.bind("origin", Map()) shouldBe None
+    "return None when called with an empty map" in {
+      testBindable.originBinder.bind("origin", Map()) shouldBe None
     }
   }
 }

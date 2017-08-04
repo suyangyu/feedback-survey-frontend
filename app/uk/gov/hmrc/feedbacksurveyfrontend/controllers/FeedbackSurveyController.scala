@@ -23,16 +23,22 @@ import uk.gov.hmrc.play.frontend.controller.FrontendController
 import play.api.mvc._
 import play.api.Play.current
 import play.api.i18n.{I18nSupport, Messages, MessagesApi}
+import uk.gov.hmrc.feedbacksurveyfrontend.services.OriginService
 import utils.LoggingUtils
 import utils.FeedbackSurveySessionKeys._
 
 
 
-object FeedbackSurveyController extends FeedbackSurveyController
+object FeedbackSurveyController extends FeedbackSurveyController {
+  val originService = new OriginService
+}
 
 trait FeedbackSurveyController extends FrontendController with LoggingUtils with I18nSupport {
 
   implicit val messagesApi: MessagesApi = Play.current.injector.instanceOf[MessagesApi]
+
+  def originService: OriginService
+
 
   val ableToDo  = Action { implicit request =>
     Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.ableToDo(formMappings.ableToDoForm))
@@ -89,17 +95,21 @@ trait FeedbackSurveyController extends FrontendController with LoggingUtils with
       "reasonForRating" -> reasonForRating.getOrElse(""),
       "recommendRating" -> recommendRating.getOrElse("")), eventTypeSuccess)
 
-    getOriginFromSession(request).customFeedbackUrl match {
+
+
+    originService.customFeedbackUrl(getOriginFromSession(request)) match {
       case Some(x) => Redirect(x)
       case None => Redirect(routes.FeedbackSurveyController.thankYou(getOriginFromSession))
     }
   }
 
-  def thankYou(originService : Origin) = Action {
+  def thankYou(origin : Origin) = Action {
     implicit request =>
-      Origin(originService.value).isValid match {
-        case true => Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.thankYou())
-        case false => Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.error_template(Messages("global_errors.title"), Messages("global_errors.heading"), Messages("global_errors.message")))
+      if(originService.isValid(Origin(origin.value))) {
+        Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.thankYou())
+      }
+      else {
+        Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.error_template(Messages("global_errors.title"), Messages("global_errors.heading"), Messages("global_errors.message")))
       }
   }
 

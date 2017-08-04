@@ -36,7 +36,7 @@ trait MicroService {
       retrieveManaged := true,
       evictionWarningOptions in update := EvictionWarningOptions.default.withWarnScalaVersionEviction(false),
       routesGenerator := StaticRoutesGenerator,
-      routesImport += "controllers.bindable._"
+      routesImport ++= Seq("controllers.bindable._", "controllers.bindable.Binders._")
     )
     .configs(IntegrationTest)
     .settings(inConfig(IntegrationTest)(Defaults.itSettings): _*)

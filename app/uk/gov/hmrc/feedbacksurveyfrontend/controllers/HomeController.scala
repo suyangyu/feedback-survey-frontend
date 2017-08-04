@@ -21,18 +21,25 @@ import play.api.i18n.Messages
 import play.api.i18n.Messages.Implicits._
 import play.api.mvc._
 import controllers.bindable.Origin
+import uk.gov.hmrc.feedbacksurveyfrontend.services.OriginService
 import uk.gov.hmrc.play.frontend.controller.FrontendController
 import utils.FeedbackSurveySessionKeys._
 
-object HomeController extends HomeController
+object HomeController extends HomeController {
+  val originService = new OriginService
+}
 
 trait HomeController extends FrontendController  {
 
-  def start(originService : Origin): Action[AnyContent] = Action {
+  def originService: OriginService
+
+  def start(origin : Origin): Action[AnyContent] = Action {
     implicit request =>
-    Origin(originService.value).isValid match {
-      case true => Redirect(routes.FeedbackSurveyController.ableToDo).withSession(request.session + (sessionOriginService -> originService.value))
-      case false => Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.error_template(Messages("global_errors.title"), Messages("global_errors.heading"), Messages("global_errors.message")))
-    }
+      if(originService.isValid(Origin(origin.value))) {
+        Redirect(routes.FeedbackSurveyController.ableToDo).withSession(request.session + (sessionOriginService -> origin.value))
+      }
+      else {
+        Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.error_template(Messages("global_errors.title"), Messages("global_errors.heading"), Messages("global_errors.message")))
+      }
   }
 }
