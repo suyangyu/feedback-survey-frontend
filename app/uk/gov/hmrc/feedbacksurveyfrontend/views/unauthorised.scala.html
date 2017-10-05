@@ -1,12 +1,14 @@
-@()(implicit request: Request[AnyRef], messages: play.api.i18n.Messages)
 @import play.twirl.api.Html
 @import uk.gov.hmrc.play.views.html.helpers._
+@import uk.gov.hmrc.feedbacksurveyfrontend.LocalTemplateRenderer
+
+
+@()(implicit request: Request[AnyRef], messages: play.api.i18n.Messages, templateRenderer: LocalTemplateRenderer)
 
 @main_template(title = Messages("generic.unauthorised.heading"), userLoggedIn = false){
-    <h1 class="heading-xlarge">@Html(Messages("generic.unauthorised.heading"))</h1>
-    <p>@Messages("generic.unauthorised.reason_start")</p>
-    <p>@Messages("generic.unauthorised.reason_1")</p>
-    <p>@Messages("generic.unauthorised.reason_2")</p>
+  <h1 class="heading-xlarge">@Html(Messages("generic.unauthorised.heading"))</h1>
+  <p>@Messages("generic.unauthorised.reason_start")</p>
+  <p>@Messages("generic.unauthorised.reason_1")</p>
+  <p>@Messages("generic.unauthorised.reason_2")</p>
 }
-
 

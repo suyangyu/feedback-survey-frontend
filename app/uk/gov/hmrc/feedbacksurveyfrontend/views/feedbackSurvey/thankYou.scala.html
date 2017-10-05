@@ -1,9 +1,11 @@
-@()(implicit request: Request[_], messages: play.api.i18n.Messages)
-
 @import play.twirl.api.Html
 @import views.helpers._
 @import views.html.helpers._
 @import models._
+@import uk.gov.hmrc.renderer.TemplateRenderer
+
+
+@()(implicit request: Request[_], messages: play.api.i18n.Messages, templateRenderer: TemplateRenderer)
 
 @uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = "feedbackSurvey.giveFeedBackPageTitle.page5.title", bodyClasses = None, langReturnUrl = request.uri) {
   <h1 id="thankYou" class="heading-large">@Messages("feedbackSurvey.page5.title")</h1>

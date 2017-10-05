@@ -1,19 +1,26 @@
-@(pageTitle: String, heading: String, message: String)(implicit request: Request[_], messages: play.api.i18n.Messages)
+@import uk.gov.hmrc.renderer.TemplateRenderer
+@import uk.gov.hmrc.play.views.html.layouts
 
-@contentHeader = {
-  <h1>@Messages(heading)</h1>
-}
+
+@(pageTitle: String, heading: String, message: String)(implicit request: Request[_], messages: play.api.i18n.Messages, templateRenderer: TemplateRenderer)
 
 @mainContent = {
-  <p>@Messages(message)</p>
+  <h1 class="heading-large">@Messages(heading)</h1>
+  <p id="intro">@Messages(message)</p>
 }
 
-@linkElement = {
-  <link rel="stylesheet" href='@routes.Assets.at("stylesheets/custom.css")'/>
+@{
+  templateRenderer.renderDefaultTemplate(
+    layouts.article(mainContent, false, None), Map[String, Any](
+      "pageTitle" -> Messages(pageTitle),
+      "navTitle" -> Messages("feedbackSurvey.giveFeedBack"),
+      "hideAccountMenu" -> true,
+      "linkElems" -> Map(
+        "url" -> routes.Assets.at("stylesheets/custom.css")
+      ),
+      "includeHMRCBranding" -> true,
+      "isWelsh" -> messages.lang.code.equals("cy"),
+      "getHelpForm" -> uk.gov.hmrc.feedbacksurveyfrontend.LocalPartialRetriever.getPartialContent(uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.reportAProblemPartialUrl)
+    )
+  )
 }
-
-@govuk_wrapper(appConfig = uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig,
-  title = Messages(pageTitle),
-  contentHeader = Some(contentHeader),
-  mainContent = mainContent,
-  linkElement = Some(linkElement))

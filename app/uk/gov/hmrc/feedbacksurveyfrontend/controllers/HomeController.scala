@@ -21,8 +21,10 @@ import play.api.i18n.Messages
 import play.api.i18n.Messages.Implicits._
 import play.api.mvc._
 import controllers.bindable.Origin
+import uk.gov.hmrc.feedbacksurveyfrontend.LocalTemplateRenderer
 import uk.gov.hmrc.feedbacksurveyfrontend.services.OriginService
 import uk.gov.hmrc.play.frontend.controller.FrontendController
+import uk.gov.hmrc.renderer.TemplateRenderer
 import utils.FeedbackSurveySessionKeys._
 
 object HomeController extends HomeController {
@@ -32,6 +34,7 @@ object HomeController extends HomeController {
 trait HomeController extends FrontendController  {
 
   def originService: OriginService
+  implicit val templateRenderer: TemplateRenderer = LocalTemplateRenderer
 
   def start(origin : Origin): Action[AnyContent] = Action {
     implicit request =>
@@ -39,7 +42,7 @@ trait HomeController extends FrontendController  {
         Redirect(routes.FeedbackSurveyController.ableToDo).withSession(request.session + (sessionOriginService -> origin.value))
       }
       else {
-        Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.error_template(Messages("global_errors.title"), Messages("global_errors.heading"), Messages("global_errors.message")))
+        Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.error_template("global_errors.title", "global_errors.heading", "global_errors.message"))
       }
   }
 }
