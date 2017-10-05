@@ -26,6 +26,8 @@ import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.feedbacksurveyfrontend.services.{OriginConfigItem, OriginService}
 import utils.{HtmlUtils, UnitTestTraits}
+import uk.gov.hmrc.feedbacksurveyfrontend.utils.MockTemplateRenderer
+import uk.gov.hmrc.renderer.TemplateRenderer
 
 class pageTests extends UnitTestTraits with HtmlUtils {
   val lookupFailure = Json.parse( """{"reason": "Generic test reason"}""")
@@ -34,6 +36,9 @@ class pageTests extends UnitTestTraits with HtmlUtils {
     FakeRequest(GET, "/feedback-survey/" + s"$page")
 
   object TestLookupController extends FeedbackSurveyController {
+
+    override implicit val templateRenderer: TemplateRenderer = MockTemplateRenderer
+
     val originService = new OriginService {
       override lazy val originConfigItems = List(
         OriginConfigItem(Some("AWRS"), None)

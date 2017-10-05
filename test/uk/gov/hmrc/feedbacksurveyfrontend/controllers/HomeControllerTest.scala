@@ -20,8 +20,9 @@ import controllers.bindable.Origin
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.feedbacksurveyfrontend.services.{OriginConfigItem, OriginService}
+import uk.gov.hmrc.feedbacksurveyfrontend.utils.MockTemplateRenderer
+import uk.gov.hmrc.renderer.TemplateRenderer
 import utils.UnitTestTraits
-
 
 
 class HomeControllerTest extends UnitTestTraits {
@@ -29,6 +30,9 @@ class HomeControllerTest extends UnitTestTraits {
   "ableToDo page GET" should {
 
     def buildFakeHomeController = new HomeController{
+
+      override implicit val templateRenderer: TemplateRenderer = MockTemplateRenderer
+
       val originService = new OriginService {
         override lazy val originConfigItems = List(
           OriginConfigItem(Some("TOKEN1"), None)

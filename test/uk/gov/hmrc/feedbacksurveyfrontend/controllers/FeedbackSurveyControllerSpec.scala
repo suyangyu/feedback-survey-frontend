@@ -23,6 +23,8 @@ import play.api.mvc.AnyContentAsEmpty
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.feedbacksurveyfrontend.services.{OriginConfigItem, OriginService}
+import uk.gov.hmrc.feedbacksurveyfrontend.utils.MockTemplateRenderer
+import uk.gov.hmrc.renderer.TemplateRenderer
 import utils.FeedbackSurveySessionKeys._
 import utils.UnitTestTraits
 
@@ -40,6 +42,9 @@ class FeedbackSurveyControllerSpec extends UnitTestTraits {
   }
 
   object TestFeedbackSurveyController extends FeedbackSurveyController {
+
+    override implicit val templateRenderer: TemplateRenderer = MockTemplateRenderer
+
     val originService = new OriginService {
       override lazy val originConfigItems = List(
         OriginConfigItem(Some("TOKEN1"), None),
