@@ -1,3 +1,7 @@
+@import uk.gov.hmrc.renderer.TemplateRenderer
+@import uk.gov.hmrc.play.views.html.layouts
+@import uk.gov.hmrc.urls.Link
+
 @(title: String,
   serviceTitle: Option[String] = None,
   pageScripts: Option[Html] = None,
@@ -6,10 +10,7 @@
   mainClass: Option[String] = None,
   userLoggedIn: Boolean = false,
   langReturnUrl: Option[String] = None,
-  scriptElem: Option[Html] = None)(mainContent: Html)(implicit request : Request[_], messages: play.api.i18n.Messages)
-
-@import uk.gov.hmrc.play.views.html.layouts
-@import uk.gov.hmrc.urls.Link
+  scriptElem: Option[Html] = None)(mainContent: Html)(implicit request : Request[_], messages: play.api.i18n.Messages, templateRenderer: TemplateRenderer)
 
 @serviceInfoContent = {}
 
@@ -19,12 +20,7 @@
   }
 }
 
-@linkElement = {
-  <link rel="stylesheet" href='@routes.Assets.at("stylesheets/custom.css")'/>
-}
-
-@scriptElement = {
-  @scriptElem
+@inlineScript = {
 
   @if(uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.analyticsToken == "N/A") {
     <script type="text/javascript">
@@ -38,22 +34,16 @@
           label: label
         }));
 
-        if (typeof args !== 'undefined' && typeof args['hitCallback'] === 'function' ) {
+        if (args && typeof args !== 'undefined' && typeof args['hitCallback'] === 'function' ) {
           args['hitCallback']();
         }
       };
     </script>
   }
-
-
-  @pageScripts
-  <script type="text/javascript" src='@routes.Assets.at("javascripts/feedback.js")'></script>
-  <script type="text/javascript" src='@routes.Assets.at("javascripts/gaTracking.js")'></script>
-  <script type="text/javascript" src='@routes.Assets.at("javascripts/jquery.min.js")'></script>
-  <script type="text/javascript" src='@routes.Assets.at("javascripts/jquery-ui.min.js")'></script>
 }
 
-@contentHeader = {
+@mainContentHeader = {
+
   @langReturnUrl.map { url =>
     <div class="lang-select">
       @if(messages.lang == Lang("cy")) {
@@ -61,7 +51,7 @@
           url=controllers.routes.LanguageController.enGb(url).toString(),
           value=Some(Messages("label.english")),
           id=Some("switch-to-english"),
-          cssClasses=Some("ga-track-event"),
+          cssClasses=Some("ga-track-anchor-click"),
           dataAttributes=Some(Map(
             "ga-event-category" -> "link - click",
             "ga-event-action" -> "lang-select",
@@ -74,7 +64,7 @@
           url=controllers.routes.LanguageController.cyGb(url).toString(),
           value=Some(Messages("label.welsh")),
           id=Some("switch-to-welsh"),
-          cssClasses=Some("ga-track-event"),
+          cssClasses=Some("ga-track-anchor-click"),
           dataAttributes=Some(Map(
             "ga-event-category" -> "link - click",
             "ga-event-action" -> "lang-select",
@@ -85,15 +75,28 @@
   }
 }
 
-@govuk_wrapper(
-  appConfig = uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig,
-  title = Messages(title),
-  serviceTitle = Messages("feedbackSurvey.giveFeedBack"),
-  mainClass = mainClass,
-  bodyClasses = bodyClasses,
-  sidebar = sidebar,
-  contentHeader = Some(contentHeader),
-  mainContent = layouts.article(mainContent),
-  serviceInfoContent = serviceInfoContent,
-  scriptElem = Some(scriptElement),
-  linkElement = Some(linkElement))
+@{
+  templateRenderer.renderDefaultTemplate(
+    layouts.article(mainContent, false, None), Map[String, Any](
+      "pageTitle" -> Messages(title),
+      "navTitle" -> Messages("feedbackSurvey.giveFeedBack"),
+      "hideAccountMenu" -> true,
+      "linkElems" -> Map(
+        "url" -> routes.Assets.at("stylesheets/custom.css")
+      ),
+      "scriptElems" -> Seq(
+        Map("url" -> routes.Assets.at("javascripts/feedback.js")),
+        Map("url" -> routes.Assets.at("javascripts/gaTracking.js")),
+        Map("url" -> routes.Assets.at("javascripts/jquery.min.js")),
+        Map("url" -> routes.Assets.at("javascripts/jquery-ui.min.js"))
+      ),
+      "inlineScript" -> inlineScript,
+      "betaBanner" -> true,
+      "feedbackIdentifier" -> "FANDF",
+      "includeHMRCBranding" -> true,
+      "isWelsh" -> messages.lang.code.equals("cy"),
+      "getHelpForm" -> uk.gov.hmrc.feedbacksurveyfrontend.LocalPartialRetriever.getPartialContent(uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.reportAProblemPartialUrl),
+      "mainContentHeader" -> mainContentHeader
+    )
+  )
+}

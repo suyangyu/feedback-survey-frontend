@@ -16,20 +16,33 @@
 
 package uk.gov.hmrc.feedbacksurveyfrontend
 
+import uk.gov.hmrc.play.audit.http.HttpAuditing
 import uk.gov.hmrc.play.audit.http.config.LoadAuditingConfig
-import uk.gov.hmrc.play.audit.http.connector.{AuditConnector => Auditing}
+import uk.gov.hmrc.play.audit.http.connector.{AuditConnector}
 import uk.gov.hmrc.play.config.{AppName, RunMode, ServicesConfig}
 import uk.gov.hmrc.play.frontend.auth.connectors.AuthConnector
 import uk.gov.hmrc.play.frontend.filters.SessionCookieCryptoFilter
-import uk.gov.hmrc.play.http.ws.{WSDelete, WSGet, WSPost, WSPut}
+import uk.gov.hmrc.play.http.ws._
 import uk.gov.hmrc.play.partials.FormPartialRetriever
 
-object FrontendAuditConnector extends Auditing with AppName {
+
+trait AuthenticationConnectors {
+  lazy val auditConnector = FrontendAuditConnector
+  lazy val authConnector = FrontendAuthConnector
+}
+
+trait ControllerConnectors {
+  protected def auditConnector: AuditConnector
+  protected def authConnector: AuthConnector
+}
+
+object FrontendAuditConnector extends AuditConnector with AppName {
   override lazy val auditingConfig = LoadAuditingConfig(s"auditing")
 }
 
-object WSHttp extends WSGet with WSPut with WSPost with WSDelete with AppName with RunMode {
-  override val hooks = NoneRequired
+object WSHttp extends WSGet with WSPut with WSPost with WSDelete with AppName with HttpAuditing with RunMode  {
+  override val auditConnector = FrontendAuditConnector
+  override val hooks = Seq(AuditingHook)
 }
 
 object FrontendAuthConnector extends AuthConnector with ServicesConfig {

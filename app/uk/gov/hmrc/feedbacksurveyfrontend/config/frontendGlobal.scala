@@ -30,6 +30,7 @@ import uk.gov.hmrc.play.http.logging.filters.FrontendLoggingFilter
 import uk.gov.hmrc.play.filters.MicroserviceFilterSupport
 import play.api.i18n.Messages.Implicits._
 import play.api.Play.current
+import uk.gov.hmrc.renderer.TemplateRenderer
 
 
 object FrontendGlobal
@@ -39,13 +40,16 @@ object FrontendGlobal
   override val loggingFilter = LoggingFilter
   override val frontendAuditFilter = AuditFilter
 
+  implicit val templateRenderer: TemplateRenderer = LocalTemplateRenderer
+
   override def onStart(app: Application) {
     super.onStart(app)
     ApplicationCrypto.verifyConfiguration()
   }
 
-  override def standardErrorTemplate(pageTitle: String, heading: String, message: String)(implicit rh: Request[_]): Html =
+  override def standardErrorTemplate(pageTitle: String, heading: String, message: String)(implicit rh: Request[_]): Html = {
     uk.gov.hmrc.feedbacksurveyfrontend.views.html.error_template(pageTitle, heading, message)
+  }
 
   override def microserviceMetricsConfig(implicit app: Application): Option[Configuration] = app.configuration.getConfig(s"microservice.metrics")
 }

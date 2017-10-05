@@ -36,8 +36,8 @@ object FrontendAppConfig extends AppConfig with ServicesConfig {
   private val contactFrontendService = baseUrl("contact-frontend")
   private val contactFormServiceIdentifier = "FEEDBACK-SURVEY"
 
-  override lazy val analyticsToken = getString(s"google-analytics.token")
-  override lazy val analyticsHost = getString(s"google-analytics.host")
+  override lazy val analyticsToken = configuration.getString(s"google-analytics.token").getOrElse("N/A")
+  override lazy val analyticsHost = configuration.getString(s"google-analytics.host").getOrElse("service.gov.uk")
   override lazy val reportAProblemPartialUrl = s"$contactFrontendService/contact/problem_reports?secure=true"
   override lazy val betaFeedbackUnauthenticatedUrl = s"$contactFrontendBaseUrl/contact/beta-feedback-unauthenticated?service=$contactFormServiceIdentifier"
 }

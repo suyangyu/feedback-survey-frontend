@@ -77,7 +77,7 @@ class pageTests extends UnitTestTraits with HtmlUtils {
 
     "render error page correctly with invalid origin" in {
       val document: Document = TestLookupController.thankYou(Origin("INVALID_ORIGIN")).apply(testRequest(page = "thankYou"))
-      document.body.getElementsByClass("page-header").text should include("Service unavailable")
+      document.body.getElementsByClass("heading-large").text should include("Service unavailable")
     }
 
   }
