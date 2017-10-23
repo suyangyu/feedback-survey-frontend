@@ -19,8 +19,8 @@ package audit
 import uk.gov.hmrc.play.audit.AuditExtensions
 import uk.gov.hmrc.play.audit.model.{Audit, DataEvent}
 import uk.gov.hmrc.play.config.AppName
-import uk.gov.hmrc.play.http.HeaderCarrier
 import uk.gov.hmrc.feedbacksurveyfrontend.FrontendAuditConnector
+import uk.gov.hmrc.http.HeaderCarrier
 
 trait Auditable {
 
