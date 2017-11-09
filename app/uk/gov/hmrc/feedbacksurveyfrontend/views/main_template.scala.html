@@ -10,7 +10,7 @@
   mainClass: Option[String] = None,
   userLoggedIn: Boolean = false,
   langReturnUrl: Option[String] = None,
-  scriptElem: Option[Html] = None)(mainContent: Html)(implicit request : Request[_], messages: play.api.i18n.Messages, templateRenderer: TemplateRenderer)
+  scriptElement: Option[Html] = None)(mainContent: Html)(implicit request : Request[_], messages: play.api.i18n.Messages, templateRenderer: TemplateRenderer)
 
 @serviceInfoContent = {}
 
@@ -22,7 +22,9 @@
 
 @inlineScript = {
 
-  @if(uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.analyticsToken == "N/A") {
+  @scriptElement
+
+  @if(uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.analyticsToken == Some("N/A")) {
     <script type="text/javascript">
       var ga = function(send, event, category, action, label, args) {
         console.log(JSON.stringify({
@@ -34,9 +36,11 @@
           label: label
         }));
 
-        if (args && typeof args !== 'undefined' && typeof args['hitCallback'] === 'function' ) {
-          args['hitCallback']();
+        if(args && typeof args !== 'undefined' && typeof args['hitCallback'] === 'function') {
+          var hitCallback = args['hitCallback'];
+          hitCallback();
         }
+
       };
     </script>
   }
@@ -44,18 +48,17 @@
 
 @mainContentHeader = {
 
-
-@langReturnUrl.map { url =>
-  <div class="lang-select">
-    @if(messages.lang == Lang("cy")) {
-      <a id="switch-to-english" lang="en" href="@controllers.routes.LanguageController.enGb(url).toString()" target="_self" data-sso="false" class="ga-track-anchor-click" data-ga-event-category="link - click" data-ga-event-action="lang-select" data-ga-event-label="English">@Messages("label.english")</a>
-      | @Messages("label.welsh")
-    } else {
-      @Messages("label.english") |
-      <a id="switch-to-welsh" lang="cy" href="@controllers.routes.LanguageController.cyGb(url).toString()" target="_self" data-sso="false" class="ga-track-anchor-click" data-ga-event-category="link - click" data-ga-event-action="lang-select" data-ga-event-label="Cymraeg">@Messages("label.welsh")</a>
+  @langReturnUrl.map { url =>
+    <div class="lang-select">
+      @if(messages.lang == Lang("cy")) {
+        <a id="switch-to-english" lang="en" href="@controllers.routes.LanguageController.enGb(url).toString()" target="_self" data-sso="false" class="ga-track-anchor-click" data-ga-event-category="link - click" data-ga-event-action="lang-select" data-ga-event-label="English">@Messages("label.english")</a>
+        | @Messages("label.welsh")
+      } else {
+        @Messages("label.english") |
+        <a id="switch-to-welsh" lang="cy" href="@controllers.routes.LanguageController.cyGb(url).toString()" target="_self" data-sso="false" class="ga-track-anchor-click" data-ga-event-category="link - click" data-ga-event-action="lang-select" data-ga-event-label="Cymraeg">@Messages("label.welsh")</a>
+      }
+    </div>
     }
-  </div>
-  }
 }
 
 @{
@@ -79,7 +82,10 @@
       "includeHMRCBranding" -> true,
       "isWelsh" -> messages.lang.code.equals("cy"),
       "getHelpForm" -> uk.gov.hmrc.feedbacksurveyfrontend.LocalPartialRetriever.getPartialContent(uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.reportAProblemPartialUrl),
-      "mainContentHeader" -> mainContentHeader
-    )
+      "mainContentHeader" -> mainContentHeader,
+      "googleAnalytics" -> Map(
+        "trackingId" -> {{ if(uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.analyticsToken==Some("N/A")) null else uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.analyticsToken }},
+        "cookieDomain" -> uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.analyticsHost)
+      )
   )
 }
