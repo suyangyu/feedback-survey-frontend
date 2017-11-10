@@ -65,9 +65,13 @@
 }
 
 @inputName = @{
-  Html("name=\"" + params.field.name + "\"")
+  Html("name=\"" + params.field.name +
+    (params.checkboxOptions.length match {
+      case 1 => "\""
+      case _ => "[]\""
+    })
+  )
 }
-
 
 @inputId(append: String) = @{
   params.overrideInputId match {
