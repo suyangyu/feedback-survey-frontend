@@ -2,31 +2,3 @@ textarea {
   border-radius:0;
   width:100%;
 }
-
-#reasonForRating {
-  background-color:transparent;
-  border:2px solid;
-  width:100%;
-}
-
-.beta-banner {
-  text-align: left;
-}
-
-#back {
-  display: inline-block;
-  margin-bottom: 52px;
-  margin-top: 45px;
-}
-
-.heading-large .heading-secondary {
-  color: #6f777b;
-  display: block;
-  font-family: "nta",Arial,sans-serif;
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 1.25;
-  padding-bottom: 4px;
-  padding-top: 6px;
-  text-transform: none;
-}
