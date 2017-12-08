@@ -30,13 +30,3 @@ textarea {
   padding-top: 6px;
   text-transform: none;
 }
-
-.lang-select {
-  border-bottom: 0px;
-  float: right;
-  padding: 0.65em 0px;
-  text-align: right;
-  width: 100%;
-  font-size: 16px;
-  border-top: 10px solid #005ea5;
-}

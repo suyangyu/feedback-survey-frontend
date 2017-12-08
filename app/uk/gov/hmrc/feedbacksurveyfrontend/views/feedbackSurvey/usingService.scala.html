@@ -1,4 +1,3 @@
-@import play.twirl.api.Html
 @import views.helpers._
 @import views.html.helpers._
 @import models.feedbackSurveyModels._
@@ -7,9 +6,7 @@
 
 @(page2: Form[models.feedbackSurveyModels.UsingService])(implicit request: Request[_], messages: play.api.i18n.Messages, templateRenderer: TemplateRenderer)
 
-@pageScripts = {}
-
-@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = "feedbackSurvey.giveFeedBackPageTitle.page2.question1", bodyClasses = None, pageScripts = Some(pageScripts), langReturnUrl = request.uri) {
+@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = "feedbackSurvey.giveFeedBackPageTitle.page2.question1") {
   <h1 id="beforeUsingThisService" class="heading-large">@Messages("feedbackSurvey.page2.question1")</h1>
   @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.FeedbackSurveyController.usingServiceContinue){
     <div class="form-group">
