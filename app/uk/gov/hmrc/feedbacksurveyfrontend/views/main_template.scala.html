@@ -3,9 +3,11 @@
 @import uk.gov.hmrc.renderer._
 @import uk.gov.hmrc.renderer.TemplateArgumentsBuilder._
 
+
 @(title: String,
   serviceTitle: Option[String] = None,
   userLoggedIn: Boolean = false,
+  backlinkUrl: Option[String] = None,
   scriptElement: Option[Html] = None)(mainContent: Html)(implicit request : Request[_], messages: play.api.i18n.Messages, templateRenderer: TemplateRenderer)
 
 @inlineScript = {
@@ -55,6 +57,7 @@
       controllers.routes.Assets.versioned("javascripts/jquery.min.js").url,
       controllers.routes.Assets.versioned("javascripts/jquery-ui.min.js").url
     )),
+    backlinkUrl.map(BackLinkUrlComponent(_)),
     Some(InlineScriptComponent(inlineScript.toString)),
     Some(GetHelpFormComponent(uk.gov.hmrc.feedbacksurveyfrontend.LocalPartialRetriever.getPartialContent(uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.reportAProblemPartialUrl))),
     uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.analyticsToken.filter(_ != "N/A").map { trackingId =>

@@ -6,7 +6,10 @@
 
 @(page4: Form[models.feedbackSurveyModels.RecommendService])(implicit request: Request[_], messages: play.api.i18n.Messages, templateRenderer: TemplateRenderer)
 
-@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = "feedbackSurvey.giveFeedBackPageTitle.page4.question1") {
+@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(
+  title = "feedbackSurvey.giveFeedBackPageTitle.page4.question1",
+  backlinkUrl = controllers.routes.FeedbackSurveyController.aboutService.url
+) {
   <h1 id="recommendRating" class="heading-large">@Messages("feedbackSurvey.page4.question1")</h1>
   @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.FeedbackSurveyController.recommendServiceContinue){
     <div class="form-group">
@@ -29,6 +32,5 @@
       '_legend -> "reasonForRating",
       '_legendHidden -> true)
     @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.submitButton("generic.continue")(id = "save-and-continue", classAttr = "button")
-    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.backLink("back", controllers.routes.FeedbackSurveyController.aboutService.url, true, "generic.back")(messages)
   }
 }
