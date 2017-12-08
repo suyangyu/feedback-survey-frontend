@@ -25,6 +25,7 @@ trait AppConfig {
   val analyticsHost: String
   val betaFeedbackUnauthenticatedUrl: String
   val reportAProblemPartialUrl: String
+  val deskproToken: Option[String]
 }
 
 object FrontendAppConfig extends AppConfig with ServicesConfig {
@@ -40,4 +41,5 @@ object FrontendAppConfig extends AppConfig with ServicesConfig {
   override lazy val analyticsHost = configuration.getString(s"google-analytics.host").getOrElse("service.gov.uk")
   override lazy val reportAProblemPartialUrl = s"$contactFrontendService/contact/problem_reports?secure=true"
   override lazy val betaFeedbackUnauthenticatedUrl = s"$contactFrontendBaseUrl/contact/beta-feedback-unauthenticated?service=$contactFormServiceIdentifier"
+  override lazy val deskproToken = configuration.getString(s"deskproToken")
 }

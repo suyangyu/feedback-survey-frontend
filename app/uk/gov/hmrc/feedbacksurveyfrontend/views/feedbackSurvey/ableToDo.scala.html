@@ -1,12 +1,11 @@
 @import views.helpers._
 @import views.html.helpers._
-@import models._
 @import uk.gov.hmrc.renderer.TemplateRenderer
 
 
 @(page1: Form[models.feedbackSurveyModels.AbleToDo])(implicit request: Request[_], messages: play.api.i18n.Messages, templateRenderer: TemplateRenderer)
 
-@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = "feedbackSurvey.giveFeedBackPageTitle.page1.question1", bodyClasses = None, langReturnUrl = request.uri) {
+@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = "feedbackSurvey.giveFeedBackPageTitle.page1.question1") {
   <h1 class="heading-large">@Messages("feedbackSurvey.page1.question1")</h1>
   <p id="intro">@Messages("feedbackSurvey.page1.para1")</p>
   @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.FeedbackSurveyController.ableToDoContinue){

@@ -1,24 +1,12 @@
 @import uk.gov.hmrc.renderer.TemplateRenderer
 @import uk.gov.hmrc.play.views.html.layouts
-@import uk.gov.hmrc.urls.Link
+@import uk.gov.hmrc.renderer._
+@import uk.gov.hmrc.renderer.TemplateArgumentsBuilder._
 
 @(title: String,
   serviceTitle: Option[String] = None,
-  pageScripts: Option[Html] = None,
-  sidebarLinks: Option[Html] = None,
-  bodyClasses: Option[String] = None,
-  mainClass: Option[String] = None,
   userLoggedIn: Boolean = false,
-  langReturnUrl: Option[String] = None,
   scriptElement: Option[Html] = None)(mainContent: Html)(implicit request : Request[_], messages: play.api.i18n.Messages, templateRenderer: TemplateRenderer)
-
-@serviceInfoContent = {}
-
-@sidebar = {
-  @if(sidebarLinks.isDefined) {
-   @layouts.sidebar(sidebarLinks.get, Some("sidebar"))
-  }
-}
 
 @inlineScript = {
 
@@ -46,46 +34,38 @@
   }
 }
 
-@mainContentHeader = {
-
-  @langReturnUrl.map { url =>
-    <div class="lang-select">
-      @if(messages.lang == Lang("cy")) {
-        <a id="switch-to-english" lang="en" href="@controllers.routes.LanguageController.enGb(url).toString()" target="_self" data-sso="false" class="ga-track-anchor-click" data-ga-event-category="link - click" data-ga-event-action="lang-select" data-ga-event-label="English">@Messages("label.english")</a>
-        | @Messages("label.welsh")
-      } else {
-        @Messages("label.english") |
-        <a id="switch-to-welsh" lang="cy" href="@controllers.routes.LanguageController.cyGb(url).toString()" target="_self" data-sso="false" class="ga-track-anchor-click" data-ga-event-category="link - click" data-ga-event-action="lang-select" data-ga-event-label="Cymraeg">@Messages("label.welsh")</a>
-      }
-    </div>
-    }
-}
-
 @{
-  templateRenderer.renderDefaultTemplate(
-    layouts.article(mainContent, false, None), Map[String, Any](
-      "pageTitle" -> Messages(title),
-      "navTitle" -> Messages("feedbackSurvey.giveFeedBack"),
-      "hideAccountMenu" -> true,
-      "linkElems" -> Map(
-        "url" -> routes.Assets.at("stylesheets/custom.css")
-      ),
-      "scriptElems" -> Seq(
-        Map("url" -> routes.Assets.at("javascripts/feedback.js")),
-        Map("url" -> routes.Assets.at("javascripts/gaTracking.js")),
-        Map("url" -> routes.Assets.at("javascripts/jquery.min.js")),
-        Map("url" -> routes.Assets.at("javascripts/jquery-ui.min.js"))
-      ),
-      "inlineScript" -> inlineScript,
-      "betaBanner" -> true,
-      "feedbackIdentifier" -> "FANDF",
-      "includeHMRCBranding" -> true,
-      "isWelsh" -> messages.lang.code.equals("cy"),
-      "getHelpForm" -> uk.gov.hmrc.feedbacksurveyfrontend.LocalPartialRetriever.getPartialContent(uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.reportAProblemPartialUrl),
-      "mainContentHeader" -> mainContentHeader,
-      "googleAnalytics" -> Map(
-        "trackingId" -> {{ if(uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.analyticsToken==Some("N/A")) null else uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.analyticsToken }},
-        "cookieDomain" -> uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.analyticsHost)
+
+  val arguments = TemplateArgumentsBuilder(
+    Some(PageTitleComponent(Messages(title))),
+    Some(NavTitleComponent(Messages("feedbackSurvey.giveFeedBack"))),
+    Some(AccountMenuStyleComponent(
+      langUrls = Some((
+        controllers.routes.LanguageController.enGb(request.uri).url,
+        controllers.routes.LanguageController.cyGb(request.uri).url
+      )),
+      hideAccountMenu = true
+    )),
+    Some(CssLinksComponent(
+      CssLinkElement(controllers.routes.Assets.versioned("stylesheets/custom.css").url)
+    )),
+    Some(ScriptsComponent(
+      controllers.routes.Assets.versioned("javascripts/feedback.js").url,
+      controllers.routes.Assets.versioned("javascripts/gaTracking.js").url,
+      controllers.routes.Assets.versioned("javascripts/jquery.min.js").url,
+      controllers.routes.Assets.versioned("javascripts/jquery-ui.min.js").url
+    )),
+    Some(InlineScriptComponent(inlineScript.toString)),
+    Some(GetHelpFormComponent(uk.gov.hmrc.feedbacksurveyfrontend.LocalPartialRetriever.getPartialContent(uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.reportAProblemPartialUrl))),
+    uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.analyticsToken.filter(_ != "N/A").map { trackingId =>
+      GoogleAnalyticsComponent(
+        trackingId,
+        Some(uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.analyticsHost)
       )
+    },
+    uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.deskproToken.map(BetaBannerComponent(_))
   )
+
+  templateRenderer.renderDefaultTemplate(layouts.article(mainContent, false, None), arguments)
+
 }
