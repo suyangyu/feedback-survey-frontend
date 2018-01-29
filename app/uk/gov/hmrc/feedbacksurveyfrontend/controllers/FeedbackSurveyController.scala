@@ -28,6 +28,8 @@ import uk.gov.hmrc.renderer.TemplateRenderer
 import uk.gov.hmrc.feedbacksurveyfrontend.services.OriginService
 import utils.LoggingUtils
 import utils.FeedbackSurveySessionKeys._
+import uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig
+import uk.gov.hmrc.feedbacksurveyfrontend.views.html
 
 
 object FeedbackSurveyController extends FeedbackSurveyController {
@@ -42,7 +44,7 @@ trait FeedbackSurveyController extends FrontendController with LoggingUtils with
   def originService: OriginService
 
   val ableToDo  = Action { implicit request =>
-    Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.ableToDo(formMappings.ableToDoForm))
+    Ok(html.feedbackSurvey.ableToDo(formMappings.ableToDoForm))
   }
 
   val ableToDoContinue =  Action (parse.form(formMappings.ableToDoForm)) { implicit request =>
@@ -53,7 +55,7 @@ trait FeedbackSurveyController extends FrontendController with LoggingUtils with
   }
 
   val usingService =  Action { implicit request =>
-    Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.usingService(formMappings.usingServiceForm))
+    Ok(html.feedbackSurvey.usingService(formMappings.usingServiceForm))
   }
 
   val usingServiceContinue = Action (parse.form(formMappings.usingServiceForm)) { implicit request =>
@@ -74,7 +76,7 @@ trait FeedbackSurveyController extends FrontendController with LoggingUtils with
   }
 
   val aboutService = Action { implicit request =>
-    Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.aboutService(formMappings.aboutServiceForm))
+    Ok(html.feedbackSurvey.aboutService(formMappings.aboutServiceForm))
   }
 
   val aboutServiceContinue =  Action (parse.form(formMappings.aboutServiceForm)) { implicit request =>
@@ -85,7 +87,7 @@ trait FeedbackSurveyController extends FrontendController with LoggingUtils with
   }
 
   val recommendService = Action { implicit request =>
-    Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.recommendService(formMappings.recommendServiceForm))
+    Ok(html.feedbackSurvey.recommendService(formMappings.recommendServiceForm))
   }
 
   val recommendServiceContinue =  Action (parse.form(formMappings.recommendServiceForm)) { implicit request =>
@@ -105,14 +107,13 @@ trait FeedbackSurveyController extends FrontendController with LoggingUtils with
   def thankYou(origin : Origin): Action[AnyContent] = Action {
     implicit request =>
       if(originService.isValid(Origin(origin.value))) {
-        Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.feedbackSurvey.thankYou())
+        Ok(html.feedbackSurvey.thankYou(FrontendAppConfig.urLinkUrl))
       } else {
-        Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.error_template("global_errors.title", "global_errors.heading", "global_errors.message"))
+        Ok(html.error_template("global_errors.title", "global_errors.heading", "global_errors.message"))
       }
   }
 
   def getOriginFromSession(implicit request: Request[_]): Origin = {
     Origin(request.session.get(sessionOriginService).get)
   }
-
 }
