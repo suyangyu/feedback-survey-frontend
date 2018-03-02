@@ -4,12 +4,10 @@
 generic.yes=Yes
 generic.no=No
 generic.continue=Continue
-generic.back=Back
 generic.error.title=Sorry, we’re experiencing technical difficulties
 generic.error.status=There has been a problem with your application
 generic.unauthorised.heading=Sorry, we’re experiencing technical difficulties
 generic.unauthorised.reason_start=This could be because,
-generic.invalid.characters=Invalid characters
 
 global_errors.message=Sorry, there is a technical problem and you cannot use the service at the moment. Please try again later.
 global_errors.heading=Service unavailable
@@ -61,8 +59,8 @@ feedbackSurvey.page4.question2=Why did you give this rating?
 feedbackSurvey.page4.question2.labelhint=Do not include any personal or financial information like your National Insurance number or bank details.
 
 feedbackSurvey.page5.title=Thank you for your feedback
+feedbackSurvey.page5.para1=Please <a href="{0}">join the HM Revenue and Customs (HMRC) user panel</a>.
+feedbackSurvey.page5.para2=By taking part in user research you will help us improve our service.
 
-label.english=English
-label.welsh=Cymraeg
 label.this_is_a_new_service_your_feedback_will_help_us_to_improve_it=This is a new service - your <a href="{0}">feedback</a> will help us to improve it.
 label.this_is_a_trial_service=This is a trial service.

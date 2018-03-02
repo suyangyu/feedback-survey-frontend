@@ -16,30 +16,26 @@
 
 package uk.gov.hmrc.feedbacksurveyfrontend
 
-import play.api.Mode
 import play.api.Play.{configuration, current}
 import uk.gov.hmrc.play.config.ServicesConfig
 
 trait AppConfig {
   val analyticsToken: Option[String]
   val analyticsHost: String
-  val betaFeedbackUnauthenticatedUrl: String
   val reportAProblemPartialUrl: String
   val deskproToken: Option[String]
+  val urLinkUrl: Option[String]
 }
 
 object FrontendAppConfig extends AppConfig with ServicesConfig {
 
-  private lazy val contactFrontendBaseUrl = {
-    if(current.mode==Mode.Dev) getConfString(s"contact-frontend.external-url", "")
-    else ""
-  }
+  private lazy val contactFrontendBaseUrl = getConfString("contact-frontend.external-url", "")
   private val contactFrontendService = baseUrl("contact-frontend")
   private val contactFormServiceIdentifier = "FEEDBACK-SURVEY"
 
-  override lazy val analyticsToken = configuration.getString(s"google-analytics.token")
-  override lazy val analyticsHost = configuration.getString(s"google-analytics.host").getOrElse("service.gov.uk")
+  override lazy val analyticsToken = configuration.getString("google-analytics.token")
+  override lazy val analyticsHost = configuration.getString("google-analytics.host").getOrElse("service.gov.uk")
   override lazy val reportAProblemPartialUrl = s"$contactFrontendService/contact/problem_reports?secure=true"
-  override lazy val betaFeedbackUnauthenticatedUrl = s"$contactFrontendBaseUrl/contact/beta-feedback-unauthenticated?service=$contactFormServiceIdentifier"
-  override lazy val deskproToken = configuration.getString(s"deskproToken")
+  override lazy val deskproToken = configuration.getString("deskproToken")
+  override lazy val urLinkUrl = configuration.getString("feature.ur-link.url")
 }

@@ -1,8 +1,17 @@
+@import views.helpers._
+@import views.html.helpers._
 @import uk.gov.hmrc.renderer.TemplateRenderer
 
 
-@()(implicit request: Request[_], messages: play.api.i18n.Messages, templateRenderer: TemplateRenderer)
+@(urLinkUrl: Option[String])(implicit request: Request[_], messages: play.api.i18n.Messages, templateRenderer: TemplateRenderer)
 
-@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(title = "feedbackSurvey.giveFeedBackPageTitle.page5.title") {
+@uk.gov.hmrc.feedbacksurveyfrontend.views.html.main_template(
+  title = "feedbackSurvey.giveFeedBackPageTitle.page5.title",
+  backlinkUrl = controllers.routes.FeedbackSurveyController.recommendService.url
+) {
   <h1 id="thankYou" class="heading-large">@Messages("feedbackSurvey.page5.title")</h1>
+  @urLinkUrl.map { urLinkUrl =>
+    <p>@Html(Messages("feedbackSurvey.page5.para1", urLinkUrl))</p>
+    <p>@Messages("feedbackSurvey.page5.para2")</p>
+  }
 }

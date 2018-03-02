@@ -4,12 +4,10 @@
 generic.yes=Iawn
 generic.no=Na
 generic.continue=Parhau
-generic.back=Yn ôl
 generic.error.title=Mae''n ddrwg gennym, rydym yn cael anawsterau technegol
 generic.error.status=Mae problem gyda''ch cais.
 generic.unauthorised.heading=Mae''n ddrwg gennym, rydym yn cael anawsterau technegol
 generic.unauthorised.reason_start=Gallai hyn fod oherwydd:
-generic.invalid.characters=Cymeriadau annilys
 
 global_errors.message=Mae''n ddrwg gennym, mae anhawster technegol ac ni allwch ddefnyddio''r gwasanaeth ar hyn o bryd. Rhowch gynnig arall arni yn nes ymlaen.
 global_errors.heading=Nid yw''r gwasanaeth ar gael
@@ -61,8 +59,8 @@ feedbackSurvey.page4.question2=Pam wnaethoch roi''r asesiad hwn?
 feedbackSurvey.page4.question2.labelhint=Peidiwch â chynnwys gwybodaeth bersonol neu ariannol, fel eich rhif Yswiriant Gwladol neu fanylion banc.
 
 feedbackSurvey.page5.title=Diolch am eich adborth
+feedbackSurvey.page5.para1=Please <a href="{0}">join the HM Revenue and Customs (HMRC) user panel</a>.
+feedbackSurvey.page5.para2=By taking part in user research you will help us improve our service.
 
-label.english=English
-label.welsh=Cymraeg
 label.this_is_a_trial_service=Mae hwn yn wasanaeth sy''n cael ei brofi.
 label.this_is_a_new_service_your_feedback_will_help_us_to_improve_it=Mae hwn yn wasanaeth newydd – bydd eich <a href="{0}">adborth</a> yn ein helpu i''w wella.
