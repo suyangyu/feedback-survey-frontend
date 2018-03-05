@@ -15,11 +15,11 @@ global_errors.title=Nid yw''r gwasanaeth ar gael
 
 # Feedback survey Specific
 feedbackSurvey.giveFeedBack=Rhoi adborth
-feedbackSurvey.giveFeedBackPageTitle.page1.question1=Rhoi adborth - A oeddech yn gallu gwneud yr hyn yr oedd angen i chi''i wneud heddiw?
-feedbackSurvey.giveFeedBackPageTitle.page2.question1=Rhoi adborth - Pa ffynonellau o wybodaeth a roesoch gynnig arnynt cyn i chi ddefnyddio''r gwasanaeth hwn?
-feedbackSurvey.giveFeedBackPageTitle.page3.question1=Rhoi adborth - At ei gilydd, sut oeddech yn teimlo am y gwasanaeth a gawsoch heddiw?
-feedbackSurvey.giveFeedBackPageTitle.page4.question1=Rhoi adborth - Pa mor debygol ydych i argymell y gwasanaeth hwn i ffrind neu gydweithiwr pe bai angen iddo wneud yr un peth?
-feedbackSurvey.giveFeedBackPageTitle.page5.title=Rhoi adborth - Diolch am eich adborth
+feedbackSurvey.giveFeedBackPageTitle.page1.question1=A oeddech yn gallu gwneud yr hyn yr oedd angen i chi''i wneud heddiw?
+feedbackSurvey.giveFeedBackPageTitle.page2.question1=Pa ffynonellau o wybodaeth a roesoch gynnig arnynt cyn i chi ddefnyddio''r gwasanaeth hwn?
+feedbackSurvey.giveFeedBackPageTitle.page3.question1=At ei gilydd, sut oeddech yn teimlo am y gwasanaeth a gawsoch heddiw?
+feedbackSurvey.giveFeedBackPageTitle.page4.question1=Pa mor debygol ydych i argymell y gwasanaeth hwn i ffrind neu gydweithiwr pe bai angen iddo wneud yr un peth?
+feedbackSurvey.giveFeedBackPageTitle.page5.title=Diolch am eich adborth
 
 feedbackSurvey.page1.title=Rhoi adborth
 feedbackSurvey.page1.para1=Mae pob cwestiwn yn yr arolwg yn ddewisol.
@@ -61,3 +61,5 @@ feedbackSurvey.page4.question2.labelhint=Peidiwch â chynnwys gwybodaeth bersono
 feedbackSurvey.page5.title=Diolch am eich adborth
 feedbackSurvey.page5.para1=<a href="{0}">Dewch i ymuno â phanel defnyddwyr Cyllid a Thollau EM (CThEM)</a>.
 feedbackSurvey.page5.para2=O gymryd rhan yn yr ymchwil defnyddwyr, byddwch yn ein helpu i wella ein gwasanaeth.
+
+feedbackSurvey.gov.uk=GOV.UK

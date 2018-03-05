@@ -40,7 +40,10 @@
 @{
 
   val arguments = TemplateArgumentsBuilder(
-    Some(PageTitleComponent(Messages(title))),
+    Some(PageTitleComponent(title = Messages(title) +
+      " - " + Messages("feedbackSurvey.giveFeedBack") +
+      " - " + Messages("feedbackSurvey.gov.uk")
+    )),
     Some(NavTitleComponent(Messages("feedbackSurvey.giveFeedBack"))),
     Some(AccountMenuStyleComponent(
       langUrls = Some((
@@ -67,10 +70,10 @@
       )
     },
     uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.deskproToken.map(BetaBannerComponent(_)),
-    backlinkUrl.map { url =>
+    backlinkUrl.map { backlinkUrl =>
       BackLinkUrlComponent(
-        url,
-        backlinkUrlText.map(_.toString)
+        url = backlinkUrl,
+        text = backlinkUrlText.map(_.toString)
       )
     }
   )

@@ -15,11 +15,11 @@ global_errors.title=Service unavailable
 
 # Feedback survey Specific
 feedbackSurvey.giveFeedBack=Give feedback
-feedbackSurvey.giveFeedBackPageTitle.page1.question1=Give feedback - Were you able to do what you needed to do today?
-feedbackSurvey.giveFeedBackPageTitle.page2.question1=Give feedback - What did you try before using this service?
-feedbackSurvey.giveFeedBackPageTitle.page3.question1=Give feedback - Overall, how did you feel about the service you received today?
-feedbackSurvey.giveFeedBackPageTitle.page4.question1=Give Feedback - How likely are you to recommend this service to a friend or colleague if they needed to do the same thing?
-feedbackSurvey.giveFeedBackPageTitle.page5.title=Give Feedback - Thank you for your feedback
+feedbackSurvey.giveFeedBackPageTitle.page1.question1=Were you able to do what you needed to do today?
+feedbackSurvey.giveFeedBackPageTitle.page2.question1=What did you try before using this service?
+feedbackSurvey.giveFeedBackPageTitle.page3.question1=Overall, how did you feel about the service you received today?
+feedbackSurvey.giveFeedBackPageTitle.page4.question1=How likely are you to recommend this service to a friend or colleague if they needed to do the same thing?
+feedbackSurvey.giveFeedBackPageTitle.page5.title=Thank you for your feedback
 
 feedbackSurvey.page1.title=Give feedback
 feedbackSurvey.page1.para1=All questions in the survey are optional.
@@ -61,3 +61,5 @@ feedbackSurvey.page4.question2.labelhint=Do not include any personal or financia
 feedbackSurvey.page5.title=Thank you for your feedback
 feedbackSurvey.page5.para1=Please <a href="{0}">join the HM Revenue and Customs (HMRC) user panel</a>.
 feedbackSurvey.page5.para2=By taking part in user research you will help us improve our service.
+
+feedbackSurvey.gov.uk=GOV.UK
