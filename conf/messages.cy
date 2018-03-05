@@ -59,8 +59,5 @@ feedbackSurvey.page4.question2=Pam wnaethoch roi''r asesiad hwn?
 feedbackSurvey.page4.question2.labelhint=Peidiwch â chynnwys gwybodaeth bersonol neu ariannol, fel eich rhif Yswiriant Gwladol neu fanylion banc.
 
 feedbackSurvey.page5.title=Diolch am eich adborth
-feedbackSurvey.page5.para1=Please <a href="{0}">join the HM Revenue and Customs (HMRC) user panel</a>.
-feedbackSurvey.page5.para2=By taking part in user research you will help us improve our service.
-
-label.this_is_a_trial_service=Mae hwn yn wasanaeth sy''n cael ei brofi.
-label.this_is_a_new_service_your_feedback_will_help_us_to_improve_it=Mae hwn yn wasanaeth newydd – bydd eich <a href="{0}">adborth</a> yn ein helpu i''w wella.
+feedbackSurvey.page5.para1=<a href="{0}">Dewch i ymuno â phanel defnyddwyr Cyllid a Thollau EM (CThEM)</a>.
+feedbackSurvey.page5.para2=O gymryd rhan yn yr ymchwil defnyddwyr, byddwch yn ein helpu i wella ein gwasanaeth.
