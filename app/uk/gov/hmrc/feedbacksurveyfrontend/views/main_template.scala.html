@@ -40,7 +40,10 @@
 @{
 
   val arguments = TemplateArgumentsBuilder(
-    Some(PageTitleComponent(Messages(title))),
+    Some(PageTitleComponent(Messages(title) +
+      " - " + Messages("feedbackSurvey.giveFeedBack") +
+      " - " + Messages("feedbackSurvey.gov.uk")
+    )),
     Some(NavTitleComponent(Messages("feedbackSurvey.giveFeedBack"))),
     Some(AccountMenuStyleComponent(
       langUrls = Some((
