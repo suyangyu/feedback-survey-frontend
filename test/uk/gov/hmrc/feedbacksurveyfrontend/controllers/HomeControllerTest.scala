@@ -16,11 +16,11 @@
 
 package controllers
 
-import controllers.bindable.Origin
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.feedbacksurveyfrontend.services.{OriginConfigItem, OriginService}
 import uk.gov.hmrc.feedbacksurveyfrontend.utils.MockTemplateRenderer
+import uk.gov.hmrc.play.binders.Origin
 import uk.gov.hmrc.renderer.TemplateRenderer
 import utils.UnitTestTraits
 

@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.feedbacksurveyfrontend.controllers
 
-import controllers.{FeedbackSurveyController, LanguageController}
+import controllers.LanguageController
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import utils.UnitTestTraits
@@ -27,7 +27,7 @@ class LanguageControllerSpec extends UnitTestTraits {
 
   "Calling LanguageController.enGb" should {
     "change the language to English and return 303" in {
-      val r = TestLanguageController.enGb("/")(FakeRequest("GET", ""))
+      val r = TestLanguageController.enGb("/change-lang")(FakeRequest("GET", ""))
       cookies(r).get("PLAY_LANG").get.value shouldBe "en"
       status(r) shouldBe 303
     }
@@ -35,7 +35,7 @@ class LanguageControllerSpec extends UnitTestTraits {
 
   "Calling LanguageController.cyGb" should {
     "change the language to Welsh and return 303" in {
-      val r = TestLanguageController.cyGb("/")(FakeRequest("GET", ""))
+      val r = TestLanguageController.cyGb("/change-lang")(FakeRequest("GET", ""))
       cookies(r).get("PLAY_LANG").get.value shouldBe "cy"
       status(r) shouldBe 303
     }

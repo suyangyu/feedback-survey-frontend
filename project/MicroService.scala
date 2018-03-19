@@ -1,8 +1,9 @@
+import play.routes.compiler.StaticRoutesGenerator
+import play.sbt.routes.RoutesKeys.routesImport
+import play.twirl.sbt.Import.TwirlKeys
 import sbt.Keys._
 import sbt.Tests.{Group, SubProcess}
 import sbt._
-import play.routes.compiler.StaticRoutesGenerator
-import play.sbt.routes.RoutesKeys.routesImport
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin._
 
 
@@ -10,13 +11,11 @@ trait MicroService {
 
   import uk.gov.hmrc._
   import DefaultBuildSettings._
-  import uk.gov.hmrc.{SbtBuildInfo, ShellPrompt, SbtAutoBuildPlugin}
+  import TestPhases._
+  import play.sbt.routes.RoutesKeys.routesGenerator
+  import uk.gov.hmrc.SbtAutoBuildPlugin
   import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin
   import uk.gov.hmrc.versioning.SbtGitVersioning
-  import play.sbt.routes.RoutesKeys.routesGenerator
-
-
-  import TestPhases._
 
   val appName: String
 
@@ -37,7 +36,7 @@ trait MicroService {
       retrieveManaged := true,
       evictionWarningOptions in update := EvictionWarningOptions.default.withWarnScalaVersionEviction(false),
       routesGenerator := StaticRoutesGenerator,
-      routesImport ++= Seq("controllers.bindable._", "controllers.bindable.Binders._")
+      routesImport ++= Seq("uk.gov.hmrc.play.binders._", "controllers.bindable._", "controllers.bindable.Binders._")
     )
     .configs(IntegrationTest)
     .settings(inConfig(IntegrationTest)(Defaults.itSettings): _*)

@@ -16,9 +16,10 @@
 
 package controllers
 
+import play.api.Play
 import play.api.i18n.{I18nSupport, Lang, MessagesApi}
 import play.api.mvc.{Action, AnyContent}
-import play.api.{Configuration, Play}
+import uk.gov.hmrc.play.binders.ContinueUrl
 import uk.gov.hmrc.play.frontend.controller.{FrontendController, UnauthorisedAction}
 
 import scala.concurrent.Future
@@ -29,12 +30,12 @@ trait LanguageController extends FrontendController with I18nSupport {
 
   implicit val messagesApi: MessagesApi = Play.current.injector.instanceOf[MessagesApi]
 
-  def enGb(redirectUrl: String): Action[AnyContent] = UnauthorisedAction.async { request =>
-    Future.successful(Redirect(redirectUrl).withLang(Lang("en")))
-  }
+  def enGb(redirectUrl: ContinueUrl): Action[AnyContent] = changeLang(redirectUrl, "en")
 
-  def cyGb(redirectUrl: String): Action[AnyContent] = UnauthorisedAction.async { request =>
-    Future.successful(Redirect(redirectUrl).withLang(Lang("cy")))
+  def cyGb(redirectUrl: ContinueUrl): Action[AnyContent] = changeLang(redirectUrl, "cy")
+
+  def changeLang(redirectUrl: ContinueUrl, language: String): Action[AnyContent] = UnauthorisedAction.async { request =>
+    Future.successful(Redirect(redirectUrl.url).withLang(Lang(language)))
   }
 
 }

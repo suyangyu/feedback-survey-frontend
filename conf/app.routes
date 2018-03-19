@@ -13,5 +13,5 @@ GET        /recommendService                  controllers.FeedbackSurveyControll
 POST       /recommendService                  controllers.FeedbackSurveyController.recommendServiceContinue
 GET        /thankYou                          controllers.FeedbackSurveyController.thankYou(origin: Origin)
 
-GET        /lang/enGb                         controllers.LanguageController.enGb(redirectUrl: String)
-GET        /lang/cyGb                         controllers.LanguageController.cyGb(redirectUrl: String)
+GET        /lang/enGb                         controllers.LanguageController.enGb(redirectUrl: ContinueUrl)
+GET        /lang/cyGb                         controllers.LanguageController.cyGb(redirectUrl: ContinueUrl)

@@ -17,12 +17,11 @@
 package controllers
 
 import play.api.Play.current
-import play.api.i18n.Messages
 import play.api.i18n.Messages.Implicits._
 import play.api.mvc._
-import controllers.bindable.Origin
 import uk.gov.hmrc.feedbacksurveyfrontend.LocalTemplateRenderer
 import uk.gov.hmrc.feedbacksurveyfrontend.services.OriginService
+import uk.gov.hmrc.play.binders.Origin
 import uk.gov.hmrc.play.frontend.controller.FrontendController
 import uk.gov.hmrc.renderer.TemplateRenderer
 import utils.FeedbackSurveySessionKeys._
@@ -38,8 +37,8 @@ trait HomeController extends FrontendController  {
 
   def start(origin : Origin): Action[AnyContent] = Action {
     implicit request =>
-      if(originService.isValid(Origin(origin.value))) {
-        Redirect(routes.FeedbackSurveyController.ableToDo).withSession(request.session + (sessionOriginService -> origin.value))
+      if(originService.isValid(Origin(origin.origin))) {
+        Redirect(routes.FeedbackSurveyController.ableToDo).withSession(request.session + (sessionOriginService -> origin.origin))
       }
       else {
         Ok(uk.gov.hmrc.feedbacksurveyfrontend.views.html.error_template("global_errors.title", "global_errors.heading", "global_errors.message"))

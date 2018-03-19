@@ -16,34 +16,27 @@
 
 package controllers.bindable
 
-import controllers.bindable.Binders.originService
 import play.api.mvc.QueryStringBindable
-import uk.gov.hmrc.feedbacksurveyfrontend.services.OriginService
+import uk.gov.hmrc.play.binders.ContinueUrl
+import uk.gov.hmrc.play.config.RunMode
 
 
-object Binders extends Binders {
+package object Binders {
 
-  val originService = new OriginService
-}
+  implicit val continueUrlBinder = new QueryStringBindable[ContinueUrl] {
 
+    val parentBinder: QueryStringBindable[ContinueUrl] = ContinueUrl.queryBinder
 
-trait Binders {
+    def errorFor(invalidUrl: String) = s"'$invalidUrl' is not a valid continue URL"
 
-  implicit def originBinder(implicit stringBinder: QueryStringBindable[String]) = new QueryStringBindable[Origin] {
-
-    val enc = play.utils.UriEncoding.encodePathSegment(_: String, "UTF-8")
-
-    override def unbind(key: String, origin: Origin): String = enc(key) + "=" + enc(origin.value)
-
-    override def bind(key: String, params: Map[String, Seq[String]]): Option[Either[String, Origin]] = {
-      params.get(key) match {
-        case None =>
-          None
-        case Some(Seq(originString)) if(originService.isValid(Origin(originString))) =>
-          Some(Right(Origin(originString)))
-        case _ =>
-          Some(Left("Invalid origin in queryString"))
+    def bind(key: String, params: Map[String, Seq[String]]) =
+      parentBinder.bind(key, params).map {
+        case Right(continueUrl) if continueUrl.isRelativeOrDev(RunMode.env) => Right(continueUrl)
+        case Right(continueUrl) => Left(errorFor(continueUrl.url))
+        case Left(message) => Left(message)
       }
-    }
+
+    def unbind(key: String, value: ContinueUrl) = parentBinder.unbind(key, value)
+
   }
 }
