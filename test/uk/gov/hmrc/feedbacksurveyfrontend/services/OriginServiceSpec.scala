@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.feedbacksurveyfrontend.services
 
-import controllers.bindable.Origin
+import uk.gov.hmrc.play.binders.Origin
 import utils.UnitTestTraits
 
 

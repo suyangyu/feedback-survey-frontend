@@ -16,48 +16,45 @@
 
 package uk.gov.hmrc.feedbacksurveyfrontend.bindable
 
-import controllers.bindable.{Binders, Origin}
-import uk.gov.hmrc.feedbacksurveyfrontend.services.{OriginConfigItem, OriginService}
+import controllers.bindable.Binders
+import uk.gov.hmrc.play.binders.ContinueUrl
 import utils.UnitTestTraits
 
 class BindableSpec extends UnitTestTraits {
 
-    
-  object testBindable extends Binders {
-    val originService = new OriginService {
-      override lazy val originConfigItems = List(
-        OriginConfigItem(Some("PERTAX"), None)
-      )
-      
+  "Calling continueUrlBinder.unbind" should {
+
+    "return the key and the ContinueUrl" in {
+
+      Binders.continueUrlBinder.unbind("continue", ContinueUrl("/relative/url")) shouldBe "continue=%2Frelative%2Furl"
+
     }
   }
 
-  "Calling originBinder.unbind" should {
+  "Calling continueUrlBinder.bind" should {
 
-    "return origin=PERTAX when key is origin and value is PERTAX" in {
-      testBindable.originBinder.unbind("origin", Origin("PERTAX")) shouldBe "origin=PERTAX"
-    }
-    "UrlEncode keys" in {
-      testBindable.originBinder.unbind("£", Origin("PERTAX")) shouldBe "%C2%A3=PERTAX"
-    }
-    "UrlEncode values" in {
-      testBindable.originBinder.unbind("origin", Origin("£")) shouldBe "origin=%C2%A3"
-    }
-  }
+    "return an url when called with a relative url" in {
 
-  "Calling originBinder.bind" should {
+      val url = "/relative/url"
+      Binders.continueUrlBinder.bind("continue", Map("continue" -> Seq(url))) shouldBe Some(Right(ContinueUrl(url)))
+    }
 
-    "return an origin when called with a valid string" in {
-      testBindable.originBinder.bind("origin", Map("origin" -> Seq("PERTAX"))) shouldBe Some(Right(Origin("PERTAX")))
+    "return error when not url" in {
+
+      val url = "gtuygyg"
+      Binders.continueUrlBinder.bind("continue", Map("continue" -> Seq(url))) shouldBe Some(Left(s"'$url' is not a valid continue URL"))
     }
-    "return error message when called with an empty string" in {
-      testBindable.originBinder.bind("origin", Map("origin" -> Seq(""))) shouldBe Some(Left("Invalid origin in queryString"))
+
+    "return error for urls with /\\" in {
+
+      val url = "/\\www.example.com"
+      Binders.continueUrlBinder.bind("continue", Map("continue" -> Seq(url))) shouldBe Some(Left(s"'$url' is not a valid continue URL"))
     }
-    "return error message when called with an invalid string" in {
-      testBindable.originBinder.bind("origin", Map("origin" -> Seq("INVALID"))) shouldBe Some(Left("Invalid origin in queryString"))
-    }
-    "return None when called with an empty map" in {
-      testBindable.originBinder.bind("origin", Map()) shouldBe None
+
+    "return error for none relative urls" in {
+
+      val url = "http://nonrelativeurl.com"
+      Binders.continueUrlBinder.bind("continue", Map("continue" -> Seq(url))) shouldBe Some(Left(s"'$url' is not a valid continue URL"))
     }
   }
 }

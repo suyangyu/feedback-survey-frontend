@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.feedbacksurveyfrontend.services
 
-import controllers.bindable.Origin
 import play.api.Play.current
+import uk.gov.hmrc.play.binders.Origin
 
 import scala.collection.JavaConversions._
 
@@ -29,7 +29,7 @@ class OriginService {
     OriginConfigItem(configItem.getString("token"), configItem.getString("customFeedbackUrl"))
   }
 
-  def isValid(origin: Origin): Boolean = !originConfigItems.filter(o => o.token.equals(Some(origin.value))).isEmpty
+  def isValid(origin: Origin): Boolean = !originConfigItems.filter(o => o.token.equals(Some(origin.origin))).isEmpty
 
-  def customFeedbackUrl(origin: Origin): Option[String] = originConfigItems.filter(o => o.token.equals(Some(origin.value))).headOption.flatMap(_.customFeedbackUrl)
+  def customFeedbackUrl(origin: Origin): Option[String] = originConfigItems.filter(o => o.token.equals(Some(origin.origin))).headOption.flatMap(_.customFeedbackUrl)
 }

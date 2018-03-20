@@ -17,7 +17,6 @@
 package views.feedbackSurvey
 
 import controllers.FeedbackSurveyController
-import controllers.bindable.Origin
 import org.jsoup.nodes.Document
 import play.api.i18n.Messages
 import play.api.libs.json.Json
@@ -27,6 +26,7 @@ import play.api.test.Helpers._
 import uk.gov.hmrc.feedbacksurveyfrontend.services.{OriginConfigItem, OriginService}
 import utils.{HtmlUtils, UnitTestTraits}
 import uk.gov.hmrc.feedbacksurveyfrontend.utils.MockTemplateRenderer
+import uk.gov.hmrc.play.binders.Origin
 import uk.gov.hmrc.renderer.TemplateRenderer
 
 class pageTests extends UnitTestTraits with HtmlUtils {

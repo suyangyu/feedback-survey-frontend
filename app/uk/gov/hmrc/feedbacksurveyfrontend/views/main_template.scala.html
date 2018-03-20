@@ -2,6 +2,7 @@
 @import uk.gov.hmrc.play.views.html.layouts
 @import uk.gov.hmrc.renderer._
 @import uk.gov.hmrc.renderer.TemplateArgumentsBuilder._
+@import uk.gov.hmrc.play.binders.ContinueUrl
 
 
 @(title: String,
@@ -47,8 +48,8 @@
     Some(NavTitleComponent(Messages("feedbackSurvey.giveFeedBack"))),
     Some(AccountMenuStyleComponent(
       langUrls = Some((
-        controllers.routes.LanguageController.enGb(request.uri).url,
-        controllers.routes.LanguageController.cyGb(request.uri).url
+        controllers.routes.LanguageController.enGb(ContinueUrl(request.uri)).url,
+        controllers.routes.LanguageController.cyGb(ContinueUrl(request.uri)).url
       )),
       hideAccountMenu = true
     )),
