@@ -12,15 +12,43 @@
 ) {
   <h1 id="serviceReceived" class="heading-large">@Messages("feedbackSurvey.page3.question1")</h1>
   @uk.gov.hmrc.play.views.html.helpers.form(action = controllers.routes.FeedbackSurveyController.aboutServiceContinue){
-    <div class="form-group">
-      @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.inputTypeRadioGroup(
-        InputTypeRadioGroupParams(
-          page3("serviceReceived"),
-          formFields.page3Question1Options,
-          legend = "feedbackSurvey.page3.question1",
-          legendClass = "visuallyhidden",
-          legendId = "serviceReceived"))
-    </div>
-    @uk.gov.hmrc.feedbacksurveyfrontend.views.html.helpers.submitButton("generic.continue")(id = "save-and-continue", classAttr = "button")
+    <form>
+      <div class="form-group">
+        <fieldset>
+
+          <legend class="visually-hidden">
+            @Messages("feedbackSurvey.giveFeedBackPageTitle.page3.question1")
+          </legend>
+
+          <div class="multiple-choice">
+            <input id="serviceReceived-5" type="radio" name="radio-contact-group">
+            <label for="serviceReceived-5">@Messages("feedbackSurvey.page3.question1.option1")</label>
+          </div>
+
+          <div class="multiple-choice">
+            <input id="serviceReceived-4" type="radio" name="radio-contact-group" value="No">
+            <label for="serviceReceived-4">@Messages("feedbackSurvey.page3.question1.option2")</label>
+          </div>
+
+          <div class="multiple-choice">
+            <input id="serviceReceived-3" type="radio" name="radio-contact-group" value="No">
+            <label for="serviceReceived-3">@Messages("feedbackSurvey.page3.question1.option3")</label>
+          </div>
+
+          <div class="multiple-choice">
+            <input id="serviceReceived-2" type="radio" name="radio-contact-group" value="No">
+            <label for="serviceReceived-2">@Messages("feedbackSurvey.page3.question1.option4")</label>
+          </div>
+
+          <div class="multiple-choice">
+            <input id="serviceReceived-1" type="radio" name="radio-contact-group" value="No">
+            <label for="serviceReceived-1">@Messages("feedbackSurvey.page3.question1.option5")</label>
+          </div>
+
+        </fieldset>
+      </div>
+      <input id="save-and-continue" type="submit" class="button" role="button" value=@Messages("generic.continue") />
+    </form>
+
   }
 }
