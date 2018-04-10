@@ -54,25 +54,21 @@ class pageTests extends UnitTestTraits with HtmlUtils {
       document.getElementById("ableToDoWhatNeeded_legend").text should include(Messages("feedbackSurvey.page1.question1"))
       document.getElementById("ableToDoWhatNeeded-yes").text shouldBe ""
       document.getElementById("ableToDoWhatNeeded-no").text shouldBe ""
-      document.getElementById("save-and-continue").text shouldBe Messages("generic.continue")
     }
 
     "render usingService page correctly" in {
       val document: Document = TestLookupController.usingService.apply(testRequest(page = "usingService"))
       document.getElementById("beforeUsingThisService").text shouldBe Messages("feedbackSurvey.page2.question1")
-      document.getElementById("save-and-continue").text shouldBe Messages("generic.continue")
     }
 
     "render aboutService page correctly" in {
       val document: Document = TestLookupController.aboutService.apply(testRequest(page = "aboutService"))
       document.getElementById("serviceReceived").text shouldBe Messages("feedbackSurvey.page3.question1")
-      document.getElementById("save-and-continue").text shouldBe Messages("generic.continue")
     }
 
     "render recommendService page correctly" in {
       val document: Document = TestLookupController.recommendService.apply(testRequest(page = "recommendService"))
       document.getElementById("reasonForRatingHeader").text shouldBe Messages("feedbackSurvey.page4.question2")
-      document.getElementById("save-and-continue").text shouldBe Messages("generic.continue")
     }
 
     "render thankYou page correctly with valid origin" in {
