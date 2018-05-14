@@ -31,11 +31,15 @@ trait LanguageController extends FrontendController with I18nSupport {
   implicit val messagesApi: MessagesApi = Play.current.injector.instanceOf[MessagesApi]
 
   def enGb(redirectUrl: ContinueUrl): Action[AnyContent] = changeLang(redirectUrl, "en")
-
   def cyGb(redirectUrl: ContinueUrl): Action[AnyContent] = changeLang(redirectUrl, "cy")
 
-  def changeLang(redirectUrl: ContinueUrl, language: String): Action[AnyContent] = UnauthorisedAction.async { request =>
-    Future.successful(Redirect(redirectUrl.url).withLang(Lang(language)))
-  }
+  def changeLang(redirectUrl: ContinueUrl, language: String): Action[AnyContent] = UnauthorisedAction.async { implicit request =>
 
+    val path = request.path.split('/').filter(_ != "")
+
+    if (path.length > 0 && (redirectUrl.url contains path.head))
+      Future.successful(Redirect(redirectUrl.url).withLang(Lang(language)))
+    else
+      Future.successful(Redirect("/" + path.head + "/" + redirectUrl.url))
+  }
 }
