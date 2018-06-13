@@ -26,7 +26,7 @@ object MockTemplateRenderer extends TemplateRenderer {
   override def refreshAfter = ???
   override def fetchTemplate(path: String) = ???
 
-  override def renderDefaultTemplate(content: Html, extraArgs: Map[String, Any])(implicit messages: Messages) = {
+  override def renderDefaultTemplate(path: String, content: Html, extraArgs: Map[String, Any])(implicit messages: Messages) = {
     Html("<title>" + extraArgs("pageTitle") + "</title>" + content)
   }
 
