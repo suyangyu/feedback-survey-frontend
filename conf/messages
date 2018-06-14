@@ -23,6 +23,7 @@ feedbackSurvey.giveFeedBackPageTitle.page5.title=Thank you for your feedback
 
 feedbackSurvey.page1.title=Give feedback
 feedbackSurvey.page1.para1=All questions in the survey are optional.
+feedbackSurvey.page1.para2=We use your feedback to make our services better.
 feedbackSurvey.page1.question1=Were you able to do what you needed to do today?
 
 feedbackSurvey.page2.question1=What did you try before using this service?
