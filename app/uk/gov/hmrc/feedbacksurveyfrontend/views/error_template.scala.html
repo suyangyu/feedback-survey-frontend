@@ -1,6 +1,7 @@
 @import uk.gov.hmrc.renderer.TemplateRenderer
 @import uk.gov.hmrc.play.views.html.layouts
-
+@import uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig
+@import uk.gov.hmrc.feedbacksurveyfrontend.LocalPartialRetriever
 
 @(pageTitle: String, heading: String, message: String)(implicit request: Request[_], messages: play.api.i18n.Messages, templateRenderer: TemplateRenderer)
 
@@ -11,6 +12,7 @@
 
 @{
   templateRenderer.renderDefaultTemplate(
+    FrontendAppConfig.frontendTemplatePath,
     layouts.article(mainContent, false, None), Map[String, Any](
       "pageTitle" -> Messages(pageTitle),
       "navTitle" -> Messages("feedbackSurvey.giveFeedBack"),
@@ -20,7 +22,7 @@
       ),
       "includeHMRCBranding" -> true,
       "isWelsh" -> messages.lang.code.equals("cy"),
-      "getHelpForm" -> uk.gov.hmrc.feedbacksurveyfrontend.LocalPartialRetriever.getPartialContent(uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.reportAProblemPartialUrl)
+      "getHelpForm" -> LocalPartialRetriever.getPartialContent(FrontendAppConfig.reportAProblemPartialUrl)
     )
   )
 }
