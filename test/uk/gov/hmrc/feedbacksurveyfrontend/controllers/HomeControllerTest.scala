@@ -52,7 +52,5 @@ class HomeControllerTest extends UnitTestTraits {
       val result = controllerUnderTest.start(Origin("TOKEN1")).apply(FakeRequest("GET", ""))
       status(result) shouldBe SEE_OTHER
     }
-
   }
-
 }
