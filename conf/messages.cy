@@ -23,6 +23,7 @@ feedbackSurvey.giveFeedBackPageTitle.page5.title=Diolch am eich adborth
 
 feedbackSurvey.page1.title=Rhoi adborth
 feedbackSurvey.page1.para1=Mae pob cwestiwn yn yr arolwg yn ddewisol.
+feedbackSurvey.page1.para2=Rydym yn defnyddio’ch adborth i wella ein gwasanaethau.
 feedbackSurvey.page1.question1=A oeddech yn gallu gwneud yr hyn yr oedd angen i chi''i wneud heddiw?
 
 feedbackSurvey.page2.question1=Pa ffynonellau o wybodaeth a roesoch gynnig arnynt cyn i chi ddefnyddio''r gwasanaeth hwn?
