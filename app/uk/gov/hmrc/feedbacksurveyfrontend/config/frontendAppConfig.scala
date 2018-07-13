@@ -38,4 +38,5 @@ object FrontendAppConfig extends AppConfig with ServicesConfig {
   override lazy val reportAProblemPartialUrl = s"$contactFrontendService/contact/problem_reports?secure=true"
   override lazy val deskproToken = configuration.getString("deskproToken")
   override lazy val urLinkUrl = configuration.getString("feature.ur-link.url")
+  lazy val frontendTemplatePath = configuration.getString("microservice.services.frontend-template-provider.path").getOrElse("/templates/mustache")
 }

@@ -1,8 +1,26 @@
+@*
+ * Copyright 2018 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
 @import uk.gov.hmrc.renderer.TemplateRenderer
 @import uk.gov.hmrc.play.views.html.layouts
 @import uk.gov.hmrc.renderer._
 @import uk.gov.hmrc.renderer.TemplateArgumentsBuilder._
 @import uk.gov.hmrc.play.binders.ContinueUrl
+@import uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig
+@import uk.gov.hmrc.feedbacksurveyfrontend.LocalPartialRetriever
 
 
 @(title: String,
@@ -16,7 +34,7 @@
 
   @scriptElement
 
-  @if(uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.analyticsToken == Some("N/A")) {
+  @if(FrontendAppConfig.analyticsToken == Some("N/A")) {
     <script type="text/javascript">
       var ga = function(send, event, category, action, label, args) {
         console.log(JSON.stringify({
@@ -63,14 +81,14 @@
       controllers.routes.Assets.versioned("javascripts/jquery-ui.min.js").url
     )),
     Some(InlineScriptComponent(inlineScript.toString)),
-    Some(GetHelpFormComponent(uk.gov.hmrc.feedbacksurveyfrontend.LocalPartialRetriever.getPartialContent(uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.reportAProblemPartialUrl))),
-    uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.analyticsToken.filter(_ != "N/A").map { trackingId =>
+    Some(GetHelpFormComponent(LocalPartialRetriever.getPartialContent(FrontendAppConfig.reportAProblemPartialUrl))),
+    FrontendAppConfig.analyticsToken.filter(_ != "N/A").map { trackingId =>
       GoogleAnalyticsComponent(
         trackingId,
-        Some(uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.analyticsHost)
+        Some(FrontendAppConfig.analyticsHost)
       )
     },
-    uk.gov.hmrc.feedbacksurveyfrontend.FrontendAppConfig.deskproToken.map(BetaBannerComponent(_)),
+    FrontendAppConfig.deskproToken.map(BetaBannerComponent(_)),
     backlinkUrl.map { url =>
       BackLinkUrlComponent(
         url,
@@ -79,6 +97,6 @@
     }
   )
 
-  templateRenderer.renderDefaultTemplate(layouts.article(mainContent, false, None), arguments)
+  templateRenderer.renderDefaultTemplate(FrontendAppConfig.frontendTemplatePath, layouts.article(mainContent, false, None), arguments)
 
 }
